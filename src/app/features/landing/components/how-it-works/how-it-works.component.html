@@ -1,0 +1,16 @@
+<section class="section-padding">
+  <div class="container">
+    <div class="text-center section-header">
+      <h2>Como Funciona</h2>
+      <p>O jeito mais simples de ter vantagens exclusivas</p>
+    </div>
+
+    <div class="steps-container">
+      <div class="step-card" *ngFor="let step of steps">
+        <div class="step-number">{{ step.number }}</div>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.text }}</p>
+      </div>
+    </div>
+  </div>
+</section>

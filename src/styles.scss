@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+:root {
+  --primary-blue: #0f4c81;     /* Classic Blue */
+  --secondary-green: #2ecc71;  /* Vibrant Green */
+  --light-gray: #f8f9fa;
+  --dark-text: #2c3e50;
+  --white: #ffffff;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: 'Roboto', "Helvetica Neue", sans-serif; 
+  background-color: var(--light-gray);
+  color: var(--dark-text);
+}
+
+/* Global Utility Classes */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.section-padding {
+  padding: 64px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mat-mdc-button.mat-primary {
+  --mdc-filled-button-container-color: var(--primary-blue);
+}
+
+.mat-mdc-button.mat-accent {
+  --mdc-filled-button-container-color: var(--secondary-green);
+}

@@ -1,0 +1,34 @@
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-brand">
+      <h3>Presscard Card Company</h3>
+      <p>Acesso a condições diferenciadas em viagens, hotelaria e benefícios.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Links Rápidos</h4>
+      <ul>
+        <li><a (click)="scrollTo('hero')">Home</a></li>
+        <li><a (click)="scrollTo('benefits')">Benefícios</a></li>
+        <li><a (click)="scrollTo('como-funciona')">Como Funciona</a></li>
+        <li><a (click)="scrollTo('offers')">Ofertas</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contato</h4>
+      <p>
+        <mat-icon inline="true">email</mat-icon>
+        contato&#64;presscard.com.br
+      </p>
+      <div class="footer-cta">
+        <app-whatsapp-button [raised]="true" label="WhatsApp"></app-whatsapp-button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      &copy; {{ currentYear() }} Presscard Card Company. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>

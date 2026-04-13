@@ -1,0 +1,12 @@
+<ng-container *ngIf="raised; else flatBtn">
+  <button mat-flat-button color="accent" class="whatsapp-btn" (click)="onClick()">
+    <mat-icon>chat</mat-icon>
+    {{ label }}
+  </button>
+</ng-container>
+<ng-template #flatBtn>
+  <button mat-stroked-button color="accent" class="whatsapp-btn" (click)="onClick()">
+    <mat-icon>chat</mat-icon>
+    {{ label }}
+  </button>
+</ng-template>

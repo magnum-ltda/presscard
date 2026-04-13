@@ -1,0 +1,14 @@
+<section class="section-padding background-white">
+  <div class="container">
+    <div class="text-center section-header">
+      <h2>Nossas Ofertas em Destaque</h2>
+      <p>Aproveite algumas das parcerias exclusivas ativas no momento.</p>
+    </div>
+
+    <div class="offers-grid">
+      <div class="offer-item" *ngFor="let offer of offers">
+        <app-offer-card [offer]="offer"></app-offer-card>
+      </div>
+    </div>
+  </div>
+</section>

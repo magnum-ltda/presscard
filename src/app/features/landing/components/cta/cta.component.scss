@@ -1,0 +1,32 @@
+.cta-section {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(15, 76, 129, 0.1) 100%);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.cta-content {
+  max-width: 800px;
+  
+  h2 {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 40px;
+  }
+}
+
+.cta-action {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+}

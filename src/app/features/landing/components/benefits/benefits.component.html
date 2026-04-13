@@ -1,0 +1,22 @@
+<section class="section-padding background-white">
+  <div class="container">
+    <div class="text-center section-header">
+      <h2>Por que escolher o Presscard?</h2>
+      <p>Desenvolvido para oferecer as melhores vantagens aos nossos clientes.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <mat-card *ngFor="let benefit of benefits" class="benefit-card">
+        <div class="icon-container">
+          <mat-icon>{{ benefit.icon }}</mat-icon>
+        </div>
+        <mat-card-header>
+          <mat-card-title>{{ benefit.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ benefit.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
