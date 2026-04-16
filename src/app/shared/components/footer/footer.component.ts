@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { WhatsappButtonComponent } from '../whatsapp-button/whatsapp-button.component';
+
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, WhatsappButtonComponent],
+  imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
