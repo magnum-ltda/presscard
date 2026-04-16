@@ -6,11 +6,11 @@
 }
 
 .benefit-card {
-  background: var(--light-gray);
+  background: #dadadb;
   padding: 30px 20px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
   transition: var(--transition-fast);
   border: 1px solid rgba(0, 0, 0, 0.05);
 
@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     mat-icon {
       font-size: 40px;
       width: 40px;
