@@ -3,26 +3,32 @@
 
 :root {
   /* Premium Palette */
-  --navy-dark: #001A33;       /* Background Header/Footer */
-  --navy-deep: #000F1F;       /* Section Backgrounds */
-  --gold-accent: #C5A021;     /* Logo & Highlights */
-  --gold-light: #DFBF5B;      /* Hover Gold */
-  --whatsapp-green: #16a34a;  /* Darker premium green */
+  --navy-dark: #001A33;
+  /* Background Header/Footer */
+  --navy-deep: #000F1F;
+  /* Section Backgrounds */
+  --gold-accent: #C5A021;
+  /* Logo & Highlights */
+  --gold-light: #DFBF5B;
+  /* Hover Gold */
+  --whatsapp-green: #16a34a;
+  /* Darker premium green */
   --whatsapp-dark: #15803d;
   --white: #ffffff;
   --light-gray: #F5F7FA;
   --text-dark: #1A1A1A;
   --text-light: #555555;
-  
+
   /* Shadow & Transitions */
   --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.08);
   --transition-fast: all 0.3s ease;
 }
 
-html, body { 
-  height: 100%; 
-  margin: 0; 
-  font-family: 'Inter', 'Roboto', "Helvetica Neue", sans-serif; 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', 'Roboto', "Helvetica Neue", sans-serif;
   background-color: var(--white);
   color: var(--text-dark);
   scroll-behavior: smooth;
@@ -38,15 +44,26 @@ html, body {
 }
 
 .section-padding {
-  padding: 50px 0;
+  padding: 25px 0;
 }
 
-.bg-navy { background-color: var(--navy-dark); color: white; }
-.bg-light { background-color: var(--light-gray); }
-.bg-white { background-color: var(--white); }
+.bg-navy {
+  background-color: var(--navy-dark);
+  color: white;
+}
+
+.bg-light {
+  background-color: var(--light-gray);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
 
 /* Typography & Headers */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -55,7 +72,7 @@ h1, h2, h3 {
   text-align: center;
   margin-bottom: 50px;
   position: relative;
-  
+
   h2 {
     font-size: 2.25rem;
     color: var(--navy-dark);
@@ -64,7 +81,8 @@ h1, h2, h3 {
     position: relative;
     padding: 0 30px;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -73,8 +91,14 @@ h1, h2, h3 {
       background: linear-gradient(to right, transparent, var(--gold-accent));
     }
 
-    &::before { right: 100%; }
-    &::after { left: 100%; transform: rotate(180deg); }
+    &::before {
+      right: 100%;
+    }
+
+    &::after {
+      left: 100%;
+      transform: rotate(180deg);
+    }
   }
 
   p {
@@ -86,10 +110,22 @@ h1, h2, h3 {
 }
 
 /* Utility Classes */
-.text-gold { color: var(--gold-accent); }
-.text-center { text-align: center; }
-.flex-row { display: flex; align-items: center; }
-.justify-between { justify-content: space-between; }
+.text-gold {
+  color: var(--gold-accent);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
 
 /* Buttons Overrides */
 .mat-mdc-button.mat-primary {

@@ -118,7 +118,8 @@
 
     .contact-text {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      gap: 5px;
       font-size: 0.95rem;
       
       .label {
