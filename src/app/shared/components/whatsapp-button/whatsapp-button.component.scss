@@ -5,15 +5,15 @@
   border-radius: 6px !important;
   font-weight: 600 !important;
   transition: var(--transition-fast) !important;
-  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3) !important;
+  box-shadow: 0 4px 10px rgba(21, 128, 61, 0.2) !important;
   height: auto !important;
   line-height: normal !important;
-  border-bottom: 3px solid #1a8e41 !important;
+  border-bottom: 3px solid #14532d !important;
 
   &:hover {
-    background: #1a8e41 !important;
+    background: #15803d !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4) !important;
+    box-shadow: 0 6px 15px rgba(21, 128, 61, 0.3) !important;
   }
 }
 
