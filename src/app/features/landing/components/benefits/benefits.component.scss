@@ -1,65 +1,50 @@
-.background-white {
-  background-color: var(--white);
-}
-
-.section-header {
-  margin-bottom: 48px;
-
-  h2 {
-    font-size: 2.25rem;
-    color: var(--primary-blue);
-    margin-bottom: 16px;
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: #666;
-  }
-}
-
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .benefit-card {
+  background: var(--white);
+  padding: 30px 20px;
+  border-radius: 8px;
   text-align: center;
-  padding: 32px 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-fast);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
 
-  .icon-container {
-    background-color: rgba(46, 204, 113, 0.1);
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+  .icon-wrapper {
+    margin: 0 auto 20px auto;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px auto;
     
     mat-icon {
-      font-size: 32px;
-      width: 32px;
-      height: 32px;
-      color: var(--secondary-green);
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      color: var(--gold-accent);
     }
   }
 
-  mat-card-title {
-    font-size: 1.25rem;
-    margin-bottom: 12px;
-    color: var(--primary-blue);
+  h3 {
+    font-size: 1.1rem;
+    color: var(--navy-dark);
+    font-weight: 600;
+    margin: 0;
   }
+}
 
-  mat-card-content p {
-    color: #666;
-    line-height: 1.5;
+@media (max-width: 576px) {
+  .benefits-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }

@@ -1,17 +1,9 @@
-<mat-card class="offer-card" matRipple>
-  <div class="image-container">
-    <img mat-card-image [src]="offer.imageUrl" [alt]="offer.title">
-    <div class="discount-badge" *ngIf="offer.discountBadge">
-      {{ offer.discountBadge }}
-    </div>
+<div class="card-container">
+  <div class="card-image">
+    <img [src]="offer.imageUrl" [alt]="offer.title">
   </div>
-  <mat-card-header>
-    <mat-card-title>{{ offer.title }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{ offer.description }}</p>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-button color="primary" (click)="onVerOferta()">VER OFERTA</button>
-  </mat-card-actions>
-</mat-card>
+  <div class="card-content">
+    <h3>{{ offer.title }}</h3>
+    <button mat-button class="btn-offer" (click)="onVerOferta()">Ver Oferta</button>
+  </div>
+</div>

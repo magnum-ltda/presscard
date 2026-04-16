@@ -1,65 +1,96 @@
-/* You can add global styles to this file, and also import other style files */
+/* Rebranding Presscard - Global Styles */
 @use '@angular/material' as mat;
 
 :root {
-  --primary-blue: #0f4c81;     /* Classic Blue */
-  --secondary-green: #2ecc71;  /* Vibrant Green */
-  --light-gray: #f8f9fa;
-  --dark-text: #2c3e50;
+  /* Premium Palette */
+  --navy-dark: #001A33;       /* Background Header/Footer */
+  --navy-deep: #000F1F;       /* Section Backgrounds */
+  --gold-accent: #C5A021;     /* Logo & Highlights */
+  --gold-light: #DFBF5B;      /* Hover Gold */
+  --whatsapp-green: #25D366;  /* Buttons */
+  --whatsapp-dark: #128C7E;
   --white: #ffffff;
+  --light-gray: #F5F7FA;
+  --text-dark: #1A1A1A;
+  --text-light: #555555;
+  
+  /* Shadow & Transitions */
+  --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --transition-fast: all 0.3s ease;
 }
 
 html, body { 
   height: 100%; 
   margin: 0; 
-  font-family: 'Roboto', "Helvetica Neue", sans-serif; 
-  background-color: var(--light-gray);
-  color: var(--dark-text);
+  font-family: 'Inter', 'Roboto', "Helvetica Neue", sans-serif; 
+  background-color: var(--white);
+  color: var(--text-dark);
+  scroll-behavior: smooth;
 }
 
-/* Global Utility Classes */
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.align-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
+/* Global Layout */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
 .section-padding {
-  padding: 64px 0;
+  padding: 80px 0;
 }
 
-.text-center {
+.bg-navy { background-color: var(--navy-dark); color: white; }
+.bg-light { background-color: var(--light-gray); }
+
+/* Typography & Headers */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
   text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  
+  h2 {
+    font-size: 2.25rem;
+    color: var(--navy-dark);
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative;
+    padding: 0 30px;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-accent));
+    }
+
+    &::before { right: 100%; }
+    &::after { left: 100%; transform: rotate(180deg); }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+  }
 }
 
+/* Utility Classes */
+.text-gold { color: var(--gold-accent); }
+.text-center { text-align: center; }
+.flex-row { display: flex; align-items: center; }
+.justify-between { justify-content: space-between; }
+
+/* Buttons Overrides */
 .mat-mdc-button.mat-primary {
-  --mdc-filled-button-container-color: var(--primary-blue);
-}
-
-.mat-mdc-button.mat-accent {
-  --mdc-filled-button-container-color: var(--secondary-green);
+  --mdc-filled-button-container-color: var(--navy-dark);
 }

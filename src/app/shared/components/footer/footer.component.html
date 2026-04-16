@@ -1,34 +1,45 @@
-<footer class="footer">
+<footer class="footer bg-navy">
   <div class="container footer-container">
-    <div class="footer-brand">
-      <h3>Presscard Card Company</h3>
-      <p>Acesso a condições diferenciadas em viagens, hotelaria e benefícios.</p>
+    <div class="footer-column brand-column">
+      <div class="logo-container">
+        <span class="logo-text">PRESSCARD</span>
+        <span class="logo-subtext">CARD COMPANY</span>
+      </div>
+      <div class="divider"></div>
+      <p>Clube de Benefícios Institucional</p>
     </div>
 
-    <div class="footer-links">
-      <h4>Links Rápidos</h4>
+    <div class="footer-column links-column">
+      <h4>Links</h4>
       <ul>
-        <li><a (click)="scrollTo('hero')">Home</a></li>
+        <li><a (click)="scrollTo('hero')">Inicio</a></li>
+        <li><a (click)="scrollTo('sobre')">Sobre</a></li>
         <li><a (click)="scrollTo('benefits')">Benefícios</a></li>
-        <li><a (click)="scrollTo('como-funciona')">Como Funciona</a></li>
-        <li><a (click)="scrollTo('offers')">Ofertas</a></li>
+        <li><a (click)="scrollTo('sobre')">Contato</a></li>
       </ul>
     </div>
 
-    <div class="footer-contact">
+    <div class="footer-column contact-column">
       <h4>Contato</h4>
-      <p>
-        <mat-icon inline="true">email</mat-icon>
-        contato&#64;presscard.com.br
-      </p>
-      <div class="footer-cta">
-        <app-whatsapp-button [raised]="true" label="WhatsApp"></app-whatsapp-button>
+      <div class="contact-item">
+        <mat-icon>phone</mat-icon>
+        <div class="contact-text">
+          <span class="label">WhatsApp:</span>
+          <span class="value">(31) 99149.9415</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <mat-icon>email</mat-icon>
+        <div class="contact-text">
+          <span class="value">cardcompany&#64;gmail.com</span>
+        </div>
       </div>
     </div>
   </div>
+  
   <div class="footer-bottom">
     <div class="container">
-      &copy; {{ currentYear() }} Presscard Card Company. Todos os direitos reservados.
+      <p>&copy; {{ currentYear() }} Presscard Card Company. Todos os direitos reservados.</p>
     </div>
   </div>
 </footer>

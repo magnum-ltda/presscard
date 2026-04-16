@@ -1,20 +1,26 @@
-<mat-toolbar color="primary" class="header-toolbar">
+<mat-toolbar class="header-toolbar">
   <div class="container header-container">
-    <div class="logo">
-      <span>Presscard Card Company</span>
+    <div class="logo-wrapper" (click)="scrollTo('hero')">
+      <div class="logo-container">
+        <span class="logo-text">PRESSCARD</span>
+        <span class="logo-subtext">CARD COMPANY</span>
+      </div>
     </div>
     
-    <div class="spacer"></div>
-
     <nav class="nav-links">
-      <button mat-button (click)="scrollTo('hero')">Home</button>
+      <button mat-button (click)="scrollTo('hero')">Início</button>
+      <button mat-button (click)="scrollTo('benefits')">Sobre</button>
       <button mat-button (click)="scrollTo('benefits')">Benefícios</button>
-      <button mat-button (click)="scrollTo('como-funciona')">Como Funciona</button>
       <button mat-button (click)="scrollTo('offers')">Ofertas</button>
     </nav>
 
     <div class="cta-wrapper">
-      <app-whatsapp-button [raised]="true"></app-whatsapp-button>
+      <app-whatsapp-button label="Fale no WhatsApp"></app-whatsapp-button>
     </div>
+    
+    <!-- Mobile Menu Button (Icon only for now) -->
+    <button mat-icon-button class="mobile-menu-btn" aria-label="Menu">
+      <mat-icon>menu</mat-icon>
+    </button>
   </div>
 </mat-toolbar>

@@ -1,57 +1,59 @@
-.offer-card {
-  height: 100%;
+.card-container {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  height: 100%;
+  transition: var(--transition-fast);
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
   }
+}
 
-  .image-container {
-    position: relative;
-    overflow: hidden;
-
-    img {
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-      margin: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .discount-badge {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background-color: var(--secondary-green);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.85rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
+.card-image {
+  height: 180px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
+}
 
-  &:hover .image-container img {
-    transform: scale(1.05);
+.card-content {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--white);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    color: var(--navy-dark);
+    font-weight: 600;
   }
+}
 
-  mat-card-header {
-    margin-top: 16px;
-  }
+.btn-offer {
+  background-color: var(--whatsapp-green) !important;
+  color: white !important;
+  border-radius: 4px;
+  padding: 5px 25px !important;
+  font-size: 0.85rem !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  line-height: normal;
+  border-bottom: 2px solid #1a8e41;
 
-  mat-card-content {
-    flex-grow: 1;
-    margin-top: 8px;
-    color: #555;
-    line-height: 1.5;
-  }
-
-  mat-card-actions {
-    padding: 16px;
+  &:hover {
+    background-color: #1a8e41 !important;
   }
 }

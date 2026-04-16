@@ -15,6 +15,7 @@ export class WhatsappButtonComponent {
   @Input() label: string = 'Fale no WhatsApp';
   @Input() openMessage: string = 'Olá! Gostaria de uma cotação/informação no Presscard.';
   @Input() raised: boolean = true;
+  @Input() large: boolean = false;
 
   private whatsappService = inject(WhatsappService);
 

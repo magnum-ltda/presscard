@@ -12,9 +12,9 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class BenefitsComponent {
   benefits = [
-    { icon: 'savings', title: 'Economia Real', description: 'Tenha acesso a preços que as plataformas comuns não te mostram.' },
-    { icon: 'verified_user', title: 'Facilidade de Acesso', description: 'Uma interface simples e direta para você encontrar o que precisa.' },
-    { icon: 'star', title: 'Curadoria de Oportunidades', description: 'Nossa equipe seleciona as melhores ofertas do mercado diariamente.' },
-    { icon: 'support_agent', title: 'Suporte Personalizado', description: 'Atendimento direto sempre que você precisar de ajuda.' }
+    { icon: 'payments', title: 'Economia Real', description: 'Tenha acesso a preços que as plataformas comuns não te mostram.' },
+    { icon: 'laptop_mac', title: 'Facilidade de Acesso', description: 'Uma interface simples e direta para você encontrar o que precisa.' },
+    { icon: 'military_tech', title: 'Curadoria de Oportunidades', description: 'Nossa equipe seleciona as melhores ofertas do mercado diariamente.' },
+    { icon: 'headset_mic', title: 'Suporte Personalizado', description: 'Atendimento direto sempre que você precisar de ajuda.' }
   ];
 }

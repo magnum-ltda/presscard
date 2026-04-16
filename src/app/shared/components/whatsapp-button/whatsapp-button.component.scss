@@ -1,17 +1,39 @@
-.whatsapp-btn {
-  font-weight: 500;
-  border-radius: 8px;
-  padding: 0 24px;
-  height: 48px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(46, 204, 113, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+.wa-btn {
+  background: var(--whatsapp-green) !important;
+  color: white !important;
+  padding: 10px 24px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: var(--transition-fast) !important;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3) !important;
+  height: auto !important;
+  line-height: normal !important;
+  border-bottom: 3px solid #1a8e41 !important;
 
   &:hover {
+    background: #1a8e41 !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(46, 204, 113, 0.4);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4) !important;
+  }
+}
+
+.wa-btn-large {
+  padding: 15px 40px !important;
+  font-size: 1.2rem !important;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-icon {
+  width: 20px;
+  height: 20px;
+  
+  .wa-btn-large & {
+    width: 28px;
+    height: 28px;
   }
 }

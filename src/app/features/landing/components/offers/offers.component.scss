@@ -1,5 +1,18 @@
+.bg-navy-deep {
+  background-color: var(--navy-deep);
+}
+
+.text-white {
+  color: white !important;
+  
+  &::before, &::after {
+    background: linear-gradient(to right, transparent, var(--gold-accent)) !important;
+  }
+}
+
 .offers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
 }
