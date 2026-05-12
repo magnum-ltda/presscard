@@ -1,0 +1,141 @@
+<section class="offer-detail-page" *ngIf="!loading(); else loadingTpl">
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar-wrapper">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input
+        id="offer-search"
+        type="text"
+        placeholder="Buscar ofertas (hotel, carro, destino...)"
+        [value]="searchQuery()"
+        (input)="onSearchChange($any($event.target).value)"
+        class="search-input"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
+  <div class="detail-layout" *ngIf="offer() as o; else notFound">
+
+    <!-- MAIN CONTENT -->
+    <main class="detail-main">
+
+      <!-- HERO IMAGE -->
+      <div class="hero-image-wrapper">
+        <div class="hero-skeleton" [class.hidden]="imageLoaded()"></div>
+        <img
+          [src]="o.imageUrl"
+          [alt]="o.title"
+          class="hero-image"
+          [class.visible]="imageLoaded()"
+          (load)="onImageLoad()"
+        />
+        <div class="hero-overlay">
+          <span class="type-badge" [class.badge-hotel]="o.type === 'hotel'" [class.badge-car]="o.type === 'carro'">
+            {{ getActionIcon() }} {{ getBadgeLabel() }}
+          </span>
+          <span class="discount-badge" *ngIf="o.discountBadge">{{ o.discountBadge }}</span>
+        </div>
+      </div>
+
+      <!-- OFFER INFO -->
+      <div class="offer-info">
+        <h1 class="offer-title">{{ o.title }}</h1>
+
+        <div class="offer-address">
+          <span class="address-icon">📍</span>
+          <span>{{ o.address }}</span>
+        </div>
+
+        <p class="offer-description">{{ o.description }}</p>
+
+        <!-- ACTION BUTTONS (desktop) -->
+        <div class="action-buttons desktop-only">
+          <button
+            id="btn-reserve"
+            class="btn btn-primary"
+            (click)="openExternalUrl()"
+          >
+            {{ getActionIcon() }} {{ getActionLabel() }}
+          </button>
+          <button
+            id="btn-directions"
+            class="btn btn-secondary"
+            (click)="openDirections()"
+          >
+            🗺️ Como Chegar
+          </button>
+        </div>
+      </div>
+
+      <!-- MAP -->
+      <div class="map-section">
+        <h2 class="section-title">📍 Localização</h2>
+        <div id="offer-map" class="map-container" aria-label="Mapa da localização da oferta"></div>
+        <p class="map-address-label">{{ o.address }}</p>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="detail-sidebar">
+      <div class="sidebar-card">
+        <h2 class="sidebar-title">Outras Ofertas</h2>
+        <ul class="related-list" *ngIf="relatedOffers().length > 0; else noRelated">
+          <li
+            *ngFor="let related of relatedOffers()"
+            class="related-item"
+            (click)="navigateToOffer(related.id)"
+            [attr.aria-label]="'Ver oferta: ' + related.title"
+          >
+            <div class="related-img-wrapper">
+              <img [src]="related.imageUrl" [alt]="related.title" class="related-img" />
+              <span class="related-badge" [class.badge-hotel]="related.type === 'hotel'" [class.badge-car]="related.type === 'carro'">
+                {{ related.type === 'hotel' ? '🏨' : '🚗' }}
+              </span>
+            </div>
+            <div class="related-info">
+              <p class="related-title">{{ related.title }}</p>
+              <p class="related-address">{{ related.address }}</p>
+              <span class="related-discount" *ngIf="related.discountBadge">{{ related.discountBadge }}</span>
+            </div>
+          </li>
+        </ul>
+        <ng-template #noRelated>
+          <p class="no-results">Nenhuma oferta encontrada.</p>
+        </ng-template>
+      </div>
+    </aside>
+
+  </div>
+
+</section>
+
+<!-- STICKY BOTTOM ACTIONS (mobile) -->
+<div class="sticky-actions mobile-only" *ngIf="offer() as o">
+  <button class="btn btn-primary btn-sticky" (click)="openExternalUrl()">
+    {{ getActionIcon() }} {{ getActionLabel() }}
+  </button>
+  <button class="btn btn-secondary btn-sticky" (click)="openDirections()">
+    🗺️ Como Chegar
+  </button>
+</div>
+
+<!-- LOADING -->
+<ng-template #loadingTpl>
+  <div class="loading-screen">
+    <div class="spinner"></div>
+    <p>Carregando oferta...</p>
+  </div>
+</ng-template>
+
+<!-- NOT FOUND -->
+<ng-template #notFound>
+  <div class="not-found">
+    <span class="not-found-icon">😕</span>
+    <h2>Oferta não encontrada</h2>
+    <p>A oferta que você está buscando não existe ou foi removida.</p>
+    <a routerLink="/" class="btn btn-primary">Voltar ao início</a>
+  </div>
+</ng-template>

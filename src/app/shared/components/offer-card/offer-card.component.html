@@ -1,9 +1,11 @@
-<div class="card-container">
+<div class="card-container" (click)="onVerOferta()" matRipple>
   <div class="card-image">
     <img [src]="offer.imageUrl" [alt]="offer.title">
+    <div class="card-badge" *ngIf="offer.discountBadge">{{ offer.discountBadge }}</div>
   </div>
   <div class="card-content">
     <h3>{{ offer.title }}</h3>
-    <button mat-button class="btn-offer" (click)="onVerOferta()">Ver Oferta</button>
+    <p class="card-address">{{ offer.address }}</p>
+    <button mat-button class="btn-offer">Ver Oferta</button>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
-import { OffersService, Offer } from '../../../../core/services/offers.service';
+import { OffersService } from '../../../../core/services/offers.service';
+import { Offer } from '../../../../core/models/offer.model';
 
 @Component({
   selector: 'app-offers',
