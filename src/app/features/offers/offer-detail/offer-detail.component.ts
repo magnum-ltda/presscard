@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { switchMap, tap, debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { OffersService } from '../../../core/services/offers.service';
 import { Offer } from '../../../core/models/offer.model';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-offer-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, HeaderComponent, FooterComponent],
   templateUrl: './offer-detail.component.html',
   styleUrls: ['./offer-detail.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <section class="offer-detail-page" *ngIf="!loading(); else loadingTpl">
 
   <!-- SEARCH BAR -->
@@ -30,6 +32,7 @@
           class="hero-image"
           [class.visible]="imageLoaded()"
           (load)="onImageLoad()"
+          (error)="onImageLoad()"
         />
         <div class="hero-overlay">
           <span class="type-badge" [class.badge-hotel]="o.type === 'hotel'" [class.badge-car]="o.type === 'carro'">
@@ -139,3 +142,6 @@
     <a routerLink="/" class="btn btn-primary">Voltar ao início</a>
   </div>
 </ng-template>
+
+<app-footer></app-footer>
+
