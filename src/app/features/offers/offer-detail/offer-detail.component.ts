@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { switchMap, tap, debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { OffersService } from '../../../core/services/offers.service';
 import { Offer } from '../../../core/models/offer.model';
-import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { FooterComponent } from '../../../shared/components/footer/footer.component';
+import { HeaderComponent } from '../../../layout/header/header.component';
+import { FooterComponent } from '../../../layout/footer/footer.component';
 import * as L from 'leaflet';
 
 @Component({

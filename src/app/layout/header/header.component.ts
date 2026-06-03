@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { WhatsappButtonComponent } from '../whatsapp-button/whatsapp-button.component';
+import { WhatsappButtonComponent } from '../../shared/components/whatsapp-button/whatsapp-button.component';
 
 @Component({
   selector: 'app-header',

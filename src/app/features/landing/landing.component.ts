@@ -4,8 +4,9 @@ import { BenefitsComponent } from './components/benefits/benefits.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { CtaComponent } from './components/cta/cta.component';
-import { HeaderComponent } from '../../shared/components/header/header.component';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { HeaderComponent } from '../../layout/header/header.component';
+import { FooterComponent } from '../../layout/footer/footer.component';
+
 
 @Component({
   selector: 'app-landing',
