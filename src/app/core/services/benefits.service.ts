@@ -48,7 +48,7 @@ export class BenefitsService {
       platformCommission: 5,
       rules: 'Redirecionamento automático. As tarifas reduzidas já estarão ativadas no link do parceiro.',
       validity: '2027-06-30',
-      usageLimit: null,
+      usageLimit: undefined,
       executionType: 'EXTERNAL_REDIRECT',
       active: true
     },
@@ -64,7 +64,7 @@ export class BenefitsService {
       platformCommission: 3,
       rules: 'O pagamento deve ser realizado através do link seguro gerado na plataforma para validação do desconto.',
       validity: '2026-12-31',
-      usageLimit: null,
+      usageLimit: undefined,
       executionType: 'PAYMENT_LINK',
       active: true
     },

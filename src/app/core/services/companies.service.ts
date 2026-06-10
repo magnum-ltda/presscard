@@ -20,6 +20,8 @@ export class CompaniesService {
   private readonly STORAGE_KEY = 'presscard_companies';
   private companiesSignal = signal<AssociatedCompany[]>([]);
   public readonly companies = this.companiesSignal.asReadonly();
+  private loadingSignal = signal<boolean>(true);
+  public readonly isLoading = this.loadingSignal.asReadonly();
 
   private defaultCompanies: AssociatedCompany[] = [
     {
@@ -63,9 +65,11 @@ export class CompaniesService {
           for (const c of this.defaultCompanies) {
             await setDoc(doc(this.firebaseService.db, 'companies', c.id), c);
           }
+          // The snapshot will trigger again after setDoc, but we can set loading false here
         } else {
           this.companiesSignal.set(list);
         }
+        this.loadingSignal.set(false);
       });
     } else {
       // LocalStorage fallback
@@ -76,6 +80,7 @@ export class CompaniesService {
         this.companiesSignal.set(this.defaultCompanies);
         this.saveToLocal(this.defaultCompanies);
       }
+      this.loadingSignal.set(false);
     }
   }
 
