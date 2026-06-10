@@ -18,6 +18,8 @@ export class PartnersService {
   private readonly STORAGE_KEY = 'presscard_partners';
   private partnersSignal = signal<CommercialPartner[]>([]);
   public readonly partners = this.partnersSignal.asReadonly();
+  private loadingSignal = signal<boolean>(true);
+  public readonly isLoading = this.loadingSignal.asReadonly();
 
   private defaultPartners: CommercialPartner[] = [
     {
@@ -159,6 +161,7 @@ export class PartnersService {
         } else {
           this.partnersSignal.set(list);
         }
+        this.loadingSignal.set(false);
       });
     } else {
       const localData = localStorage.getItem(this.STORAGE_KEY);
@@ -168,6 +171,7 @@ export class PartnersService {
         this.partnersSignal.set(this.defaultPartners);
         this.saveToLocal(this.defaultPartners);
       }
+      this.loadingSignal.set(false);
     }
   }
 

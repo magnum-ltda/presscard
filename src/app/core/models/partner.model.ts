@@ -38,6 +38,7 @@ export interface CommercialPartner {
   imageUrl?: string; // Mantido para compatibilidade simples
   images: string[];
   contact: string;
+  whatsapp?: string;
   externalLink: string;
   executionType: ExecutionType;
   commissionType: 'PERCENTAGE' | 'FIXED';
