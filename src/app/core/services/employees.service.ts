@@ -18,6 +18,8 @@ export class EmployeesService {
   private readonly STORAGE_KEY = 'presscard_employees';
   private employeesSignal = signal<Employee[]>([]);
   public readonly employees = this.employeesSignal.asReadonly();
+  private loadingSignal = signal<boolean>(true);
+  public readonly isLoading = this.loadingSignal.asReadonly();
 
   private defaultEmployees: Employee[] = [
     {
@@ -91,6 +93,7 @@ export class EmployeesService {
         } else {
           this.employeesSignal.set(list);
         }
+        this.loadingSignal.set(false);
       });
     } else {
       const localData = localStorage.getItem(this.STORAGE_KEY);
@@ -100,6 +103,7 @@ export class EmployeesService {
         this.employeesSignal.set(this.defaultEmployees);
         this.saveToLocal(this.defaultEmployees);
       }
+      this.loadingSignal.set(false);
     }
   }
 

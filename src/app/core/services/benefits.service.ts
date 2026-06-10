@@ -18,6 +18,8 @@ export class BenefitsService {
   private readonly STORAGE_KEY = 'presscard_benefits';
   private benefitsSignal = signal<Benefit[]>([]);
   public readonly benefits = this.benefitsSignal.asReadonly();
+  private loadingSignal = signal<boolean>(true);
+  public readonly isLoading = this.loadingSignal.asReadonly();
 
   private defaultBenefits: Benefit[] = [
     {
@@ -106,6 +108,7 @@ export class BenefitsService {
         } else {
           this.benefitsSignal.set(list);
         }
+        this.loadingSignal.set(false);
       });
     } else {
       const localData = localStorage.getItem(this.STORAGE_KEY);
@@ -115,6 +118,7 @@ export class BenefitsService {
         this.benefitsSignal.set(this.defaultBenefits);
         this.saveToLocal(this.defaultBenefits);
       }
+      this.loadingSignal.set(false);
     }
   }
 
