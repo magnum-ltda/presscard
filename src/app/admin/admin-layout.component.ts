@@ -177,6 +177,64 @@ import { AuthService } from '../core/auth/auth.service';
       padding: 2rem;
       overflow-y: auto;
     }
+
+    /* Mobile Responsive Sidebar -> Bottom Nav */
+    @media (max-width: 768px) {
+      .admin-layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        flex-direction: row;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .sidebar-header, .sidebar-footer {
+        display: none;
+      }
+      .sidebar-nav {
+        flex-direction: row;
+        padding: 0;
+        justify-content: space-around;
+        width: 100%;
+      }
+      .sidebar-nav a {
+        flex-direction: column;
+        padding: 0.5rem;
+        font-size: 0.7rem;
+        gap: 0.25rem;
+        border-left: none;
+        border-top: 3px solid transparent;
+        flex: 1;
+        text-align: center;
+      }
+      .sidebar-nav a:hover, .sidebar-nav a.active {
+        border-top-color: #3b82f6;
+        border-left-color: transparent;
+        background-color: rgba(255,255,255,0.1);
+      }
+      .sidebar-nav a .icon {
+        font-size: 1.5rem;
+      }
+      .main-content {
+        margin-bottom: 60px; /* Space for bottom nav */
+      }
+      .topbar {
+        padding: 0 1rem;
+        height: 60px;
+      }
+      .content-area {
+        padding: 1rem;
+      }
+      .topbar-title {
+        font-size: 1.1rem;
+      }
+    }
   `]
 })
 export class AdminLayoutComponent {

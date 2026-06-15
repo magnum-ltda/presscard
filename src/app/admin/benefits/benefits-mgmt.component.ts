@@ -230,7 +230,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
     .flex-1 { flex: 1; }
     
     .form-group label { font-size: 0.875rem; font-weight: 500; color: #475569; }
-    .form-control { padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.2s; }
+    .form-control { width: 100%; box-sizing: border-box; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.2s; }
     .form-control:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
     .form-control.error { border-color: #ef4444; }
     textarea.form-control { resize: vertical; }
