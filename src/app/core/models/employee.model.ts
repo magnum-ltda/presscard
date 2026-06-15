@@ -7,6 +7,7 @@ export interface Employee {
   role: UserRole;
   companyId: string; // Vínculo com a Empresa Associada
   partnerId?: string; // Vínculo opcional se o usuário gerencia um parceiro comercial
+  whatsapp?: string; // Para contato com o funcionário
   status: 'ACTIVE' | 'INACTIVE';
   createdAt?: any;
 }

@@ -112,6 +112,11 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
               </select>
             </div>
 
+            <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE'">
+              <label>WhatsApp do Funcionário</label>
+              <input type="text" formControlName="whatsapp" class="form-control" placeholder="(00) 00000-0000">
+            </div>
+
             <div class="modal-footer">
               <button type="button" class="btn-secondary" (click)="closeForm()">Cancelar</button>
               <button type="submit" class="btn-primary" [disabled]="employeeForm.invalid || isSaving">
@@ -207,6 +212,7 @@ export class EmployeesComponent {
     email: ['', [Validators.required, Validators.email]],
     role: ['EMPLOYEE', Validators.required],
     companyId: [''],
+    whatsapp: [''],
     status: ['ACTIVE', Validators.required]
   });
 
@@ -234,7 +240,7 @@ export class EmployeesComponent {
       this.employeeForm.patchValue(employee);
     } else {
       this.currentEmployeeId = null;
-      this.employeeForm.reset({ role: 'EMPLOYEE', status: 'ACTIVE', companyId: '' });
+      this.employeeForm.reset({ role: 'EMPLOYEE', status: 'ACTIVE', companyId: '', whatsapp: '' });
     }
     this.isModalOpen = true;
   }
@@ -259,6 +265,11 @@ export class EmployeesComponent {
     // Se não for funcionário ou admin de empresa, limpa a companyId
     if (formData.role !== 'EMPLOYEE' && formData.role !== 'ADMIN') {
       formData.companyId = '';
+    }
+
+    // Se não for funcionário, limpa o whatsapp
+    if (formData.role !== 'EMPLOYEE') {
+      formData.whatsapp = '';
     }
 
     // Se for funcionário, companyId é obrigatório
