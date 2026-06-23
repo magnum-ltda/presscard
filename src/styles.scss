@@ -200,3 +200,30 @@ h3 {
     gap: 1rem !important;
   }
 }
+
+/* Premium Menu (Dropdowns) Override */
+.mat-mdc-menu-panel.premium-menu,
+.premium-menu {
+  --mat-menu-container-color: var(--navy-dark);
+  background-color: var(--navy-dark) !important;
+  border: 1px solid var(--gold-accent) !important;
+  border-radius: 8px !important;
+
+  .mat-mdc-menu-item {
+    color: white !important;
+    transition: all 0.2s;
+    
+    &:hover {
+      background-color: rgba(197, 160, 33, 0.15) !important;
+      color: var(--gold-accent) !important;
+    }
+    
+    .mat-icon {
+      color: var(--gold-accent) !important;
+    }
+  }
+
+  .mat-divider {
+    border-top-color: rgba(255, 255, 255, 0.1) !important;
+  }
+}

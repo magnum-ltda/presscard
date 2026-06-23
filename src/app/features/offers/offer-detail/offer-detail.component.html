@@ -2,71 +2,52 @@
 
 <section class="offer-detail-page" *ngIf="!loading(); else loadingTpl">
 
-  <!-- SEARCH BAR -->
-  <div class="search-bar-wrapper">
-    <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input
-        id="offer-search"
-        type="text"
-        placeholder="Buscar ofertas (hotel, carro, destino...)"
-        [value]="searchQuery()"
-        (input)="onSearchChange($any($event.target).value)"
-        class="search-input"
-        autocomplete="off"
-      />
-    </div>
-  </div>
-
-  <div class="detail-layout" *ngIf="offer() as o; else notFound">
-
-    <!-- MAIN CONTENT -->
-    <main class="detail-main">
+  <div class="detail-layout" *ngIf="benefit() as b; else notFound">
+    <main class="detail-main" *ngIf="partner() as p">
 
       <!-- HERO IMAGE -->
       <div class="hero-image-wrapper">
         <div class="hero-skeleton" [class.hidden]="imageLoaded()"></div>
         <img
-          [src]="o.imageUrl"
-          [alt]="o.title"
+          [src]="p.imageUrl || 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop'"
+          [alt]="p.tradeName"
           class="hero-image"
           [class.visible]="imageLoaded()"
           (load)="onImageLoad()"
           (error)="onImageLoad()"
         />
         <div class="hero-overlay">
-          <span class="type-badge" [class.badge-hotel]="o.type === 'hotel'" [class.badge-car]="o.type === 'carro'">
-            {{ getActionIcon() }} {{ getBadgeLabel() }}
-          </span>
-          <span class="discount-badge" *ngIf="o.discountBadge">{{ o.discountBadge }}</span>
+          <span class="type-badge">{{ b.category }}</span>
+          <span class="discount-badge">{{ b.discountPercentage }}% OFF</span>
         </div>
       </div>
 
       <!-- OFFER INFO -->
       <div class="offer-info">
-        <h1 class="offer-title">{{ o.title }}</h1>
+        <h1 class="offer-title">{{ b.title }}</h1>
+        <p class="offer-partner-name" style="font-weight: 500; color: #64748b; margin-top: -10px; margin-bottom: 20px;">
+          Oferecido por: {{ p.tradeName }}
+        </p>
 
         <div class="offer-address">
           <span class="address-icon">📍</span>
-          <span>{{ o.address }}</span>
+          <span>{{ p.location.address }}, {{ p.location.number }} - {{ p.location.city }}/{{ p.location.state }}</span>
         </div>
 
-        <p class="offer-description">{{ o.description }}</p>
+        <p class="offer-description">{{ b.description }}</p>
+
+        <!-- RULES -->
+        <div class="rules-section" style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 8px;">
+          <h3 style="margin-top:0; color:#334155; font-size:1rem;">Regras de Uso</h3>
+          <p style="white-space: pre-line; color:#475569; font-size: 0.9rem; margin: 0;">{{ b.rules }}</p>
+        </div>
 
         <!-- ACTION BUTTONS (desktop) -->
         <div class="action-buttons desktop-only">
-          <button
-            id="btn-reserve"
-            class="btn btn-primary"
-            (click)="openExternalUrl()"
-          >
-            {{ getActionIcon() }} {{ getActionLabel() }}
+          <button class="btn btn-primary" (click)="onResgatar()">
+            🎁 Resgatar Benefício
           </button>
-          <button
-            id="btn-directions"
-            class="btn btn-secondary"
-            (click)="openDirections()"
-          >
+          <button class="btn btn-secondary" (click)="openDirections()">
             🗺️ Como Chegar
           </button>
         </div>
@@ -76,49 +57,18 @@
       <div class="map-section">
         <h2 class="section-title">📍 Localização</h2>
         <div id="offer-map" class="map-container" aria-label="Mapa da localização da oferta"></div>
-        <p class="map-address-label">{{ o.address }}</p>
+        <p class="map-address-label">{{ p.location.address }}</p>
       </div>
 
     </main>
-
-    <!-- SIDEBAR -->
-    <aside class="detail-sidebar">
-      <div class="sidebar-card">
-        <h2 class="sidebar-title">Outras Ofertas</h2>
-        <ul class="related-list" *ngIf="relatedOffers().length > 0; else noRelated">
-          <li
-            *ngFor="let related of relatedOffers()"
-            class="related-item"
-            (click)="navigateToOffer(related.id)"
-            [attr.aria-label]="'Ver oferta: ' + related.title"
-          >
-            <div class="related-img-wrapper">
-              <img [src]="related.imageUrl" [alt]="related.title" class="related-img" />
-              <span class="related-badge" [class.badge-hotel]="related.type === 'hotel'" [class.badge-car]="related.type === 'carro'">
-                {{ related.type === 'hotel' ? '🏨' : '🚗' }}
-              </span>
-            </div>
-            <div class="related-info">
-              <p class="related-title">{{ related.title }}</p>
-              <p class="related-address">{{ related.address }}</p>
-              <span class="related-discount" *ngIf="related.discountBadge">{{ related.discountBadge }}</span>
-            </div>
-          </li>
-        </ul>
-        <ng-template #noRelated>
-          <p class="no-results">Nenhuma oferta encontrada.</p>
-        </ng-template>
-      </div>
-    </aside>
-
   </div>
 
 </section>
 
 <!-- STICKY BOTTOM ACTIONS (mobile) -->
-<div class="sticky-actions mobile-only" *ngIf="offer() as o">
-  <button class="btn btn-primary btn-sticky" (click)="openExternalUrl()">
-    {{ getActionIcon() }} {{ getActionLabel() }}
+<div class="sticky-actions mobile-only" *ngIf="benefit() && !loading()">
+  <button class="btn btn-primary btn-sticky" (click)="onResgatar()">
+    🎁 Resgatar Benefício
   </button>
   <button class="btn btn-secondary btn-sticky" (click)="openDirections()">
     🗺️ Como Chegar
@@ -139,9 +89,59 @@
     <span class="not-found-icon">😕</span>
     <h2>Oferta não encontrada</h2>
     <p>A oferta que você está buscando não existe ou foi removida.</p>
-    <a routerLink="/" class="btn btn-primary">Voltar ao início</a>
+    <a routerLink="/" class="btn btn-primary">Voltar ao Catálogo</a>
   </div>
 </ng-template>
 
-<app-footer></app-footer>
+<!-- COUPON SUCCESS MODAL -->
+<div class="modal-overlay" *ngIf="generatedCouponCode()" (click)="closeCouponModal()">
+  <div class="modal-content" style="max-width: 400px; padding: 2rem; text-align: center;" (click)="$event.stopPropagation()">
+    <div style="font-size: 4rem; margin-bottom: 1rem; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);">🎉</div>
+    <h2 style="margin-bottom: 0.5rem; color: #1e293b;">Cupom Gerado!</h2>
+    <p style="color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">Apresente o código abaixo no estabelecimento para garantir seu benefício.</p>
+    
+    <div style="background: #f8fafc; border: 2px dashed #cbd5e1; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+      <div style="font-size: 1.75rem; font-weight: 800; letter-spacing: 3px; color: #f59e0b;">
+        {{ generatedCouponCode() }}
+      </div>
+    </div>
 
+    <!-- Partner Actions -->
+    <div style="display: flex; gap: 10px; margin-bottom: 2rem; justify-content: center;" *ngIf="partner() as p">
+      <button *ngIf="p.whatsapp || p.contact" class="btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 600; cursor: pointer;" (click)="openPartnerWhatsapp()">
+        💬 WhatsApp
+      </button>
+      <button *ngIf="p.externalLink" class="btn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: #3b82f6; color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 600; cursor: pointer;" (click)="openPartnerLink()">
+        🌐 Acessar Site
+      </button>
+    </div>
+
+    <button class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;" (click)="closeCouponModal()">
+      Entendido
+    </button>
+  </div>
+</div>
+
+<style>
+  @keyframes pop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+  }
+  .modal-content {
+    background: white; border-radius: 16px; width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    transform: translateY(0); animation: slideUp 0.3s ease-out;
+  }
+  @keyframes slideUp { 
+    from { transform: translateY(20px); opacity: 0; } 
+    to { transform: translateY(0); opacity: 1; } 
+  }
+</style>
+
+<app-footer></app-footer>

@@ -1,107 +1,86 @@
-import {
-  Component, OnInit, OnDestroy, AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef, signal
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, signal, computed, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { switchMap, tap, debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import { OffersService } from '../../../core/services/offers.service';
-import { Offer } from '../../../core/models/offer.model';
 import { HeaderComponent } from '../../../layout/header/header.component';
 import { FooterComponent } from '../../../layout/footer/footer.component';
+import { BenefitsService } from '../../../core/services/benefits.service';
+import { PartnersService } from '../../../core/services/partners.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { CouponsService } from '../../../core/services/coupons.service';
+import { Benefit } from '../../../core/models/benefit.model';
+import { CommercialPartner } from '../../../core/models/partner.model';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-offer-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
   templateUrl: './offer-detail.component.html',
-  styleUrls: ['./offer-detail.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./offer-detail.component.css']
 })
 export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private benefitsService = inject(BenefitsService);
+  private partnersService = inject(PartnersService);
+  private authService = inject(AuthService);
+  private couponsService = inject(CouponsService);
+  private cdr = inject(ChangeDetectorRef);
 
-  offer = signal<Offer | null>(null);
-  relatedOffers = signal<Offer[]>([]);
-  searchQuery = signal('');
+  benefit = signal<Benefit | null>(null);
+  partner = computed(() => {
+    const b = this.benefit();
+    if (!b) return null;
+    return this.partnersService.partners().find(p => p.id === b.commercialPartnerId) || null;
+  });
+  
   loading = signal(true);
   imageLoaded = signal(false);
+  generatedCouponCode = signal<string | null>(null);
 
   private map: L.Map | null = null;
   private marker: L.Marker | null = null;
-  private destroy$ = new Subject<void>();
-  private searchSubject = new Subject<string>();
   private mapInitialized = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private offersService: OffersService,
-    private cdr: ChangeDetectorRef
-  ) {}
-
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      takeUntil(this.destroy$),
-      switchMap(params => {
-        const id = Number(params.get('id'));
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
         this.loading.set(true);
         this.imageLoaded.set(false);
-        return this.offersService.getOfferById(id);
-      })
-    ).subscribe(offer => {
-      this.offer.set(offer ?? null);
-      this.loading.set(false);
-      this.cdr.markForCheck();
-      if (offer) {
-        this.loadRelated();
-        setTimeout(() => this.updateMap(), 100);
+        // Espera os dados estarem disponíveis nos signals
+        setTimeout(() => {
+          const b = this.benefitsService.benefits().find(x => x.id === id);
+          this.benefit.set(b || null);
+          this.loading.set(false);
+          this.cdr.markForCheck();
+          if (b) {
+            setTimeout(() => this.updateMap(), 100);
+          }
+        }, 500);
       }
-    });
-
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntil(this.destroy$),
-      switchMap(q => this.offersService.searchOffers(q))
-    ).subscribe(offers => {
-      const currentId = this.offer()?.id;
-      this.relatedOffers.set(offers.filter(o => o.id !== currentId));
-      this.cdr.markForCheck();
     });
   }
 
   ngAfterViewInit(): void {
-    if (this.offer()) {
+    if (this.benefit()) {
       this.initMap();
     }
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
     this.destroyMap();
   }
 
-  private loadRelated(): void {
-    this.offersService.getOffers().subscribe(offers => {
-      const currentId = this.offer()?.id;
-      this.relatedOffers.set(offers.filter(o => o.id !== currentId));
-      this.cdr.markForCheck();
-    });
-  }
-
   private initMap(): void {
-    const offer = this.offer();
-    if (!offer || this.mapInitialized) return;
+    const p = this.partner();
+    if (!p || !p.location || this.mapInitialized) return;
 
     const mapEl = document.getElementById('offer-map');
     if (!mapEl) return;
 
     this.destroyMap();
 
-    // Fix Leaflet default icon
     const iconDefault = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -113,28 +92,28 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.map = L.map('offer-map', {
-      center: [offer.latitude, offer.longitude],
+      center: [p.location.latitude, p.location.longitude],
       zoom: 15,
       zoomControl: true,
       scrollWheelZoom: false
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      attribution: '© OpenStreetMap',
       maxZoom: 19
     }).addTo(this.map);
 
-    this.marker = L.marker([offer.latitude, offer.longitude], { icon: iconDefault })
+    this.marker = L.marker([p.location.latitude, p.location.longitude], { icon: iconDefault })
       .addTo(this.map)
-      .bindPopup(`<strong>${offer.title}</strong><br>${offer.address}`)
+      .bindPopup(`<strong>${p.tradeName}</strong><br>${p.location.address}`)
       .openPopup();
 
     this.mapInitialized = true;
   }
 
   private updateMap(): void {
-    const offer = this.offer();
-    if (!offer) return;
+    const p = this.partner();
+    if (!p || !p.location) return;
 
     if (!this.mapInitialized) {
       this.initMap();
@@ -142,10 +121,10 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.map && this.marker) {
-      const latlng: L.LatLngExpression = [offer.latitude, offer.longitude];
+      const latlng: L.LatLngExpression = [p.location.latitude, p.location.longitude];
       this.map.setView(latlng, 15);
       this.marker.setLatLng(latlng);
-      this.marker.setPopupContent(`<strong>${offer.title}</strong><br>${offer.address}`);
+      this.marker.setPopupContent(`<strong>${p.tradeName}</strong><br>${p.location.address}`);
       this.map.invalidateSize();
     }
   }
@@ -159,43 +138,73 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onSearchChange(value: string): void {
-    this.searchQuery.set(value);
-    this.searchSubject.next(value);
-  }
-
-  openExternalUrl(): void {
-    const url = this.offer()?.externalUrl;
-    if (url) window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
-  openDirections(): void {
-    const offer = this.offer();
-    if (!offer) return;
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${offer.latitude},${offer.longitude}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
-
-  navigateToOffer(id: number): void {
-    this.mapInitialized = false;
-    this.destroyMap();
-    this.router.navigate(['/ofertas', id]);
-  }
-
-  getActionLabel(): string {
-    return this.offer()?.type === 'hotel' ? 'Reservar Hotel' : 'Alugar Carro';
-  }
-
-  getActionIcon(): string {
-    return this.offer()?.type === 'hotel' ? '🏨' : '🚗';
-  }
-
-  getBadgeLabel(): string {
-    return this.offer()?.type === 'hotel' ? 'Hotel' : 'Aluguel de Carro';
-  }
-
   onImageLoad(): void {
     this.imageLoaded.set(true);
     this.cdr.markForCheck();
+  }
+
+  openDirections(): void {
+    const p = this.partner();
+    if (!p || !p.location) return;
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${p.location.latitude},${p.location.longitude}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  async onResgatar() {
+    const user = this.authService.currentUser();
+    if (!user) {
+      this.router.navigate(['/auth/login'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+    
+    const b = this.benefit();
+    const p = this.partner();
+    if (!b || !p) return;
+
+    if (b.associatedCompanyId !== 'ALL' && b.associatedCompanyId !== user.companyId && user.role === 'EMPLOYEE') {
+      alert('Este benefício é exclusivo para funcionários de outra empresa associada.');
+      return;
+    }
+
+    if (b.executionType === 'EXTERNAL_REDIRECT' || b.executionType === 'PAYMENT_LINK') {
+      window.open(p.externalLink || '#', '_blank', 'noopener,noreferrer');
+    } else {
+      const coupon = await this.couponsService.generateCoupon({
+        employeeId: user.id,
+        employeeName: user.name,
+        companyName: user.companyId,
+        benefitId: b.id,
+        benefitTitle: b.title,
+        partnerId: p.id,
+        partnerName: p.tradeName
+      });
+      if (coupon) {
+        this.generatedCouponCode.set(coupon.code);
+      } else {
+        alert('Erro ao gerar cupom. Tente novamente mais tarde.');
+      }
+    }
+  }
+
+  closeCouponModal(): void {
+    this.generatedCouponCode.set(null);
+  }
+
+  openPartnerLink(): void {
+    const link = this.partner()?.externalLink;
+    if (link) window.open(link, '_blank', 'noopener,noreferrer');
+  }
+
+  openPartnerWhatsapp(): void {
+    const p = this.partner();
+    if (!p) return;
+    
+    // Tenta pegar o whatsapp, se não tiver, usa o contact (telefone)
+    const phone = p.whatsapp || p.contact;
+    if (phone) {
+      const cleanNum = phone.replace(/\D/g, '');
+      const text = `Olá! Gostaria de utilizar meu benefício do Clube. Meu cupom de resgate é: ${this.generatedCouponCode()}`;
+      window.open(`https://wa.me/55${cleanNum}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    }
   }
 }

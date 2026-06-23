@@ -14,13 +14,86 @@
       <button mat-button (click)="scrollTo('offers')">Ofertas</button>
     </nav>
 
-    <div class="cta-wrapper">
-      <app-whatsapp-button label="Fale no WhatsApp"></app-whatsapp-button>
+    <div class="cta-wrapper desktop-only">
+      <app-whatsapp-button label="WhatsApp" class="desktop-only"></app-whatsapp-button>
+      
+      <ng-container *ngIf="user(); else loginBtn">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
+          <mat-icon style="margin-right: 4px;">account_circle</mat-icon>
+          <span class="user-name">{{ user()?.name }}</span>
+          <mat-icon style="margin-left: 0; font-size: 1.2rem;">arrow_drop_down</mat-icon>
+        </button>
+      </ng-container>
+      
+      <ng-template #loginBtn>
+        <button mat-raised-button color="primary" class="login-btn" (click)="goToLogin()">
+          <mat-icon style="margin-right: 4px;">login</mat-icon> Entrar
+        </button>
+      </ng-template>
     </div>
 
-    <!-- Mobile Menu Button (Icon only for now) -->
-    <button mat-icon-button class="mobile-menu-btn" aria-label="Menu">
+    <!-- User Menu (Shared) -->
+    <mat-menu #userMenu="matMenu" class="premium-menu">
+      <ng-container *ngIf="user()?.role === 'SUPER_ADMIN' || user()?.role === 'ADMIN'">
+        <button mat-menu-item (click)="goToAdmin()">
+          <mat-icon>dashboard</mat-icon>
+          <span>Painel Administrador</span>
+        </button>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <ng-container *ngIf="user()?.role === 'EMPLOYEE'">
+        <button mat-menu-item (click)="goToCoupons()">
+          <mat-icon>local_activity</mat-icon>
+          <span>Meus Cupons</span>
+        </button>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair da Conta</span>
+      </button>
+    </mat-menu>
+
+    <!-- Mobile Menu Button -->
+    <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu">
       <mat-icon>menu</mat-icon>
     </button>
+
+    <!-- Mobile Full Menu -->
+    <mat-menu #mobileMenu="matMenu" xPosition="before" class="premium-menu">
+      <button mat-menu-item (click)="scrollTo('hero')">Início</button>
+      <button mat-menu-item (click)="scrollTo('about')">Sobre</button>
+      <button mat-menu-item (click)="scrollTo('benefits')">Benefícios</button>
+      <button mat-menu-item (click)="scrollTo('offers')">Ofertas</button>
+      <mat-divider></mat-divider>
+      
+      <ng-container *ngIf="user(); else mobileLogin">
+        <div style="padding: 12px 16px; font-weight: 600; color: var(--gold-accent); background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          Olá, {{ user()?.name }}
+        </div>
+        <ng-container *ngIf="user()?.role === 'SUPER_ADMIN' || user()?.role === 'ADMIN'">
+          <button mat-menu-item (click)="goToAdmin()">
+            <mat-icon>dashboard</mat-icon>
+            <span>Painel Admin</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="user()?.role === 'EMPLOYEE'">
+          <button mat-menu-item (click)="goToCoupons()">
+            <mat-icon>local_activity</mat-icon>
+            <span>Meus Cupons</span>
+          </button>
+        </ng-container>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Sair</span>
+        </button>
+      </ng-container>
+      
+      <ng-template #mobileLogin>
+        <button mat-menu-item (click)="goToLogin()">
+          <mat-icon>login</mat-icon> Entrar
+        </button>
+      </ng-template>
+    </mat-menu>
   </div>
 </mat-toolbar>

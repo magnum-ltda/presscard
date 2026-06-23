@@ -20,6 +20,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/offers/offer-detail/offer-detail.component').then(m => m.OfferDetailComponent)
   },
   {
+    path: 'meus-cupons',
+    canActivate: [authGuard(['EMPLOYEE'])],
+    loadComponent: () => import('./features/employee/my-coupons/my-coupons.component').then(m => m.MyCouponsComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

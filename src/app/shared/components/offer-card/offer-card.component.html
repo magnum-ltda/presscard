@@ -1,11 +1,12 @@
-<div class="card-container" (click)="onVerOferta()" matRipple>
+<div class="card-container" (click)="onVerOferta()" matRipple *ngIf="partner()">
   <div class="card-image">
-    <img [src]="offer.imageUrl" [alt]="offer.title">
-    <div class="card-badge" *ngIf="offer.discountBadge">{{ offer.discountBadge }}</div>
+    <img [src]="partner()?.imageUrl || 'assets/placeholder.jpg'" [alt]="partner()?.tradeName">
+    <div class="card-badge">{{ benefit.discountPercentage }}% OFF</div>
   </div>
   <div class="card-content">
-    <h3>{{ offer.title }}</h3>
-    <p class="card-address">{{ offer.address }}</p>
-    <button mat-button class="btn-offer">Ver Oferta</button>
+    <h3>{{ benefit.title }}</h3>
+    <p class="card-address">{{ partner()?.location?.city }} - {{ partner()?.location?.state }}</p>
+    <p class="card-partner">{{ partner()?.tradeName }}</p>
+    <button mat-button class="btn-offer">Ver Detalhes</button>
   </div>
 </div>

@@ -16,19 +16,23 @@ import { AuthService } from '../core/auth/auth.service';
         </div>
         <nav class="sidebar-nav">
           <a routerLink="/admin/dashboard" routerLinkActive="active">
-            <i class="icon">📊</i> Dashboard
+            <i class="icon">📊</i> <span class="nav-text">Dashboard</span>
           </a>
           <a routerLink="/admin/empresas" routerLinkActive="active">
-            <i class="icon">🏢</i> Empresas
+            <i class="icon">🏢</i> <span class="nav-text">Empresas</span>
           </a>
           <a routerLink="/admin/parceiros" routerLinkActive="active">
-            <i class="icon">🤝</i> Parceiros
+            <i class="icon">🤝</i> <span class="nav-text">Parceiros</span>
           </a>
           <a routerLink="/admin/funcionarios" routerLinkActive="active">
-            <i class="icon">👥</i> Funcionários
+            <i class="icon">👥</i> <span class="nav-text">Funcionários</span>
           </a>
           <a routerLink="/admin/beneficios" routerLinkActive="active">
-            <i class="icon">🎁</i> Benefícios
+            <i class="icon">🎁</i> <span class="nav-text">Benefícios</span>
+          </a>
+          <!-- Mobile Logout -->
+          <a (click)="logout()" class="mobile-logout">
+            <i class="icon">🚪</i> <span class="nav-text">Sair</span>
           </a>
         </nav>
         <div class="sidebar-footer">
@@ -139,6 +143,10 @@ import { AuthService } from '../core/auth/auth.service';
       color: white;
     }
 
+    .mobile-logout {
+      display: none !important;
+    }
+
     .main-content {
       flex: 1;
       display: flex;
@@ -206,12 +214,19 @@ import { AuthService } from '../core/auth/auth.service';
       .sidebar-nav a {
         flex-direction: column;
         padding: 0.5rem;
-        font-size: 0.7rem;
-        gap: 0.25rem;
+        font-size: 0.65rem;
+        gap: 0.2rem;
         border-left: none;
         border-top: 3px solid transparent;
         flex: 1;
         text-align: center;
+      }
+      .mobile-logout {
+        display: flex !important;
+        color: #ef4444 !important;
+      }
+      .mobile-logout:hover {
+        background-color: rgba(239, 68, 68, 0.1) !important;
       }
       .sidebar-nav a:hover, .sidebar-nav a.active {
         border-top-color: #3b82f6;

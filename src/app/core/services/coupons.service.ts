@@ -23,26 +23,26 @@ export class CouponsService {
       );
       const querySnapshot = await getDocs(q);
       const coupons = querySnapshot.docs.map(doc => doc.data() as Coupon);
+      coupons.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       this.couponsSignal.set(coupons);
     } catch (e) {
       console.error('Error loading coupons', e);
     }
   }
 
-  async generateCoupon(employeeId: string, benefitId: string): Promise<Coupon | null> {
+  async generateCoupon(couponData: Omit<Coupon, 'id' | 'code' | 'status' | 'createdAt'>): Promise<Coupon | null> {
     if (!this.firebase.isEnabled) return null;
     const newCoupon: Coupon = {
+      ...couponData,
       id: crypto.randomUUID(),
-      code: this.generateRandomCode(),
-      employeeId,
-      benefitId,
+      code: `PRSC-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
       status: 'CREATED',
       createdAt: new Date().toISOString()
     };
     
     try {
       await setDoc(doc(this.firebase.db, this.collectionName, newCoupon.id), newCoupon);
-      this.couponsSignal.update(c => [...c, newCoupon]);
+      this.couponsSignal.update(c => [newCoupon, ...c]);
       return newCoupon;
     } catch (e) {
       console.error('Error generating coupon', e);

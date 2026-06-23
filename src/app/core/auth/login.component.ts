@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Employee } from '../models/employee.model';
 
@@ -139,6 +139,7 @@ import { Employee } from '../models/employee.model';
 export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   mockUsers: Employee[] = this.authService.mockUsers;
 
@@ -161,7 +162,12 @@ export class LoginComponent {
           break;
         case 'EMPLOYEE':
         default:
-          this.router.navigate(['/portal']);
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          if (returnUrl) {
+            this.router.navigateByUrl(returnUrl);
+          } else {
+            this.router.navigate(['/']);
+          }
           break;
       }
     }

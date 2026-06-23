@@ -1,0 +1,50 @@
+<app-header></app-header>
+<main class="coupons-page section-padding bg-light">
+  <div class="container">
+    <div class="section-title text-center" style="margin-bottom: 3rem;">
+      <h2>Meus Cupons</h2>
+      <p style="color: #64748b;">Histórico de todos os benefícios que você resgatou.</p>
+    </div>
+
+    <div class="coupons-grid" *ngIf="coupons().length > 0; else emptyState">
+      <div class="coupon-card" *ngFor="let coupon of coupons()">
+        <div class="coupon-header" [class.validated]="coupon.status === 'VALIDATED'">
+          <span class="status-badge">{{ coupon.status === 'CREATED' ? 'Válido' : 'Utilizado' }}</span>
+          <h3>{{ coupon.benefitTitle }}</h3>
+          <p>{{ coupon.partnerName }}</p>
+        </div>
+        <div class="coupon-body">
+          <div class="code-box" [class.used]="coupon.status === 'VALIDATED'">
+            {{ coupon.code }}
+          </div>
+          <p class="date-info">
+            Gerado em: {{ coupon.createdAt | date:'dd/MM/yyyy HH:mm' }}
+          </p>
+          <p class="date-info" *ngIf="coupon.validatedAt">
+            Utilizado em: {{ coupon.validatedAt | date:'dd/MM/yyyy HH:mm' }}
+          </p>
+
+          <!-- Ações se ainda for válido -->
+          <div class="coupon-actions" *ngIf="coupon.status === 'CREATED' && getPartnerData(coupon.partnerId) as partner">
+            <button *ngIf="partner.whatsapp || partner.contact" class="btn action-btn whatsapp-btn" (click)="openPartnerWhatsapp(coupon.partnerId, coupon.code)">
+              <mat-icon style="font-size: 1.2rem; width: 1.2rem; height: 1.2rem; margin-right: 4px;">chat</mat-icon> WhatsApp
+            </button>
+            <button *ngIf="partner.externalLink" class="btn action-btn link-btn" (click)="openPartnerLink(coupon.partnerId)">
+              <mat-icon style="font-size: 1.2rem; width: 1.2rem; height: 1.2rem; margin-right: 4px;">language</mat-icon> Site
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="empty-state text-center" style="padding: 4rem 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎫</div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Nenhum cupom gerado ainda</h3>
+        <p style="color: #64748b; margin-bottom: 2rem;">Explore o catálogo de benefícios e resgate ofertas exclusivas!</p>
+        <a href="/" class="btn btn-primary">Explorar Benefícios</a>
+      </div>
+    </ng-template>
+  </div>
+</main>
+<app-footer></app-footer>

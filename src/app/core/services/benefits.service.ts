@@ -106,6 +106,25 @@ export class BenefitsService {
             await setDoc(doc(this.firebaseService.db, 'benefits', b.id), b);
           }
         } else {
+          const hasFake = list.some(b => b.id === 'benefit-fake-tech');
+          if (!hasFake) {
+            const fakeB: Benefit = {
+              id: 'benefit-fake-tech',
+              title: 'Desconto Exclusivo TechCorp',
+              description: 'Este benefício é apenas para funcionários da empresa TechCorp. Se você faz parte da ACME Corp, não deveria ver isso no catálogo logado.',
+              category: 'STORE',
+              associatedCompanyId: 'company-techcorp',
+              commercialPartnerId: 'partner-smartfit', 
+              discountPercentage: 50,
+              employeeDiscount: 50,
+              platformCommission: 0,
+              rules: 'Regra exclusiva da TechCorp.',
+              validity: '2028-12-31',
+              executionType: 'COUPON',
+              active: true
+            };
+            await setDoc(doc(this.firebaseService.db, 'benefits', fakeB.id), fakeB);
+          }
           this.benefitsSignal.set(list);
         }
         this.loadingSignal.set(false);

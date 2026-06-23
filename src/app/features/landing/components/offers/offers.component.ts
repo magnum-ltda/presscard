@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfferCardComponent } from '../../../../shared/components/offer-card/offer-card.component';
-import { OffersService } from '../../../../core/services/offers.service';
-import { Offer } from '../../../../core/models/offer.model';
+import { BenefitsService } from '../../../../core/services/benefits.service';
+import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-offers',
@@ -11,13 +11,40 @@ import { Offer } from '../../../../core/models/offer.model';
   templateUrl: './offers.component.html',
   styleUrls: ['./offers.component.scss']
 })
-export class OffersComponent implements OnInit {
-  offers: Offer[] = [];
-  private offersService = inject(OffersService);
+export class OffersComponent {
+  private benefitsService = inject(BenefitsService);
+  private authService = inject(AuthService);
+  
+  benefits = this.benefitsService.benefits;
+  user = this.authService.currentUser;
+  
+  selectedCategory = signal<string | null>(null);
 
-  ngOnInit(): void {
-    this.offersService.getOffers().subscribe(data => {
-      this.offers = data;
-    });
+  categories = [
+    { id: 'HOTEL', icon: '🏨', label: 'Hotéis' },
+    { id: 'RESTAURANT', icon: '🍽️', label: 'Restaurantes' },
+    { id: 'CAR_RENTAL', icon: '🚗', label: 'Carros' },
+    { id: 'GYM', icon: '🏋️', label: 'Academias' },
+    { id: 'STORE', icon: '🛍️', label: 'Lojas' },
+    { id: 'SERVICES', icon: '🛠️', label: 'Serviços' },
+  ];
+
+  filteredBenefits = computed(() => {
+    let all = this.benefits().filter(b => b.active);
+    const u = this.user();
+
+    if (u && u.role === 'EMPLOYEE') {
+      all = all.filter(b => b.associatedCompanyId === 'ALL' || b.associatedCompanyId === u.companyId);
+    } else if (!u) {
+      all = all.filter(b => b.associatedCompanyId === 'ALL');
+    }
+
+    const cat = this.selectedCategory();
+    if (!cat) return all;
+    return all.filter(b => b.category === cat);
+  });
+
+  selectCategory(categoryId: string | null) {
+    this.selectedCategory.set(categoryId);
   }
 }

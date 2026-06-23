@@ -4,9 +4,29 @@
       <h2 class="text-white">Ofertas Exclusivas</h2>
     </div>
 
+    <div class="category-filters">
+      <button class="filter-pill" 
+              [class.active]="selectedCategory() === null" 
+              (click)="selectCategory(null)">
+        ⭐ Todos
+      </button>
+      <button class="filter-pill" 
+              *ngFor="let cat of categories" 
+              [class.active]="selectedCategory() === cat.id" 
+              (click)="selectCategory(cat.id)">
+        {{ cat.icon }} {{ cat.label }}
+      </button>
+    </div>
+
     <div class="offers-grid">
-      <div class="offer-item" *ngFor="let offer of offers">
-        <app-offer-card [offer]="offer"></app-offer-card>
+      <ng-container *ngFor="let b of filteredBenefits()">
+        <div class="offer-item">
+          <app-offer-card [benefit]="b"></app-offer-card>
+        </div>
+      </ng-container>
+      
+      <div class="empty-state" *ngIf="filteredBenefits().length === 0">
+        <p>Nenhuma oferta encontrada para esta categoria.</p>
       </div>
     </div>
   </div>
