@@ -25,6 +25,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/employee/my-coupons/my-coupons.component').then(m => m.MyCouponsComponent)
   },
   {
+    path: 'parceiro',
+    loadChildren: () => import('./features/partner/partner.routes').then(m => m.PARTNER_ROUTES),
+    canActivate: [authGuard(['PARTNER'])]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

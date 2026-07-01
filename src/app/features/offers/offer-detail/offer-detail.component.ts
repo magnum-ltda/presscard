@@ -169,6 +169,7 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     if (b.executionType === 'EXTERNAL_REDIRECT' || b.executionType === 'PAYMENT_LINK') {
       window.open(p.externalLink || '#', '_blank', 'noopener,noreferrer');
     } else {
+      const fixedCode = b.couponType === 'FIXED' ? b.fixedCouponCode : undefined;
       const coupon = await this.couponsService.generateCoupon({
         employeeId: user.id,
         employeeName: user.name,
@@ -177,7 +178,7 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
         benefitTitle: b.title,
         partnerId: p.id,
         partnerName: p.tradeName
-      });
+      }, fixedCode);
       if (coupon) {
         this.generatedCouponCode.set(coupon.code);
       } else {

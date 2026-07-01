@@ -1,0 +1,104 @@
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CouponsService } from '../../../core/services/coupons.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { Coupon } from '../../../core/models/coupon.model';
+
+@Component({
+  selector: 'app-history',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="history-container">
+      <div class="header">
+        <h2>Histórico de Validações</h2>
+        <p>Acompanhe todos os cupons que foram validados no seu estabelecimento.</p>
+      </div>
+
+      <div class="card">
+        <table class="data-table" *ngIf="coupons().length > 0; else emptyState">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Benefício</th>
+              <th>Cliente</th>
+              <th>Status</th>
+              <th>Data de Validação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let coupon of coupons()">
+              <td><span class="code-badge">{{ coupon.code }}</span></td>
+              <td>{{ coupon.benefitTitle }}</td>
+              <td>{{ coupon.employeeName }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="coupon.status.toLowerCase()">
+                  {{ coupon.status === 'VALIDATED' ? 'Utilizado' : 'Gerado' }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="coupon.validatedAt">{{ coupon.validatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                <span *ngIf="!coupon.validatedAt" class="text-gray">-</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #emptyState>
+          <div class="empty-state">
+            <div class="icon">📋</div>
+            <h3>Nenhum cupom validado ainda</h3>
+            <p>Os cupons validados pelo seu estabelecimento aparecerão aqui.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .history-container { max-width: 1000px; margin: 0 auto; }
+    .header { margin-bottom: 2rem; }
+    .header h2 { margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1.5rem; }
+    .header p { color: #64748b; margin: 0; }
+    
+    .card { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
+    .data-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .data-table th, .data-table td { padding: 1rem 1.5rem; border-bottom: 1px solid #e2e8f0; }
+    .data-table th { background: #f8fafc; color: #64748b; font-weight: 600; font-size: 0.875rem; text-transform: uppercase; }
+    .data-table td { color: #334155; }
+    
+    .code-badge { font-family: monospace; background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 600; color: #475569; letter-spacing: 1px; }
+    
+    .status-badge { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .status-badge.validated { background: #dcfce7; color: #166534; }
+    .status-badge.created { background: #fef9c3; color: #854d0e; }
+    
+    .text-gray { color: #94a3b8; }
+    
+    .empty-state { text-align: center; padding: 4rem 2rem; }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+    .empty-state h3 { margin: 0 0 0.5rem 0; color: #475569; }
+    .empty-state p { margin: 0; color: #94a3b8; }
+
+    @media (max-width: 768px) {
+      .data-table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  `]
+})
+export class HistoryComponent implements OnInit {
+  private couponsService = inject(CouponsService);
+  private authService = inject(AuthService);
+
+  coupons = signal<Coupon[]>([]);
+
+  ngOnInit() {
+    this.loadHistory();
+  }
+
+  async loadHistory() {
+    const user = this.authService.currentUser();
+    if (user && user.role === 'PARTNER' && user.partnerId) {
+      const history = await this.couponsService.getCouponsByPartner(user.partnerId);
+      this.coupons.set(history);
+    }
+  }
+}

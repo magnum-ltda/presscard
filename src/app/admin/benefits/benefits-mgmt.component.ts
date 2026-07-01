@@ -119,6 +119,20 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
               </div>
             </div>
 
+            <div class="form-row" *ngIf="benefitForm.get('executionType')?.value === 'COUPON'">
+              <div class="form-group flex-1">
+                <label>Tipo de Cupom</label>
+                <select formControlName="couponType" class="form-control">
+                  <option value="AUTOMATIC">Gerar Código Automático</option>
+                  <option value="FIXED">Código Fixo / Específico</option>
+                </select>
+              </div>
+              <div class="form-group flex-1" *ngIf="benefitForm.get('couponType')?.value === 'FIXED'">
+                <label>Código Fixo do Cupom</label>
+                <input type="text" formControlName="fixedCouponCode" class="form-control" placeholder="Ex: PROMO50">
+              </div>
+            </div>
+
             <h3 class="section-title">Valores e Comissões</h3>
             <div class="location-group">
               <div class="form-row">
@@ -274,6 +288,8 @@ export class BenefitsMgmtComponent {
     validity: [''],
     usageLimit: [null],
     executionType: ['COUPON', Validators.required],
+    couponType: ['AUTOMATIC'],
+    fixedCouponCode: [''],
     active: [true]
   });
 
@@ -307,6 +323,8 @@ export class BenefitsMgmtComponent {
         category: 'HOTEL', 
         associatedCompanyId: 'ALL', 
         executionType: 'COUPON',
+        couponType: 'AUTOMATIC',
+        fixedCouponCode: '',
         discountPercentage: 0,
         employeeDiscount: 0,
         platformCommission: 0,

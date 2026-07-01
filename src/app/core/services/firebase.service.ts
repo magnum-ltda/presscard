@@ -16,7 +16,7 @@ export class FirebaseService {
   }
 
   private initFirebase() {
-    const config = environment.firebase;
+    const config: any = environment.firebase;
     if (config && config.apiKey && config.projectId) {
       try {
         this.app = getApps().length === 0 ? initializeApp(config) : getApp();

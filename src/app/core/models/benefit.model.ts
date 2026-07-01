@@ -14,6 +14,8 @@ export interface Benefit {
   validity?: string;           // Data de validade (YYYY-MM-DD)
   usageLimit?: number;         // Limite de usos por funcionário (null = sem limite)
   executionType: ExecutionType;
+  couponType?: 'AUTOMATIC' | 'FIXED';
+  fixedCouponCode?: string;
   active: boolean;
   createdAt?: any;
 }
