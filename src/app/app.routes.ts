@@ -30,6 +30,11 @@ export const routes: Routes = [
     canActivate: [authGuard(['PARTNER'])]
   },
   {
+    path: 'empresa',
+    loadChildren: () => import('./features/company/company.routes').then(m => m.COMPANY_ROUTES),
+    canActivate: [authGuard(['COMPANY_ADMIN'])]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

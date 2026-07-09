@@ -55,6 +55,14 @@ export class AuthService {
       companyId: 'none',
       partnerId: 'partner-resort-paradiso',
       status: 'ACTIVE'
+    },
+    {
+      id: 'usr-company-admin-1',
+      name: 'RH ACME Corp',
+      email: 'rh@acme.com',
+      role: 'COMPANY_ADMIN',
+      companyId: 'company-acme',
+      status: 'ACTIVE'
     }
   ];
 

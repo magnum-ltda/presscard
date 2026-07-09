@@ -160,6 +160,9 @@ export class LoginComponent {
         case 'PARTNER':
           this.router.navigate(['/parceiro']);
           break;
+        case 'COMPANY_ADMIN':
+          this.router.navigate(['/empresa']);
+          break;
         case 'EMPLOYEE':
         default:
           const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
