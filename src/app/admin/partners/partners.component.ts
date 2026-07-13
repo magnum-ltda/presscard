@@ -39,7 +39,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
                   <div class="text-sm text-gray">{{ partner.companyName }}</div>
                 </td>
                 <td><span class="badge">{{ partner.category }}</span></td>
-                <td>{{ partner.location?.city }} - {{ partner.location?.state }}</td>
+                <td>{{ partner.location.city }} - {{ partner.location.state }}</td>
                 <td>{{ partner.contact }}</td>
                 <td>
                   <span class="status-dot" [class.active]="partner.active"></span>
@@ -310,10 +310,10 @@ export class PartnersComponent {
       this.partnerForm.patchValue(partner);
     } else {
       this.currentPartnerId = null;
-      this.partnerForm.reset({ 
-        category: 'HOTEL', 
-        executionType: 'COUPON', 
-        commissionType: 'PERCENTAGE', 
+      this.partnerForm.reset({
+        category: 'HOTEL',
+        executionType: 'COUPON',
+        commissionType: 'PERCENTAGE',
         commissionValue: 0,
         active: true,
         images: [],
@@ -337,7 +337,7 @@ export class PartnersComponent {
     if (!cep) return;
     cep = cep.replace(/\D/g, '');
     if (cep.length !== 8) return;
-    
+
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
       const data = await response.json();
@@ -386,7 +386,7 @@ export class PartnersComponent {
       confirmText: 'Excluir Parceiro',
       isDestructive: true
     });
-    
+
     if (confirmed) {
       await this.partnersService.deletePartner(id);
     }

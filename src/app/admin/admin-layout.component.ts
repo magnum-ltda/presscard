@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { AuthService } from '../core/auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule],
+  imports: [CommonModule, RouterOutlet, RouterModule, MatIconModule],
   template: `
     <div class="admin-layout">
       <!-- Sidebar -->
@@ -30,25 +31,27 @@ import { AuthService } from '../core/auth/auth.service';
           <a routerLink="/admin/beneficios" routerLinkActive="active">
             <i class="icon">🎁</i> <span class="nav-text">Benefícios</span>
           </a>
-          <!-- Mobile Logout -->
-          <a (click)="logout()" class="mobile-logout">
-            <i class="icon">🚪</i> <span class="nav-text">Sair</span>
-          </a>
         </nav>
-        <div class="sidebar-footer">
-          <button (click)="logout()" class="logout-btn">
-            <i class="icon">🚪</i> Sair
-          </button>
-        </div>
       </aside>
 
       <!-- Main Content -->
       <main class="main-content">
         <header class="topbar">
           <div class="topbar-title">Gestão Corporativa</div>
-          <div class="user-profile" *ngIf="user()">
-            <span class="user-role">{{ user()?.role }}</span>
-            <span class="user-name">{{ user()?.name }}</span>
+          <div class="user-menu-container" (click)="toggleMenu($event)">
+            <div class="user-profile" *ngIf="user()">
+              <div class="user-info-text">
+                <span class="user-role">{{ user()?.role }}</span>
+                <span class="user-name">{{ user()?.name }}</span>
+              </div>
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            
+            <div class="dropdown-menu" *ngIf="isMenuOpen()">
+              <button (click)="logout()" class="dropdown-item logout">
+                <mat-icon>logout</mat-icon> Sair
+              </button>
+            </div>
           </div>
         </header>
         
@@ -117,35 +120,7 @@ import { AuthService } from '../core/auth/auth.service';
       font-size: 1.2rem; 
     }
 
-    .sidebar-footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .logout-btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      background-color: rgba(239, 68, 68, 0.1);
-      color: #ef4444;
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: inherit;
-    }
-
-    .logout-btn:hover {
-      background-color: #ef4444;
-      color: white;
-    }
-
-    .mobile-logout {
-      display: none !important;
-    }
+    /* Removed sidebar-footer and logout-btn */
 
     .main-content {
       flex: 1;
@@ -171,7 +146,25 @@ import { AuthService } from '../core/auth/auth.service';
       color: #334155;
     }
 
+    .user-menu-container {
+      position: relative;
+      cursor: pointer;
+    }
+
     .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .user-profile:hover {
+      background-color: #f1f5f9;
+    }
+
+    .user-info-text {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -179,6 +172,48 @@ import { AuthService } from '../core/auth/auth.service';
 
     .user-name { font-weight: 600; color: #1e293b; font-size: 0.95rem; }
     .user-role { font-size: 0.75rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      min-width: 150px;
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+
+    .dropdown-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border: none;
+      background: none;
+      text-align: left;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: #334155;
+      font-family: inherit;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f8fafc;
+    }
+
+    .dropdown-item.logout {
+      color: #ef4444;
+    }
+
+    .dropdown-item.logout:hover {
+      background-color: #fef2f2;
+    }
 
     .content-area {
       flex: 1;
@@ -221,13 +256,6 @@ import { AuthService } from '../core/auth/auth.service';
         flex: 1;
         text-align: center;
       }
-      .mobile-logout {
-        display: flex !important;
-        color: #ef4444 !important;
-      }
-      .mobile-logout:hover {
-        background-color: rgba(239, 68, 68, 0.1) !important;
-      }
       .sidebar-nav a:hover, .sidebar-nav a.active {
         border-top-color: #3b82f6;
         border-left-color: transparent;
@@ -254,7 +282,22 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class AdminLayoutComponent {
   private authService = inject(AuthService);
+  private eRef = inject(ElementRef);
+  
   user = this.authService.currentUser;
+  isMenuOpen = signal(false);
+
+  toggleMenu(event: Event) {
+    event.stopPropagation();
+    this.isMenuOpen.update(val => !val);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: Event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.isMenuOpen.set(false);
+    }
+  }
 
   logout() {
     this.authService.logout();
