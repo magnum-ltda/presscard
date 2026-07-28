@@ -8,12 +8,14 @@ import {
   deleteDoc, 
   onSnapshot 
 } from 'firebase/firestore';
+import { UserManagementService } from './user-management.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeesService {
   private firebaseService = inject(FirebaseService);
+  private userManagementService = inject(UserManagementService);
 
   private readonly STORAGE_KEY = 'presscard_employees';
   private employeesSignal = signal<Employee[]>([]);
@@ -35,22 +37,6 @@ export class EmployeesService {
       name: 'Clara Silva',
       email: 'admin@presscard.com',
       role: 'ADMIN',
-      companyId: 'presscard-corp',
-      status: 'ACTIVE'
-    },
-    {
-      id: 'usr-financial',
-      name: 'Bruno Costa',
-      email: 'financial@presscard.com',
-      role: 'FINANCIAL',
-      companyId: 'presscard-corp',
-      status: 'ACTIVE'
-    },
-    {
-      id: 'usr-support',
-      name: 'Daniel Santos',
-      email: 'support@presscard.com',
-      role: 'SUPPORT',
       companyId: 'presscard-corp',
       status: 'ACTIVE'
     },
@@ -108,9 +94,20 @@ export class EmployeesService {
   }
 
   public async createEmployee(employee: Omit<Employee, 'id'>): Promise<void> {
+    let authUid = 'usr-' + Math.random().toString(36).substr(2, 9);
+
+    if (this.firebaseService.isEnabled) {
+      try {
+        authUid = await this.userManagementService.createUserInAuth(employee.email);
+      } catch (e: any) {
+        console.error('Falha ao criar autenticação para o funcionário', e);
+        throw new Error('Não foi possível criar o acesso do funcionário. O e-mail já está em uso?');
+      }
+    }
+
     const newEmployee: Employee = {
       ...employee,
-      id: 'usr-' + Math.random().toString(36).substr(2, 9),
+      id: authUid,
       createdAt: new Date().toISOString()
     };
 

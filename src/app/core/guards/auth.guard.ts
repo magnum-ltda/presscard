@@ -17,7 +17,7 @@ export const authGuard = (allowedRoles?: UserRole[]): CanActivateFn => {
     if (allowedRoles && allowedRoles.length > 0) {
       if (!role || !allowedRoles.includes(role)) {
         // Redirecionamento inteligente com base nas permissões do usuário
-        if (role === 'SUPER_ADMIN' || role === 'ADMIN' || role === 'FINANCIAL' || role === 'SUPPORT') {
+        if (role === 'SUPER_ADMIN' || role === 'ADMIN') {
           router.navigate(['/admin']);
         } else if (role === 'PARTNER') {
           router.navigate(['/parceiro']);

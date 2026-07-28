@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAuth, Auth } from 'firebase/auth';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class FirebaseService {
   private app: FirebaseApp | null = null;
   private dbInstance: Firestore | null = null;
+  private authInstance: Auth | null = null;
   private isEnabledFlag = false;
 
   constructor() {
@@ -21,6 +23,7 @@ export class FirebaseService {
       try {
         this.app = getApps().length === 0 ? initializeApp(config) : getApp();
         this.dbInstance = getFirestore(this.app);
+        this.authInstance = getAuth(this.app);
         this.isEnabledFlag = true;
         console.log('Firebase SDK initialized successfully on project:', config.projectId);
       } catch (e) {
@@ -42,5 +45,12 @@ export class FirebaseService {
       throw new Error('Firestore not initialized.');
     }
     return this.dbInstance;
+  }
+
+  public get auth(): Auth {
+    if (!this.authInstance) {
+      throw new Error('Firebase Auth not initialized.');
+    }
+    return this.authInstance;
   }
 }

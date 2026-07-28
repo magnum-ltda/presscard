@@ -6,6 +6,8 @@ import { CompaniesService } from '../../core/services/companies.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { Employee } from '../../core/models/employee.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
+import { AuthService } from '../../core/auth/auth.service';
+import { computed } from '@angular/core';
 
 @Component({
   selector: 'app-employees',
@@ -88,10 +90,8 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
                 <select formControlName="role" class="form-control">
                   <option value="EMPLOYEE">Funcionário</option>
                   <option value="ADMIN">Administrador</option>
-                  <option value="FINANCIAL">Financeiro</option>
-                  <option value="SUPPORT">Suporte</option>
+                  <option value="COMPANY_ADMIN">Admin Empresa</option>
                   <option value="PARTNER">Parceiro Comercial</option>
-                  <option value="SUPER_ADMIN">Super Admin</option>
                 </select>
               </div>
 
@@ -104,7 +104,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
               </div>
             </div>
 
-            <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE' || employeeForm.get('role')?.value === 'ADMIN'">
+            <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE' || employeeForm.get('role')?.value === 'COMPANY_ADMIN'">
               <label>Vínculo (Empresa Associada)</label>
               <select formControlName="companyId" class="form-control" [class.error]="isFieldInvalid('companyId')">
                 <option value="">Selecione uma empresa...</option>
@@ -151,7 +151,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
     .badge.super_admin, .badge.admin { background: #fee2e2; color: #ef4444; }
     .badge.employee { background: #dbeafe; color: #3b82f6; }
     .badge.partner { background: #d1fae5; color: #10b981; }
-    .badge.financial, .badge.support { background: #ede9fe; color: #8b5cf6; }
+    .badge.company_admin { background: #ffedd5; color: #f97316; }
     
     .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; margin-right: 0.5rem; }
     .status-dot.active { background: #10b981; }
@@ -197,10 +197,12 @@ export class EmployeesComponent {
   private companiesService = inject(CompaniesService);
   private confirmDialog = inject(ConfirmDialogService);
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
 
-  employees = this.employeesService.employees;
+  employees = computed(() => this.employeesService.employees().filter(e => e.role !== 'SUPER_ADMIN'));
   companies = this.companiesService.companies;
   isLoading = this.employeesService.isLoading;
+  userRole = this.authService.userRole;
 
   isModalOpen = false;
   isEditing = false;
@@ -220,8 +222,7 @@ export class EmployeesComponent {
     const roles: Record<string, string> = {
       'SUPER_ADMIN': 'Super Admin',
       'ADMIN': 'Administrador',
-      'FINANCIAL': 'Financeiro',
-      'SUPPORT': 'Suporte',
+      'COMPANY_ADMIN': 'Admin Empresa',
       'EMPLOYEE': 'Funcionário',
       'PARTNER': 'Parceiro'
     };
@@ -263,7 +264,7 @@ export class EmployeesComponent {
     const formData = this.employeeForm.value;
     
     // Se não for funcionário ou admin de empresa, limpa a companyId
-    if (formData.role !== 'EMPLOYEE' && formData.role !== 'ADMIN') {
+    if (formData.role !== 'EMPLOYEE' && formData.role !== 'COMPANY_ADMIN') {
       formData.companyId = '';
     }
 
@@ -272,8 +273,8 @@ export class EmployeesComponent {
       formData.whatsapp = '';
     }
 
-    // Se for funcionário, companyId é obrigatório
-    if ((formData.role === 'EMPLOYEE' || formData.role === 'ADMIN') && !formData.companyId) {
+    // Se for funcionário ou admin da empresa, companyId é obrigatório
+    if ((formData.role === 'EMPLOYEE' || formData.role === 'COMPANY_ADMIN') && !formData.companyId) {
       this.employeeForm.get('companyId')?.setErrors({ required: true });
       return;
     }
@@ -287,8 +288,9 @@ export class EmployeesComponent {
         await this.employeesService.createEmployee(formData);
       }
       this.closeForm();
-    } catch (e) {
+    } catch (e: any) {
       console.error('Erro ao salvar funcionário', e);
+      alert(e.message || 'Ocorreu um erro ao salvar o funcionário.');
     } finally {
       this.isSaving = false;
     }

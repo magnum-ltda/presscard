@@ -4,7 +4,7 @@ import { authGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   {
     path: 'admin',
-    canActivate: [authGuard(['SUPER_ADMIN', 'ADMIN', 'FINANCIAL', 'SUPPORT'])],
+    canActivate: [authGuard(['SUPER_ADMIN', 'ADMIN'])],
     loadChildren: () => import('./admin/admin.routes').then(m => m.adminRoutes)
   },
   {
