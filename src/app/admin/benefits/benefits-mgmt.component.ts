@@ -7,11 +7,12 @@ import { PartnersService } from '../../core/services/partners.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { Benefit } from '../../core/models/benefit.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-benefits-mgmt',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -138,15 +139,15 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
               <div class="form-row">
                 <div class="form-group flex-1">
                   <label>Desconto Total (%)</label>
-                  <input type="number" formControlName="discountPercentage" class="form-control" placeholder="Ex: 20">
+                  <input type="text" formControlName="discountPercentage" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 20,50">
                 </div>
                 <div class="form-group flex-1">
                   <label>Desconto do Usuário (%)</label>
-                  <input type="number" formControlName="employeeDiscount" class="form-control" placeholder="Ex: 15">
+                  <input type="text" formControlName="employeeDiscount" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 15,00">
                 </div>
                 <div class="form-group flex-1">
                   <label>Comissão da Plataforma (%)</label>
-                  <input type="number" formControlName="platformCommission" class="form-control" placeholder="Ex: 5">
+                  <input type="text" formControlName="platformCommission" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 5,50">
                 </div>
               </div>
             </div>
@@ -281,9 +282,9 @@ export class BenefitsMgmtComponent {
     category: ['HOTEL', Validators.required],
     associatedCompanyId: ['ALL', Validators.required],
     commercialPartnerId: ['', Validators.required],
-    discountPercentage: [0, Validators.required],
-    employeeDiscount: [0, Validators.required],
-    platformCommission: [0, Validators.required],
+    discountPercentage: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+    employeeDiscount: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+    platformCommission: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
     rules: ['', Validators.required],
     validity: [''],
     usageLimit: [null],
@@ -351,10 +352,16 @@ export class BenefitsMgmtComponent {
 
     const formData = this.benefitForm.value;
     
-    // Converte os valores numéricos que podem vir como string do input HTML
-    formData.discountPercentage = Number(formData.discountPercentage);
-    formData.employeeDiscount = Number(formData.employeeDiscount);
-    formData.platformCommission = Number(formData.platformCommission);
+    // Função auxiliar para converter string com vírgula para número e tratar o sufixo '%'
+    const parsePercent = (val: any) => {
+      if (!val) return 0;
+      if (typeof val === 'number') return val;
+      return Number(val.replace('%', '').replace(',', '.'));
+    };
+
+    formData.discountPercentage = parsePercent(formData.discountPercentage);
+    formData.employeeDiscount = parsePercent(formData.employeeDiscount);
+    formData.platformCommission = parsePercent(formData.platformCommission);
     formData.usageLimit = formData.usageLimit ? Number(formData.usageLimit) : undefined;
 
     this.isSaving = true;

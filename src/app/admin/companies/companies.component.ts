@@ -5,11 +5,12 @@ import { CompaniesService } from '../../core/services/companies.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { AssociatedCompany } from '../../core/models/company.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -70,7 +71,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
             
             <div class="form-group">
               <label>CNPJ</label>
-              <input type="text" formControlName="cnpj" placeholder="00.000.000/0000-00" class="form-control" [class.error]="isFieldInvalid('cnpj')">
+              <input type="text" formControlName="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" class="form-control" [class.error]="isFieldInvalid('cnpj')">
               <span class="error-msg" *ngIf="isFieldInvalid('cnpj')">CNPJ é obrigatório</span>
             </div>
 
@@ -170,7 +171,7 @@ export class CompaniesComponent {
 
   companyForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    cnpj: ['', Validators.required],
+    cnpj: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
     plan: ['Silver', Validators.required],
     active: [true]
   });

@@ -8,11 +8,12 @@ import { Employee } from '../../core/models/employee.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { computed } from '@angular/core';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-employees',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -114,7 +115,8 @@ import { computed } from '@angular/core';
 
             <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE'">
               <label>WhatsApp do Funcionário</label>
-              <input type="text" formControlName="whatsapp" class="form-control" placeholder="(00) 00000-0000">
+              <input type="text" formControlName="whatsapp" mask="(00) 00000-0000" class="form-control" placeholder="(00) 00000-0000" [class.error]="isFieldInvalid('whatsapp')">
+              <span class="error-msg" *ngIf="isFieldInvalid('whatsapp')">WhatsApp inválido</span>
             </div>
 
             <div class="modal-footer">
@@ -214,7 +216,7 @@ export class EmployeesComponent {
     email: ['', [Validators.required, Validators.email]],
     role: ['EMPLOYEE', Validators.required],
     companyId: [''],
-    whatsapp: [''],
+    whatsapp: ['', [Validators.minLength(10), Validators.maxLength(11)]],
     status: ['ACTIVE', Validators.required]
   });
 

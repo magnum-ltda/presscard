@@ -5,11 +5,12 @@ import { PartnersService } from '../../core/services/partners.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { CommercialPartner } from '../../core/models/partner.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-partners',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -100,7 +101,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
               </div>
               <div class="form-group flex-1">
                 <label>WhatsApp</label>
-                <input type="text" formControlName="whatsapp" placeholder="(00) 00000-0000" class="form-control">
+                <input type="text" formControlName="whatsapp" mask="(00) 00000-0000" placeholder="(00) 00000-0000" class="form-control" [class.error]="isFieldInvalid('whatsapp')">
               </div>
             </div>
 
@@ -144,7 +145,7 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog.service
                 <div class="form-group flex-1" style="position: relative;">
                   <label>CEP</label>
                   <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" formControlName="zipCode" class="form-control" style="flex: 1;" (blur)="searchCep()">
+                    <input type="text" formControlName="zipCode" mask="00000-000" class="form-control" style="flex: 1;" (blur)="searchCep()" [class.error]="isFieldInvalid('location.zipCode')">
                     <button type="button" class="btn-secondary" (click)="searchCep()" style="padding: 0.5rem;" title="Buscar CEP">🔍</button>
                   </div>
                 </div>
@@ -281,7 +282,7 @@ export class PartnersComponent {
     category: ['HOTEL', Validators.required],
     description: ['', Validators.required],
     contact: ['', Validators.required],
-    whatsapp: [''],
+    whatsapp: ['', [Validators.minLength(10), Validators.maxLength(11)]],
     externalLink: [''],
     executionType: ['COUPON', Validators.required],
     commissionType: ['PERCENTAGE', Validators.required],
@@ -296,7 +297,7 @@ export class PartnersComponent {
       city: ['', Validators.required],
       state: ['', Validators.required],
       country: ['Brasil'],
-      zipCode: ['', Validators.required],
+      zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       latitude: [0],
       longitude: [0],
       googleMapsLink: ['']
