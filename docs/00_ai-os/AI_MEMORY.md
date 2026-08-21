@@ -3,26 +3,19 @@ document: AI_MEMORY
 title: Presscard AI Memory
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Armazenar as verdades permanentes do projeto Presscard.
-  Este documento representa a memória de longo prazo da plataforma.
-
+purpose: Armazenar as verdades permanentes do projeto Presscard. Este documento representa
+  a memória de longo prazo da plataforma.
 audience:
-  - AI
-  - Developer
-
+- AI
+- Developer
 updated_by_antigravity: false
-
 depends_on: []
-
 related_documents:
-  - AI_OPERATING_SYSTEM
-  - PROJECT
-  - ARCHITECTURE
+- 00_ai-os/AI_OPERATING_SYSTEM.md
+- 01_project/PROJECT.md
+- 02_architecture/ARCHITECTURE.md
 ---
 
 # AI Memory

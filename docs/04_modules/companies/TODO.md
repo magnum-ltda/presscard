@@ -3,20 +3,16 @@ document: COMPANIES_TODO
 title: Associated Companies Module Backlog
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Manter o backlog do módulo Companies.
-
+purpose: Manter o backlog do módulo Companies.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
+- 04_modules/companies/README.md
+- 04_modules/companies/RULES.md
+- 04_modules/companies/ENTITIES.md
+- 04_modules/companies/FLOW.md
+- 04_modules/companies/API.md
 ---
 
 # Companies Backlog

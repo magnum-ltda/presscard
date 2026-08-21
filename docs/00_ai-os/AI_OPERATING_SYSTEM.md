@@ -5,23 +5,18 @@ version: 1.0.0
 status: Official
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Define o comportamento obrigatório de qualquer Inteligência Artificial que participe do desenvolvimento da plataforma.
-
+purpose: Define o comportamento obrigatório de qualquer Inteligência Artificial que
+  participe do desenvolvimento da plataforma.
 audience:
-  - AI
-  - Developer
-
+- AI
+- Developer
 updated_by_antigravity: false
-
 depends_on:
-  - AI_MEMORY
-  - PROJECT
-
+- 00_ai-os/AI_MEMORY.md
+- 01_project/PROJECT.md
 related_documents:
-  - IMPLEMENTATION_PROTOCOL
-  - AI_GUARDRAILS
+- 00_ai-os/IMPLEMENTATION_PROTOCOL.md
+- 00_ai-os/AI_GUARDRAILS.md
 ---
 
 # AI Operating System

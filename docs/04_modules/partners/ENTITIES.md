@@ -3,17 +3,13 @@ document: PARTNERS_ENTITIES
 title: Commercial Partners Module Entities
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir as entidades conceituais do módulo Partners.
-
+purpose: Definir as entidades conceituais do módulo Partners.
 depends_on:
-  - DOMAIN_MODEL
-  - MULTI_TENANT
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MULTI_TENANT.md
 ---
 
 # Partners Entities

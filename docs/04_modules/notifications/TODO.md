@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_TODO
+title: Notifications Backlog
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/TODO.md
+module: Notifications
+---
+
 # Notifications Backlog
 
 ## Núcleo

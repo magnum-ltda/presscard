@@ -3,19 +3,15 @@ document: BENEFITS_SERVICES
 title: Benefits Module Services
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir os serviços do módulo Benefits.
-
+purpose: Definir os serviços do módulo Benefits.
 depends_on:
-  - README
-  - API
-  - RULES
-  - ENTITIES
+- 04_modules/benefits/README.md
+- 04_modules/benefits/API.md
+- 04_modules/benefits/RULES.md
+- 04_modules/benefits/ENTITIES.md
 ---
 
 # Benefits Services

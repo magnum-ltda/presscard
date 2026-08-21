@@ -3,18 +3,14 @@ document: BENEFITS_COMPONENTS
 title: Benefits Module Components
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir os componentes de interface do módulo Benefits.
-
+purpose: Definir os componentes de interface do módulo Benefits.
 depends_on:
-  - README
-  - FLOW
-  - API
+- 04_modules/benefits/README.md
+- 04_modules/benefits/FLOW.md
+- 04_modules/benefits/API.md
 ---
 
 # Benefits Components

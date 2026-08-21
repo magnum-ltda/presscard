@@ -3,20 +3,16 @@ document: BENEFITS_RULES
 title: Benefits Module Rules
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir as regras de negócio do módulo Benefits.
-
+purpose: Definir as regras de negócio do módulo Benefits.
 depends_on:
-  - BUSINESS_RULES
-  - COMPANIES
-  - EMPLOYEES
-  - PARTNERS
-  - README
+- 03_business/BUSINESS_RULES.md
+- 04_modules/companies/README.md
+- 04_modules/employees/README.md
+- 04_modules/partners/README.md
+- 04_modules/benefits/README.md
 ---
 
 # Benefits Rules

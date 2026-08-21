@@ -3,19 +3,15 @@ document: CATALOG_API
 title: Catalog API
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir os contratos de consulta do catálogo.
-
+purpose: Definir os contratos de consulta do catálogo.
 depends_on:
-  - README
-  - SEARCH
-  - FILTERS
-  - MAPS
+- 04_modules/catalog/README.md
+- 04_modules/catalog/SEARCH.md
+- 04_modules/catalog/FILTERS.md
+- 04_modules/catalog/MAPS.md
 ---
 
 # Catalog API

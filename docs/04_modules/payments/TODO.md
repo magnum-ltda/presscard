@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_TODO
+title: Payments Backlog
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/TODO.md
+module: Payments
+---
+
 # Payments Backlog
 
 ## Legenda

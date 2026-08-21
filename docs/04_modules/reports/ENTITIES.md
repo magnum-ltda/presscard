@@ -8,22 +8,22 @@ project: Presscard
 module: Reports
 purpose: Definir o módulo de relatórios e dashboard da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - EMPLOYEES
-  - COMPANIES
-  - BOOKING
-  - PAYMENTS
-  - COMMISSIONS
+- 04_modules/employees/README.md
+- 04_modules/companies/README.md
+- 04_modules/booking/README.md
+- 03_business/PAYMENTS.md
+- 03_business/COMMISSIONS.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/reports/RULES.md
+- 04_modules/reports/ENTITIES.md
+- 04_modules/reports/FLOW.md
+- 04_modules/reports/API.md
+- 04_modules/reports/SERVICES.md
+- 04_modules/reports/TODO.md
 ---
 
 # Entities

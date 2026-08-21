@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_SERVICES
+title: Notifications Services
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/SERVICES.md
+module: Notifications
+---
+
 # Notifications Services
 
 ## Arquitetura

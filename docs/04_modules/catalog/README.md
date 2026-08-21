@@ -3,31 +3,26 @@ document: CATALOG_MODULE
 title: Marketplace and Catalog Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir o módulo responsável pela descoberta e apresentação de Benefits, Commercial Partners e recursos disponíveis para os Employees.
-
+purpose: Definir o módulo responsável pela descoberta e apresentação de Benefits,
+  Commercial Partners e recursos disponíveis para os Employees.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - BENEFITS
-  - PARTNERS
-  - EMPLOYEES
-
+- 03_business/BENEFITS.md
+- 04_modules/partners/README.md
+- 04_modules/employees/README.md
 related_documents:
-  - SEARCH
-  - FILTERS
-  - MAPS
-  - FLOW
-  - API
-  - TODO
+- 04_modules/catalog/SEARCH.md
+- 04_modules/catalog/FILTERS.md
+- 04_modules/catalog/MAPS.md
+- 04_modules/catalog/FLOW.md
+- 04_modules/catalog/API.md
+- 04_modules/catalog/TODO.md
 ---
 
 # Catalog
@@ -87,5 +82,5 @@ Booking (quando aplicável)
 Status
 
 ☐ Não iniciado
-☐ Parcial
+☑ Parcial
 ☐ Completo

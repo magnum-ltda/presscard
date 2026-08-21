@@ -1,3 +1,14 @@
+---
+document: COMMISSIONS_TODO
+title: Commissions Backlog
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/commissions/TODO.md
+module: Commissions
+---
+
 # Commissions Backlog
 
 ## Legenda

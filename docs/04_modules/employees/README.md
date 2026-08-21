@@ -3,32 +3,26 @@ document: EMPLOYEES_MODULE
 title: Employees Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir o módulo responsável pelo gerenciamento dos Employees da Presscard.
-
+purpose: Definir o módulo responsável pelo gerenciamento dos Employees da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - DOMAIN_MODEL
-  - MULTI_TENANT
-  - BUSINESS_RULES
-  - COMPANIES
-
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MULTI_TENANT.md
+- 03_business/BUSINESS_RULES.md
+- 04_modules/companies/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - COMPONENTS
-  - SERVICES
+- 04_modules/employees/RULES.md
+- 04_modules/employees/ENTITIES.md
+- 04_modules/employees/FLOW.md
+- 04_modules/employees/API.md
+- 04_modules/employees/COMPONENTS.md
+- 04_modules/employees/SERVICES.md
 ---
 
 # Employees

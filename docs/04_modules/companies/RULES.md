@@ -3,18 +3,14 @@ document: COMPANIES_RULES
 title: Associated Companies Module Rules
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir as regras de negócio do módulo Companies.
-
+purpose: Definir as regras de negócio do módulo Companies.
 depends_on:
-  - BUSINESS_RULES
-  - MULTI_TENANT
-  - README
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/MULTI_TENANT.md
+- 04_modules/companies/README.md
 ---
 
 # Companies Rules

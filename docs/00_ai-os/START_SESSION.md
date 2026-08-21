@@ -3,26 +3,20 @@ document: START_SESSION
 title: Presscard AI Session Bootstrap
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir como uma Inteligência Artificial deve iniciar uma nova sessão de trabalho no projeto Presscard.
-
+purpose: Definir como uma Inteligência Artificial deve iniciar uma nova sessão de
+  trabalho no projeto Presscard.
 audience:
-  - AI
-
+- AI
 updated_by_antigravity: false
-
 depends_on:
-  - AI_OPERATING_SYSTEM
-  - AI_MEMORY
-  - IMPLEMENTATION_PROTOCOL
-
+- 00_ai-os/AI_OPERATING_SYSTEM.md
+- 00_ai-os/AI_MEMORY.md
+- 00_ai-os/IMPLEMENTATION_PROTOCOL.md
 related_documents:
-  - PROJECT
-  - CURRENT_STATE
+- 01_project/PROJECT.md
+- 01_project/CURRENT_STATE.md
 ---
 
 # START SESSION

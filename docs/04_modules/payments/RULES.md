@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_RULES
+title: Payments Rules
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/RULES.md
+module: Payments
+---
+
 # Payments Rules
 
 ## Regras principais

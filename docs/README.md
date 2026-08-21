@@ -1,3 +1,14 @@
+---
+document: DOCUMENTATION_INDEX
+title: Presscard Knowledge Base
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/README.md
+module: Documentation
+---
+
 # Presscard Knowledge Base
 
 > Documentação oficial da plataforma Presscard.

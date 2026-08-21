@@ -3,27 +3,21 @@ document: IMPLEMENTATION_PROTOCOL
 title: Presscard Implementation Protocol
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o fluxo oficial para implementação de qualquer funcionalidade na plataforma Presscard.
-
+purpose: Definir o fluxo oficial para implementação de qualquer funcionalidade na
+  plataforma Presscard.
 audience:
-  - AI
-  - Developer
-
+- AI
+- Developer
 updated_by_antigravity: false
-
 depends_on:
-  - AI_OPERATING_SYSTEM
-  - AI_MEMORY
-  - AI_GUARDRAILS
-
+- 00_ai-os/AI_OPERATING_SYSTEM.md
+- 00_ai-os/AI_MEMORY.md
+- 00_ai-os/AI_GUARDRAILS.md
 related_documents:
-  - START_SESSION
-  - CURRENT_STATE
+- 00_ai-os/START_SESSION.md
+- 01_project/CURRENT_STATE.md
 ---
 
 # Implementation Protocol

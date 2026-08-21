@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_API
+title: Notifications API
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/API.md
+module: Notifications
+---
+
 # Notifications API
 
 Base route:

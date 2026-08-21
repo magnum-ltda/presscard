@@ -3,19 +3,15 @@ document: EMPLOYEES_RULES
 title: Employees Module Rules
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir as regras de negócio do módulo Employees.
-
+purpose: Definir as regras de negócio do módulo Employees.
 depends_on:
-  - BUSINESS_RULES
-  - MULTI_TENANT
-  - COMPANIES
-  - README
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/MULTI_TENANT.md
+- 04_modules/companies/README.md
+- 04_modules/employees/README.md
 ---
 
 # Employees Rules

@@ -3,27 +3,20 @@ document: DOMAIN_MODEL
 title: Presscard Domain Model
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o modelo de domínio oficial da plataforma Presscard.
-
+purpose: Definir o modelo de domínio oficial da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Architect
-
+- AI
+- Developer
+- Architect
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-  - ARCHITECTURE
-
+- 01_project/PROJECT.md
+- 02_architecture/ARCHITECTURE.md
 related_documents:
-  - MODULE_MAP
-  - BUSINESS_RULES
+- 02_architecture/MODULE_MAP.md
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Domain Model

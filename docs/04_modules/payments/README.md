@@ -3,31 +3,26 @@ document: PAYMENTS_MODULE
 title: Payments Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Payments
-
-purpose:
-  Definir o módulo responsável pelo ciclo de vida financeiro dos Payments da Presscard.
-
+purpose: Definir o módulo responsável pelo ciclo de vida financeiro dos Payments da
+  Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - BOOKING
-  - BENEFITS
-  - EMPLOYEES
-
+- 04_modules/booking/README.md
+- 03_business/BENEFITS.md
+- 04_modules/employees/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/payments/RULES.md
+- 04_modules/payments/ENTITIES.md
+- 04_modules/payments/FLOW.md
+- 04_modules/payments/API.md
+- 04_modules/payments/SERVICES.md
+- 04_modules/payments/TODO.md
 ---
 
 # Payments

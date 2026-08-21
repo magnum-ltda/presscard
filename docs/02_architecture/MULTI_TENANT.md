@@ -3,28 +3,22 @@ document: MULTI_TENANT
 title: Presscard Multi-Tenant Architecture
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir a estratégia oficial de multiempresa (multi-tenant) da plataforma Presscard.
-
+purpose: Definir a estratégia oficial de multiempresa (multi-tenant) da plataforma
+  Presscard.
 audience:
-  - AI
-  - Developer
-  - Architect
-
+- AI
+- Developer
+- Architect
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-  - DOMAIN_MODEL
-  - ARCHITECTURE
-
+- 01_project/PROJECT.md
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/ARCHITECTURE.md
 related_documents:
-  - MODULE_MAP
-  - BUSINESS_RULES
+- 02_architecture/MODULE_MAP.md
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Multi-Tenant

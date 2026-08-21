@@ -3,17 +3,13 @@ document: CATALOG_MAPS
 title: Catalog Maps
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir a utilização de localização e mapas no catálogo.
-
+purpose: Definir a utilização de localização e mapas no catálogo.
 depends_on:
-  - CATALOG
-  - PARTNERS
+- 04_modules/catalog/README.md
+- 04_modules/partners/README.md
 ---
 
 # Maps

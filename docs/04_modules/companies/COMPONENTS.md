@@ -3,18 +3,14 @@ document: COMPANIES_COMPONENTS
 title: Associated Companies Module Components
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir os componentes de interface do módulo Companies.
-
+purpose: Definir os componentes de interface do módulo Companies.
 depends_on:
-  - README
-  - FLOW
-  - API
+- 04_modules/companies/README.md
+- 04_modules/companies/FLOW.md
+- 04_modules/companies/API.md
 ---
 
 # Companies Components

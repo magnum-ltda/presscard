@@ -1,3 +1,14 @@
+---
+document: BOOKING_CALENDAR
+title: Booking Calendar
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/CALENDAR.md
+module: Booking
+---
+
 # Booking Calendar
 
 ## Tipos

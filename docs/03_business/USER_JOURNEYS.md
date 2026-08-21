@@ -3,29 +3,22 @@ document: USER_JOURNEYS
 title: Presscard User Journeys
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir as principais jornadas dos usuários da plataforma Presscard.
-
+purpose: Definir as principais jornadas dos usuários da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-  - UX Designer
-
+- AI
+- Developer
+- Product Owner
+- UX Designer
 updated_by_antigravity: false
-
 depends_on:
-  - BUSINESS_RULES
-  - BENEFITS
-  - BOOKINGS
-  - PAYMENTS
-
+- 03_business/BUSINESS_RULES.md
+- 03_business/BENEFITS.md
+- 03_business/BOOKINGS.md
+- 03_business/PAYMENTS.md
 related_documents:
-  - DOMAIN_MODEL
+- 02_architecture/DOMAIN_MODEL.md
 ---
 
 # User Journeys

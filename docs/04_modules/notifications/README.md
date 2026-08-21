@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_DOCUMENTATION
+title: Notifications Module
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/README.md
+module: Notifications
+---
+
 # Notifications Module
 
 Version: 1.0.0  

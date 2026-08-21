@@ -3,18 +3,14 @@ document: PARTNERS_COMPONENTS
 title: Commercial Partners Module Components
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir os componentes de interface do módulo Partners.
-
+purpose: Definir os componentes de interface do módulo Partners.
 depends_on:
-  - README
-  - FLOW
-  - API
+- 04_modules/partners/README.md
+- 04_modules/partners/FLOW.md
+- 04_modules/partners/API.md
 ---
 
 # Partners Components

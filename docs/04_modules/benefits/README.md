@@ -3,32 +3,27 @@ document: BENEFITS_MODULE
 title: Benefits Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir o módulo responsável pelo gerenciamento dos Benefits disponibilizados pelas Associated Companies.
-
+purpose: Definir o módulo responsável pelo gerenciamento dos Benefits disponibilizados
+  pelas Associated Companies.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - BUSINESS_RULES
-  - COMPANIES
-  - EMPLOYEES
-  - PARTNERS
-
+- 03_business/BUSINESS_RULES.md
+- 04_modules/companies/README.md
+- 04_modules/employees/README.md
+- 04_modules/partners/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - COMPONENTS
-  - SERVICES
+- 04_modules/benefits/RULES.md
+- 04_modules/benefits/ENTITIES.md
+- 04_modules/benefits/FLOW.md
+- 04_modules/benefits/API.md
+- 04_modules/benefits/COMPONENTS.md
+- 04_modules/benefits/SERVICES.md
 ---
 
 # Benefits
@@ -106,5 +101,5 @@ Expired / Deactivated
 Status
 
 ☐ Não iniciado
-☐ Parcial
+☑ Parcial
 ☐ Completo

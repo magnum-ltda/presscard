@@ -3,28 +3,21 @@ document: BENEFITS
 title: Presscard Benefits Specification
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o funcionamento do módulo de Benefícios da plataforma Presscard.
-
+purpose: Definir o funcionamento do módulo de Benefícios da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - BUSINESS_RULES
-  - DOMAIN_MODEL
-
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/DOMAIN_MODEL.md
 related_documents:
-  - BOOKINGS
-  - COMMISSIONS
-  - PAYMENTS
+- 03_business/BOOKINGS.md
+- 03_business/COMMISSIONS.md
+- 03_business/PAYMENTS.md
 ---
 
 # Benefits

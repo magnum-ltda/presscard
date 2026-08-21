@@ -3,27 +3,19 @@ document: ROADMAP
 title: Presscard Product Roadmap
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir a evolução oficial da plataforma Presscard através de fases incrementais.
-
+purpose: Definir a evolução oficial da plataforma Presscard através de fases incrementais.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-  - PROJECT_VISION
-
+- 01_project/PROJECT.md
+- 01_project/PROJECT_VISION.md
 related_documents:
-  - NEXT_STEPS
-  - CHANGELOG
+- 01_project/CHANGELOG.md
 ---
 
 # Product Roadmap

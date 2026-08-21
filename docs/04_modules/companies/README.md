@@ -3,32 +3,26 @@ document: COMPANIES_MODULE
 title: Associated Companies Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir o módulo responsável pelo gerenciamento das Associated Companies.
-
+purpose: Definir o módulo responsável pelo gerenciamento das Associated Companies.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - ARCHITECTURE
-  - DOMAIN_MODEL
-  - MULTI_TENANT
-  - BUSINESS_RULES
-
+- 02_architecture/ARCHITECTURE.md
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MULTI_TENANT.md
+- 03_business/BUSINESS_RULES.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - COMPONENTS
-  - SERVICES
+- 04_modules/companies/RULES.md
+- 04_modules/companies/ENTITIES.md
+- 04_modules/companies/FLOW.md
+- 04_modules/companies/API.md
+- 04_modules/companies/COMPONENTS.md
+- 04_modules/companies/SERVICES.md
 ---
 
 # Associated Companies

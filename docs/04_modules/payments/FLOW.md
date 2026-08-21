@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_FLOW
+title: Payments Flows
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/FLOW.md
+module: Payments
+---
+
 # Payments Flows
 
 ## Pagamento de Booking

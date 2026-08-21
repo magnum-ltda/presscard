@@ -3,18 +3,14 @@ document: PARTNERS_FLOW
 title: Commercial Partners Module Flows
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir os fluxos funcionais do módulo Partners.
-
+purpose: Definir os fluxos funcionais do módulo Partners.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/partners/README.md
+- 04_modules/partners/RULES.md
+- 04_modules/partners/ENTITIES.md
 ---
 
 # Partners Flows

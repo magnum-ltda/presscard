@@ -3,19 +3,15 @@ document: EMPLOYEES_FLOW
 title: Employees Module Flows
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir os fluxos funcionais do módulo Employees.
-
+purpose: Definir os fluxos funcionais do módulo Employees.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
-  - COMPANIES
+- 04_modules/employees/README.md
+- 04_modules/employees/RULES.md
+- 04_modules/employees/ENTITIES.md
+- 04_modules/companies/README.md
 ---
 
 # Employees Flows

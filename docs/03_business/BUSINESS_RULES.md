@@ -3,28 +3,21 @@ document: BUSINESS_RULES
 title: Presscard Business Rules
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir as regras de negócio oficiais da plataforma Presscard.
-
+purpose: Definir as regras de negócio oficiais da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-  - DOMAIN_MODEL
-
+- 01_project/PROJECT.md
+- 02_architecture/DOMAIN_MODEL.md
 related_documents:
-  - BENEFITS
-  - BOOKINGS
-  - PAYMENTS
+- 03_business/BENEFITS.md
+- 03_business/BOOKINGS.md
+- 03_business/PAYMENTS.md
 ---
 
 # Business Rules

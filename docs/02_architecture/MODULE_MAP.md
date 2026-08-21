@@ -3,26 +3,20 @@ document: MODULE_MAP
 title: Presscard Module Map
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir oficialmente os módulos da plataforma Presscard, suas responsabilidades e dependências.
-
+purpose: Definir oficialmente os módulos da plataforma Presscard, suas responsabilidades
+  e dependências.
 audience:
-  - AI
-  - Developer
-  - Architect
-
+- AI
+- Developer
+- Architect
 updated_by_antigravity: false
-
 depends_on:
-  - ARCHITECTURE
-  - DOMAIN_MODEL
-
+- 02_architecture/ARCHITECTURE.md
+- 02_architecture/DOMAIN_MODEL.md
 related_documents:
-  - BUSINESS_RULES
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Module Map

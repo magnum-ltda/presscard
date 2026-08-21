@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_TEMPLATES
+title: Notification Templates
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/TEMPLATES.md
+module: Notifications
+---
+
 # Notification Templates
 
 ## Estrutura

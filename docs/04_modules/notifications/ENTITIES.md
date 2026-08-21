@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_ENTITIES
+title: Notifications Entities
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/ENTITIES.md
+module: Notifications
+---
+
 # Notifications Entities
 
 ## Notification

@@ -1,3 +1,14 @@
+---
+document: QUALITY_STRATEGY
+title: Estratégia de Testes
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/quality/STRATEGY.md
+module: Quality
+---
+
 # Estratégia de Testes
 
 ## Pirâmide de cobertura

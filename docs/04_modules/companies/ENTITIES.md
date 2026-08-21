@@ -3,18 +3,14 @@ document: COMPANIES_ENTITIES
 title: Associated Companies Module Entities
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir as entidades do domínio administrativo de Associated Companies.
-
+purpose: Definir as entidades do domínio administrativo de Associated Companies.
 depends_on:
-  - DOMAIN_MODEL
-  - MULTI_TENANT
-  - README
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MULTI_TENANT.md
+- 04_modules/companies/README.md
 ---
 
 # Companies Entities

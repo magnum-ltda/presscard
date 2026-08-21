@@ -3,25 +3,19 @@ document: AI_GUARDRAILS
 title: Presscard AI Guardrails
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir os limites obrigatórios que toda Inteligência Artificial deve respeitar durante o desenvolvimento da plataforma Presscard.
-
+purpose: Definir os limites obrigatórios que toda Inteligência Artificial deve respeitar
+  durante o desenvolvimento da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-
+- AI
+- Developer
 updated_by_antigravity: false
-
 depends_on:
-  - AI_OPERATING_SYSTEM
-  - AI_MEMORY
-
+- 00_ai-os/AI_OPERATING_SYSTEM.md
+- 00_ai-os/AI_MEMORY.md
 related_documents:
-  - IMPLEMENTATION_PROTOCOL
+- 00_ai-os/IMPLEMENTATION_PROTOCOL.md
 ---
 
 # AI Guardrails

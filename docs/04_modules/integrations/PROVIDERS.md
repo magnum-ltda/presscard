@@ -1,3 +1,14 @@
+---
+document: INTEGRATIONS_PROVIDERS
+title: Integration Providers
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/integrations/PROVIDERS.md
+module: Integrations
+---
+
 # Integration Providers
 
 ## Objetivo

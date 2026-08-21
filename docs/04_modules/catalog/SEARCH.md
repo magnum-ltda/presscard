@@ -3,18 +3,14 @@ document: CATALOG_SEARCH
 title: Catalog Search
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir o comportamento da pesquisa do catálogo.
-
+purpose: Definir o comportamento da pesquisa do catálogo.
 depends_on:
-  - CATALOG
-  - BENEFITS
-  - PARTNERS
+- 04_modules/catalog/README.md
+- 03_business/BENEFITS.md
+- 04_modules/partners/README.md
 ---
 
 # Search

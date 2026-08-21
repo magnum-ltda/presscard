@@ -1,3 +1,14 @@
+---
+document: BOOKING_API
+title: Booking API
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/API.md
+module: Booking
+---
+
 # Booking API
 
 Base route:

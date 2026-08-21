@@ -3,19 +3,15 @@ document: BENEFITS_ENTITIES
 title: Benefits Module Entities
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir as entidades conceituais do módulo Benefits.
-
+purpose: Definir as entidades conceituais do módulo Benefits.
 depends_on:
-  - DOMAIN_MODEL
-  - COMPANIES
-  - PARTNERS
-  - EMPLOYEES
+- 02_architecture/DOMAIN_MODEL.md
+- 04_modules/companies/README.md
+- 04_modules/partners/README.md
+- 04_modules/employees/README.md
 ---
 
 # Benefits Entities

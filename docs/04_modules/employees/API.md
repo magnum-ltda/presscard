@@ -3,18 +3,14 @@ document: EMPLOYEES_API
 title: Employees Module API
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir os contratos de API do módulo Employees.
-
+purpose: Definir os contratos de API do módulo Employees.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/employees/README.md
+- 04_modules/employees/RULES.md
+- 04_modules/employees/ENTITIES.md
 ---
 
 # Employees API

@@ -1,3 +1,14 @@
+---
+document: BOOKING_AVAILABILITY
+title: Booking Availability
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/AVAILABILITY.md
+module: Booking
+---
+
 # Booking Availability
 
 ## Objetivo

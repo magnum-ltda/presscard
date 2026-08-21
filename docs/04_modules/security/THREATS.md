@@ -1,3 +1,14 @@
+---
+document: SECURITY_THREATS
+title: Security Threats
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/security/THREATS.md
+module: Security
+---
+
 # Security Threats
 
 ## Objetivo

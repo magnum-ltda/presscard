@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_API
+title: Payments API
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/API.md
+module: Payments
+---
+
 # Payments API
 
 Base route:

@@ -3,27 +3,20 @@ document: CURRENT_STATE
 title: Current Project State
 version: 1.0.0
 status: Living Document
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Registrar o estado atual da plataforma e servir como ponto de partida para novas implementações.
-
+purpose: Registrar o estado atual da plataforma e servir como ponto de partida para
+  novas implementações.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: true
-
 depends_on:
-  - PROJECT
-  - PROJECT_VISION
-
+- 01_project/PROJECT.md
+- 01_project/PROJECT_VISION.md
 related_documents:
-  - CHANGELOG
-  - NEXT_STEPS
+- 01_project/CHANGELOG.md
 ---
 
 # Current State
@@ -71,6 +64,9 @@ Em validação.
 - Benefícios
 - Parceiros Comerciais
 - Gestão administrativa
+- Catálogo de Ofertas
+- Geração de Cupons (Meus Cupons)
+- Integração com WhatsApp
 
 ---
 
@@ -131,7 +127,9 @@ Toda evolução deverá preservar:
 
 ## Documentação Oficial
 
-Em construção.
+Estrutura consolidada.
+
+A documentação oficial encontra-se estabelecida e passa por manutenção e revisão contínuas conforme a evolução do produto.
 
 Responsável:
 
@@ -159,9 +157,9 @@ Novas decisões deverão ser registradas através de ADRs.
 
 # Objetivo Atual
 
-Concluir a documentação oficial da plataforma.
+Manter a documentação consistente com as decisões aprovadas e com a evolução da plataforma.
 
-Após isso iniciar a implementação dos próximos módulos conforme Roadmap.
+Implementar os próximos módulos conforme o Roadmap, preservando a arquitetura e as regras de negócio documentadas.
 
 ---
 

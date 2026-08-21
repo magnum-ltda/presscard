@@ -3,27 +3,20 @@ document: COMMISSIONS
 title: Presscard Commission Specification
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o funcionamento do módulo de Comissões da plataforma Presscard.
-
+purpose: Definir o funcionamento do módulo de Comissões da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - BUSINESS_RULES
-  - BOOKINGS
-  - PAYMENTS
-
+- 03_business/BUSINESS_RULES.md
+- 03_business/BOOKINGS.md
+- 03_business/PAYMENTS.md
 related_documents:
-  - BENEFITS
+- 03_business/BENEFITS.md
 ---
 
 # Commissions

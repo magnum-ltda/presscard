@@ -3,19 +3,15 @@ document: CATALOG_FILTERS
 title: Catalog Filters
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir filtros disponíveis no catálogo.
-
+purpose: Definir filtros disponíveis no catálogo.
 depends_on:
-  - CATALOG
-  - SEARCH
-  - BENEFITS
-  - PARTNERS
+- 04_modules/catalog/README.md
+- 04_modules/catalog/SEARCH.md
+- 03_business/BENEFITS.md
+- 04_modules/partners/README.md
 ---
 
 # Filters

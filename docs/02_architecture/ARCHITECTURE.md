@@ -3,28 +3,21 @@ document: ARCHITECTURE
 title: Presscard Architecture
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir oficialmente a arquitetura da plataforma Presscard.
-
+purpose: Definir oficialmente a arquitetura da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Architect
-
+- AI
+- Developer
+- Architect
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-  - PROJECT_VISION
-
+- 01_project/PROJECT.md
+- 01_project/PROJECT_VISION.md
 related_documents:
-  - DOMAIN_MODEL
-  - MODULE_MAP
-  - BUSINESS_RULES
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MODULE_MAP.md
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Architecture

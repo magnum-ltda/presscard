@@ -3,18 +3,14 @@ document: EMPLOYEES_ENTITIES
 title: Employees Module Entities
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir as entidades conceituais do módulo Employees.
-
+purpose: Definir as entidades conceituais do módulo Employees.
 depends_on:
-  - DOMAIN_MODEL
-  - MULTI_TENANT
-  - COMPANIES
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MULTI_TENANT.md
+- 04_modules/companies/README.md
 ---
 
 # Employees Entities

@@ -3,18 +3,14 @@ document: PARTNERS_RULES
 title: Commercial Partners Module Rules
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir as regras de negócio do módulo Partners.
-
+purpose: Definir as regras de negócio do módulo Partners.
 depends_on:
-  - BUSINESS_RULES
-  - DOMAIN_MODEL
-  - README
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/DOMAIN_MODEL.md
+- 04_modules/partners/README.md
 ---
 
 # Partners Rules

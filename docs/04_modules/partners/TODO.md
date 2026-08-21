@@ -3,20 +3,16 @@ document: PARTNERS_TODO
 title: Commercial Partners Module Backlog
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Manter o backlog do módulo Partners.
-
+purpose: Manter o backlog do módulo Partners.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
+- 04_modules/partners/README.md
+- 04_modules/partners/RULES.md
+- 04_modules/partners/ENTITIES.md
+- 04_modules/partners/FLOW.md
+- 04_modules/partners/API.md
 ---
 
 # Partners Backlog

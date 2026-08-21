@@ -1,3 +1,14 @@
+---
+document: COMMISSIONS_RULES
+title: Commissions Rules
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/commissions/RULES.md
+module: Commissions
+---
+
 # Commissions Rules
 
 ## Regras principais

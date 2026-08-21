@@ -3,28 +3,21 @@ document: BOOKINGS
 title: Presscard Booking Specification
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o funcionamento do módulo de Reservas (Booking) da plataforma Presscard.
-
+purpose: Definir o funcionamento do módulo de Reservas (Booking) da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - BUSINESS_RULES
-  - DOMAIN_MODEL
-  - BENEFITS
-
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/DOMAIN_MODEL.md
+- 03_business/BENEFITS.md
 related_documents:
-  - PAYMENTS
-  - COMMISSIONS
+- 03_business/PAYMENTS.md
+- 03_business/COMMISSIONS.md
 ---
 
 # Bookings

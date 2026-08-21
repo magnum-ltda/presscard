@@ -3,19 +3,15 @@ document: COMPANIES_SERVICES
 title: Associated Companies Module Services
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir os serviços do módulo Companies.
-
+purpose: Definir os serviços do módulo Companies.
 depends_on:
-  - README
-  - API
-  - RULES
-  - ENTITIES
+- 04_modules/companies/README.md
+- 04_modules/companies/API.md
+- 04_modules/companies/RULES.md
+- 04_modules/companies/ENTITIES.md
 ---
 
 # Companies Services

@@ -8,20 +8,20 @@ project: Presscard
 module: Quality
 purpose: Definir o módulo de qualidade e testes da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - ARCHITECTURE
-  - BUSINESS_RULES
-  - SECURITY
+- 02_architecture/ARCHITECTURE.md
+- 03_business/BUSINESS_RULES.md
+- 04_modules/security/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/quality/RULES.md
+- 04_modules/quality/ENTITIES.md
+- 04_modules/quality/FLOW.md
+- 04_modules/quality/API.md
+- 04_modules/quality/SERVICES.md
+- 04_modules/quality/TODO.md
 ---
 
 # Rules

@@ -1,3 +1,14 @@
+---
+document: BOOKING_RULES
+title: Booking Rules
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/RULES.md
+module: Booking
+---
+
 # Booking Rules
 
 ## Regras

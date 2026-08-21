@@ -3,20 +3,16 @@ document: CATALOG_FLOW
 title: Catalog Module Flows
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Definir os principais fluxos do catálogo.
-
+purpose: Definir os principais fluxos do catálogo.
 depends_on:
-  - README
-  - SEARCH
-  - FILTERS
-  - MAPS
-  - BENEFITS
+- 04_modules/catalog/README.md
+- 04_modules/catalog/SEARCH.md
+- 04_modules/catalog/FILTERS.md
+- 04_modules/catalog/MAPS.md
+- 03_business/BENEFITS.md
 ---
 
 # Catalog Flows

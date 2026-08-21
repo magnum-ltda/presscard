@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_FLOW
+title: Notifications Flows
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/FLOW.md
+module: Notifications
+---
+
 # Notifications Flows
 
 ## Notificação transacional

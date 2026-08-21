@@ -3,18 +3,14 @@ document: COMPANIES_API
 title: Associated Companies Module API
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir os contratos de API do módulo Companies.
-
+purpose: Definir os contratos de API do módulo Companies.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/companies/README.md
+- 04_modules/companies/RULES.md
+- 04_modules/companies/ENTITIES.md
 ---
 
 # Companies API

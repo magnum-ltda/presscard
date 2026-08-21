@@ -3,18 +3,14 @@ document: COMPANIES_FLOW
 title: Associated Companies Module Flows
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Companies
-
-purpose:
-  Definir os fluxos funcionais do módulo Companies.
-
+purpose: Definir os fluxos funcionais do módulo Companies.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/companies/README.md
+- 04_modules/companies/RULES.md
+- 04_modules/companies/ENTITIES.md
 ---
 
 # Companies Flows

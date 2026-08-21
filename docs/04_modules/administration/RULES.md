@@ -8,20 +8,20 @@ project: Presscard
 module: Administration
 purpose: Definir o módulo de administração e configurações da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - EMPLOYEES
-  - COMPANIES
-  - SECURITY
+- 04_modules/employees/README.md
+- 04_modules/companies/README.md
+- 04_modules/security/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/administration/RULES.md
+- 04_modules/administration/ENTITIES.md
+- 04_modules/administration/FLOW.md
+- 04_modules/administration/API.md
+- 04_modules/administration/SERVICES.md
+- 04_modules/administration/TODO.md
 ---
 
 # Rules

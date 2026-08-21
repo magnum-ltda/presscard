@@ -8,20 +8,20 @@ project: Presscard
 module: Security
 purpose: Definir o módulo de segurança e auditoria da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - ADMINISTRATION
-  - EMPLOYEES
-  - COMPANIES
+- 04_modules/administration/README.md
+- 04_modules/employees/README.md
+- 04_modules/companies/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/security/RULES.md
+- 04_modules/security/ENTITIES.md
+- 04_modules/security/FLOW.md
+- 04_modules/security/API.md
+- 04_modules/security/SERVICES.md
+- 04_modules/security/TODO.md
 ---
 
 # Entities

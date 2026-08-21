@@ -3,18 +3,14 @@ document: EMPLOYEES_COMPONENTS
 title: Employees Module Components
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Definir os componentes de interface do módulo Employees.
-
+purpose: Definir os componentes de interface do módulo Employees.
 depends_on:
-  - README
-  - FLOW
-  - API
+- 04_modules/employees/README.md
+- 04_modules/employees/FLOW.md
+- 04_modules/employees/API.md
 ---
 
 # Employees Components

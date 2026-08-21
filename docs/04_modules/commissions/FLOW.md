@@ -1,3 +1,14 @@
+---
+document: COMMISSIONS_FLOW
+title: Commissions Flows
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/commissions/FLOW.md
+module: Commissions
+---
+
 # Commissions Flows
 
 ## Geração

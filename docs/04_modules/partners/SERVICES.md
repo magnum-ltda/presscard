@@ -3,19 +3,15 @@ document: PARTNERS_SERVICES
 title: Commercial Partners Module Services
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir os serviços do módulo Partners.
-
+purpose: Definir os serviços do módulo Partners.
 depends_on:
-  - README
-  - API
-  - RULES
-  - ENTITIES
+- 04_modules/partners/README.md
+- 04_modules/partners/API.md
+- 04_modules/partners/RULES.md
+- 04_modules/partners/ENTITIES.md
 ---
 
 # Partners Services

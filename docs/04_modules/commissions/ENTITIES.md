@@ -1,3 +1,14 @@
+---
+document: COMMISSIONS_ENTITIES
+title: Commissions Entities
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/commissions/ENTITIES.md
+module: Commissions
+---
+
 # Commissions Entities
 
 ## Commission

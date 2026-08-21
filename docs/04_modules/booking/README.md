@@ -1,3 +1,14 @@
+---
+document: BOOKING_DOCUMENTATION
+title: Booking Module
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/README.md
+module: Booking
+---
+
 # Booking Module
 
 Version: 1.0.0  

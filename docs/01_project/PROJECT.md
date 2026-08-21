@@ -3,26 +3,20 @@ document: PROJECT
 title: Presscard Project
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir oficialmente o que é a plataforma Presscard, seu propósito, escopo, público-alvo e visão de evolução.
-
+purpose: Definir oficialmente o que é a plataforma Presscard, seu propósito, escopo,
+  público-alvo e visão de evolução.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on: []
-
 related_documents:
-  - PROJECT_VISION
-  - AI_MEMORY
-  - BUSINESS_RULES
+- 01_project/PROJECT_VISION.md
+- 00_ai-os/AI_MEMORY.md
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Presscard

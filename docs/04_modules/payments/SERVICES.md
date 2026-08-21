@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_SERVICES
+title: Payments Services
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/SERVICES.md
+module: Payments
+---
+
 # Payments Services
 
 ## Arquitetura

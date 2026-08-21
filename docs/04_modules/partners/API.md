@@ -3,18 +3,14 @@ document: PARTNERS_API
 title: Commercial Partners Module API
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Partners
-
-purpose:
-  Definir os contratos de API do módulo Partners.
-
+purpose: Definir os contratos de API do módulo Partners.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/partners/README.md
+- 04_modules/partners/RULES.md
+- 04_modules/partners/ENTITIES.md
 ---
 
 # Partners API

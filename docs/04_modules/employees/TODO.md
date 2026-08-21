@@ -3,20 +3,16 @@ document: EMPLOYEES_TODO
 title: Employees Module Backlog
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Employees
-
-purpose:
-  Manter o backlog do módulo Employees.
-
+purpose: Manter o backlog do módulo Employees.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
+- 04_modules/employees/README.md
+- 04_modules/employees/RULES.md
+- 04_modules/employees/ENTITIES.md
+- 04_modules/employees/FLOW.md
+- 04_modules/employees/API.md
 ---
 
 # Employees Backlog

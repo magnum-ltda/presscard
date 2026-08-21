@@ -3,27 +3,21 @@ document: EVENTS
 title: Presscard Domain Events
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir os principais eventos de domínio da plataforma Presscard e orientar a comunicação entre módulos.
-
+purpose: Definir os principais eventos de domínio da plataforma Presscard e orientar
+  a comunicação entre módulos.
 audience:
-  - AI
-  - Developer
-  - Architect
-
+- AI
+- Developer
+- Architect
 updated_by_antigravity: false
-
 depends_on:
-  - DOMAIN_MODEL
-  - MODULE_MAP
-
+- 02_architecture/DOMAIN_MODEL.md
+- 02_architecture/MODULE_MAP.md
 related_documents:
-  - BUSINESS_RULES
-  - ARCHITECTURE
+- 03_business/BUSINESS_RULES.md
+- 02_architecture/ARCHITECTURE.md
 ---
 
 # Domain Events

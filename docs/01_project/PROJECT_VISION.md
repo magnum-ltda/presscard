@@ -3,27 +3,21 @@ document: PROJECT_VISION
 title: Presscard Product Vision
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir a visão de longo prazo da plataforma Presscard e orientar todas as decisões estratégicas do produto.
-
+purpose: Definir a visão de longo prazo da plataforma Presscard e orientar todas as
+  decisões estratégicas do produto.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - PROJECT
-
+- 01_project/PROJECT.md
 related_documents:
-  - ROADMAP
-  - ARCHITECTURE
-  - BUSINESS_RULES
+- 01_project/ROADMAP.md
+- 02_architecture/ARCHITECTURE.md
+- 03_business/BUSINESS_RULES.md
 ---
 
 # Product Vision

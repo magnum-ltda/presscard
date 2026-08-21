@@ -1,3 +1,14 @@
+---
+document: NOTIFICATIONS_RULES
+title: Notifications Rules
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/notifications/RULES.md
+module: Notifications
+---
+
 # Notifications Rules
 
 - Toda notificação possui identificador único.

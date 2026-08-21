@@ -1,3 +1,14 @@
+---
+document: BOOKING_TODO
+title: Booking Backlog
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/TODO.md
+module: Booking
+---
+
 # Booking Backlog
 
 ## Núcleo

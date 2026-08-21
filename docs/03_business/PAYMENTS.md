@@ -3,27 +3,20 @@ document: PAYMENTS
 title: Presscard Payment Specification
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
-
-purpose:
-  Definir o funcionamento do módulo de Pagamentos da plataforma Presscard.
-
+purpose: Definir o funcionamento do módulo de Pagamentos da plataforma Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 updated_by_antigravity: false
-
 depends_on:
-  - BUSINESS_RULES
-  - BOOKINGS
-  - COMMISSIONS
-
+- 03_business/BUSINESS_RULES.md
+- 03_business/BOOKINGS.md
+- 03_business/COMMISSIONS.md
 related_documents:
-  - BENEFITS
+- 03_business/BENEFITS.md
 ---
 
 # Payments

@@ -3,18 +3,14 @@ document: BENEFITS_FLOW
 title: Benefits Module Flows
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir os fluxos funcionais do módulo Benefits.
-
+purpose: Definir os fluxos funcionais do módulo Benefits.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/benefits/README.md
+- 04_modules/benefits/RULES.md
+- 04_modules/benefits/ENTITIES.md
 ---
 
 # Benefits Flows

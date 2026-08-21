@@ -3,32 +3,27 @@ document: COMMISSIONS_MODULE
 title: Commissions Module
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Commissions
-
-purpose:
-  Definir o módulo responsável pelo cálculo, registro e acompanhamento das comissões da Presscard.
-
+purpose: Definir o módulo responsável pelo cálculo, registro e acompanhamento das
+  comissões da Presscard.
 audience:
-  - AI
-  - Developer
-  - Product Owner
-
+- AI
+- Developer
+- Product Owner
 depends_on:
-  - PAYMENTS
-  - BOOKING
-  - BENEFITS
-  - PARTNERS
-
+- 03_business/PAYMENTS.md
+- 04_modules/booking/README.md
+- 03_business/BENEFITS.md
+- 04_modules/partners/README.md
 related_documents:
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
-  - SERVICES
-  - TODO
+- 04_modules/commissions/RULES.md
+- 04_modules/commissions/ENTITIES.md
+- 04_modules/commissions/FLOW.md
+- 04_modules/commissions/API.md
+- 04_modules/commissions/SERVICES.md
+- 04_modules/commissions/TODO.md
 ---
 
 # Commissions

@@ -1,3 +1,14 @@
+---
+document: BOOKING_RESOURCES
+title: Reservable Resources
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/booking/RESOURCES.md
+module: Booking
+---
+
 # Reservable Resources
 
 ## Objetivo

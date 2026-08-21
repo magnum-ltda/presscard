@@ -3,18 +3,14 @@ document: BENEFITS_API
 title: Benefits Module API
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Definir os contratos de API do módulo Benefits.
-
+purpose: Definir os contratos de API do módulo Benefits.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
+- 04_modules/benefits/README.md
+- 04_modules/benefits/RULES.md
+- 04_modules/benefits/ENTITIES.md
 ---
 
 # Benefits API

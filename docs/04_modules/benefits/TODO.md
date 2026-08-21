@@ -3,20 +3,16 @@ document: BENEFITS_TODO
 title: Benefits Module Backlog
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Benefits
-
-purpose:
-  Manter o backlog do módulo Benefits.
-
+purpose: Manter o backlog do módulo Benefits.
 depends_on:
-  - README
-  - RULES
-  - ENTITIES
-  - FLOW
-  - API
+- 04_modules/benefits/README.md
+- 04_modules/benefits/RULES.md
+- 04_modules/benefits/ENTITIES.md
+- 04_modules/benefits/FLOW.md
+- 04_modules/benefits/API.md
 ---
 
 # Benefits Backlog

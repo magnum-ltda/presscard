@@ -3,21 +3,17 @@ document: CATALOG_TODO
 title: Catalog Module Backlog
 version: 1.0.0
 status: Official
-
 owner: Magnum Oliveira
 project: Presscard
 module: Catalog
-
-purpose:
-  Manter o backlog do módulo Catalog.
-
+purpose: Manter o backlog do módulo Catalog.
 depends_on:
-  - README
-  - SEARCH
-  - FILTERS
-  - MAPS
-  - FLOW
-  - API
+- 04_modules/catalog/README.md
+- 04_modules/catalog/SEARCH.md
+- 04_modules/catalog/FILTERS.md
+- 04_modules/catalog/MAPS.md
+- 04_modules/catalog/FLOW.md
+- 04_modules/catalog/API.md
 ---
 
 # Catalog Backlog

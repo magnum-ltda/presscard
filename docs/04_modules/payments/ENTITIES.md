@@ -1,3 +1,14 @@
+---
+document: PAYMENTS_ENTITIES
+title: Payments Entities
+version: 1.0.0
+status: Official
+owner: Magnum Oliveira
+project: Presscard
+path: docs/04_modules/payments/ENTITIES.md
+module: Payments
+---
+
 # Payments Entities
 
 ## Payment
