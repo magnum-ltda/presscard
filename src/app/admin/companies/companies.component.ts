@@ -5,12 +5,12 @@ import { CompaniesService } from '../../core/services/companies.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { AssociatedCompany } from '../../core/models/company.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
-import { NgxMaskDirective } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -35,7 +35,7 @@ import { NgxMaskDirective } from 'ngx-mask';
             <tbody>
               <tr *ngFor="let company of companies()">
                 <td>{{ company.name }}</td>
-                <td>{{ company.cnpj }}</td>
+                <td>{{ company.cnpj | mask: '00.000.000/0000-00' }}</td>
                 <td><span class="badge">{{ company.plan }}</span></td>
                 <td>
                   <span class="status-dot" [class.active]="company.active"></span>
@@ -66,13 +66,14 @@ import { NgxMaskDirective } from 'ngx-mask';
             <div class="form-group">
               <label>Nome da Empresa</label>
               <input type="text" formControlName="name" placeholder="Ex: ACME Corp" class="form-control" [class.error]="isFieldInvalid('name')">
-              <span class="error-msg" *ngIf="isFieldInvalid('name')">Nome é obrigatório</span>
+              <span class="error-msg" *ngIf="companyForm.get('name')?.hasError('required') && isFieldInvalid('name')">Nome é obrigatório</span>
             </div>
             
             <div class="form-group">
               <label>CNPJ</label>
               <input type="text" formControlName="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" class="form-control" [class.error]="isFieldInvalid('cnpj')">
-              <span class="error-msg" *ngIf="isFieldInvalid('cnpj')">CNPJ é obrigatório</span>
+              <span class="error-msg" *ngIf="companyForm.get('cnpj')?.hasError('required') && isFieldInvalid('cnpj')">CNPJ é obrigatório</span>
+              <span class="error-msg" *ngIf="(companyForm.get('cnpj')?.hasError('minlength') || companyForm.get('cnpj')?.hasError('maxlength')) && isFieldInvalid('cnpj')">CNPJ inválido</span>
             </div>
 
             <div class="form-group">
@@ -171,7 +172,7 @@ export class CompaniesComponent {
 
   companyForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    cnpj: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+    cnpj: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(18)]],
     plan: ['Silver', Validators.required],
     active: [true]
   });
@@ -180,7 +181,11 @@ export class CompaniesComponent {
     this.isEditing = !!company;
     if (company) {
       this.currentCompanyId = company.id;
-      this.companyForm.patchValue(company);
+      const rawCnpj = company.cnpj ? company.cnpj.replace(/\D/g, '') : '';
+      this.companyForm.patchValue({
+        ...company,
+        cnpj: rawCnpj
+      });
     } else {
       this.currentCompanyId = null;
       this.companyForm.reset({ plan: 'Silver', active: true });

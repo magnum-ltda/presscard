@@ -1,16 +1,32 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { PartnersService } from '../../core/services/partners.service';
 import { SkeletonTableComponent } from '../../shared/components/skeleton-table/skeleton-table.component';
 import { CommercialPartner } from '../../core/models/partner.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
 import { NgxMaskDirective } from 'ngx-mask';
+import { CurrencyPercentageInputComponent } from '../../shared/components/currency-percentage-input/currency-percentage-input.component';
+
+// Custom phone validator that accepts formatted or unformatted numbers (10-11 digits)
+function phoneValidator(control: AbstractControl): { [key: string]: any } | null {
+  const raw = control.value ?? '';
+  const digits = raw.toString().replace(/\D/g, '');
+  return digits.length >= 10 && digits.length <= 11 ? null : { invalidPhone: true };
+}
+
+// Custom CEP validator that ignores mask separators (e.g. "11000-000" → 8 digits)
+function cepValidator(control: AbstractControl): { [key: string]: any } | null {
+  const raw = control.value ?? '';
+  const digits = raw.toString().replace(/\D/g, '');
+  return digits.length === 8 ? null : { invalidCep: true };
+}
+
 
 @Component({
   selector: 'app-partners',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective, CurrencyPercentageInputComponent],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -41,7 +57,7 @@ import { NgxMaskDirective } from 'ngx-mask';
                 </td>
                 <td><span class="badge">{{ partner.category }}</span></td>
                 <td>{{ partner.location.city }} - {{ partner.location.state }}</td>
-                <td>{{ partner.contact }}</td>
+                <td>{{ formatPhone(partner.contact) }}</td>
                 <td>
                   <span class="status-dot" [class.active]="partner.active"></span>
                   {{ partner.active ? 'Ativo' : 'Inativo' }}
@@ -97,17 +113,19 @@ import { NgxMaskDirective } from 'ngx-mask';
               </div>
               <div class="form-group flex-1">
                 <label>Telefone</label>
-                <input type="text" formControlName="contact" class="form-control" [class.error]="isFieldInvalid('contact')">
+                <input type="text" formControlName="contact" mask="(00) 00000-0000" placeholder="(00) 00000-0000" class="form-control" [class.error]="isFieldInvalid('contact')">
+                <div class="error" *ngIf="isFieldInvalid('contact')">Telefone obrigatório e deve conter 10 ou 11 dígitos.</div>
               </div>
               <div class="form-group flex-1">
                 <label>WhatsApp</label>
                 <input type="text" formControlName="whatsapp" mask="(00) 00000-0000" placeholder="(00) 00000-0000" class="form-control" [class.error]="isFieldInvalid('whatsapp')">
+                <div class="error" *ngIf="isFieldInvalid('whatsapp')">WhatsApp deve conter 10 ou 11 dígitos.</div>
               </div>
             </div>
 
             <div class="form-group">
               <label>Link Externo</label>
-              <input type="text" formControlName="externalLink" placeholder="https://www.exemplo.com.br" class="form-control">
+              <input type="text" formControlName="externalLink" placeholder="https://www.exemplo.com.br" class="form-control" [class.error]="isFieldInvalid('externalLink')">
             </div>
 
             <div class="form-row">
@@ -130,7 +148,11 @@ import { NgxMaskDirective } from 'ngx-mask';
               </div>
               <div class="form-group flex-1">
                 <label>Valor da Comissão</label>
-                <input type="number" formControlName="commissionValue" class="form-control" [class.error]="isFieldInvalid('commissionValue')">
+                <app-currency-percentage-input
+                  formControlName="commissionValue"
+                  [mode]="partnerForm.get('commissionType')?.value"
+                  [class.error]="isFieldInvalid('commissionValue')">
+                </app-currency-percentage-input>
               </div>
             </div>
 
@@ -146,6 +168,7 @@ import { NgxMaskDirective } from 'ngx-mask';
                   <label>CEP</label>
                   <div style="display: flex; gap: 0.5rem;">
                     <input type="text" formControlName="zipCode" mask="00000-000" class="form-control" style="flex: 1;" (blur)="searchCep()" [class.error]="isFieldInvalid('location.zipCode')">
+                    <div class="error" *ngIf="isFieldInvalid('location.zipCode')">CEP deve conter 8 dígitos.</div>
                     <button type="button" class="btn-secondary" (click)="searchCep()" style="padding: 0.5rem;" title="Buscar CEP">🔍</button>
                   </div>
                 </div>
@@ -176,7 +199,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 
               <div class="form-group">
                 <label>Link do Google Maps</label>
-                <input type="text" formControlName="googleMapsLink" placeholder="https://maps.google.com/..." class="form-control">
+                <input type="text" formControlName="googleMapsLink" placeholder="https://maps.google.com/..." class="form-control" [class.error]="isFieldInvalid('location.googleMapsLink')">
               </div>
             </div>
 
@@ -251,7 +274,8 @@ import { NgxMaskDirective } from 'ngx-mask';
     .form-group label { font-size: 0.875rem; font-weight: 500; color: #475569; }
     .form-control { padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.2s; }
     .form-control:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
-    .form-control.error { border-color: #ef4444; }
+    .error { color: #ef4444; font-size: 0.85rem; margin-top: 0.25rem; }
+
     textarea.form-control { resize: vertical; }
     
     .section-title { margin: 1rem 0 0 0; font-size: 1rem; color: #334155; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
@@ -274,6 +298,10 @@ export class PartnersComponent {
   isModalOpen = false;
   isEditing = false;
   isSaving = false;
+  /**
+   * Holds error message for CEP lookup failures.
+   */
+  cepError: string = '';
   currentPartnerId: string | null = null;
 
   partnerForm: FormGroup = this.fb.group({
@@ -281,9 +309,9 @@ export class PartnersComponent {
     tradeName: ['', Validators.required],
     category: ['HOTEL', Validators.required],
     description: ['', Validators.required],
-    contact: ['', Validators.required],
+    contact: ['', [Validators.required, phoneValidator]],
     whatsapp: ['', [Validators.minLength(10), Validators.maxLength(11)]],
-    externalLink: [''],
+    externalLink: ['', Validators.pattern(/^https?:\/\/.+$/)],
     executionType: ['COUPON', Validators.required],
     commissionType: ['PERCENTAGE', Validators.required],
     commissionValue: [0, Validators.required],
@@ -297,10 +325,10 @@ export class PartnersComponent {
       city: ['', Validators.required],
       state: ['', Validators.required],
       country: ['Brasil'],
-      zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      zipCode: ['', [Validators.required, cepValidator]],
       latitude: [0],
       longitude: [0],
-      googleMapsLink: ['']
+      googleMapsLink: ['', Validators.pattern(/^https?:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.app\.goo\.gl|maps\.google\.[a-z.]+).*/)]
     })
   });
 
@@ -309,6 +337,7 @@ export class PartnersComponent {
     if (partner) {
       this.currentPartnerId = partner.id;
       this.partnerForm.patchValue(partner);
+      this.partnerForm.updateValueAndValidity();
     } else {
       this.currentPartnerId = null;
       this.partnerForm.reset({
@@ -333,8 +362,20 @@ export class PartnersComponent {
     return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
+  formatPhone(value: string): string {
+    const digits = (value ?? '').replace(/\D/g, '');
+    if (digits.length === 11) {
+      return digits.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+    if (digits.length === 10) {
+      return digits.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    }
+    return value;
+  }
+
   async searchCep() {
     let cep = this.partnerForm.get('location.zipCode')?.value;
+    this.cepError = '';
     if (!cep) return;
     cep = cep.replace(/\D/g, '');
     if (cep.length !== 8) return;
@@ -351,9 +392,18 @@ export class PartnersComponent {
             state: data.uf
           }
         });
+        // Clear any previous CEP errors
+        this.partnerForm.get('location.zipCode')?.setErrors(null);
+        this.cepError = '';
+      } else {
+        // CEP not found
+        this.partnerForm.get('location.zipCode')?.setErrors({ invalidCep: true });
+        this.cepError = 'CEP não encontrado.';
       }
     } catch (e) {
       console.error('Erro ao buscar CEP', e);
+      this.partnerForm.get('location.zipCode')?.setErrors({ invalidCep: true });
+      this.cepError = 'Erro ao buscar CEP.';
     }
   }
 

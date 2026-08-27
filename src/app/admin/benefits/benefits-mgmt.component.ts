@@ -8,11 +8,12 @@ import { SkeletonTableComponent } from '../../shared/components/skeleton-table/s
 import { Benefit } from '../../core/models/benefit.model';
 import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
 import { NgxMaskDirective } from 'ngx-mask';
+import { CurrencyPercentageInputComponent } from '../../shared/components/currency-percentage-input/currency-percentage-input.component';
 
 @Component({
   selector: 'app-benefits-mgmt',
   standalone: true,
-  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective],
+  imports: [CommonModule, SkeletonTableComponent, ReactiveFormsModule, NgxMaskDirective, CurrencyPercentageInputComponent],
   template: `
     <div class="admin-page">
       <div class="page-header">
@@ -139,15 +140,15 @@ import { NgxMaskDirective } from 'ngx-mask';
               <div class="form-row">
                 <div class="form-group flex-1">
                   <label>Desconto Total (%)</label>
-                  <input type="text" formControlName="discountPercentage" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 20,50">
+                  <app-currency-percentage-input formControlName="discountPercentage" mode="PERCENTAGE" [class.error]="isFieldInvalid('discountPercentage')"></app-currency-percentage-input>
                 </div>
                 <div class="form-group flex-1">
                   <label>Desconto do Usuário (%)</label>
-                  <input type="text" formControlName="employeeDiscount" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 15,00">
+                  <app-currency-percentage-input formControlName="employeeDiscount" mode="PERCENTAGE" [class.error]="isFieldInvalid('employeeDiscount')"></app-currency-percentage-input>
                 </div>
                 <div class="form-group flex-1">
                   <label>Comissão da Plataforma (%)</label>
-                  <input type="text" formControlName="platformCommission" mask="00,00" [dropSpecialCharacters]="false" suffix="%" class="form-control" placeholder="Ex: 5,50">
+                  <app-currency-percentage-input formControlName="platformCommission" mode="PERCENTAGE" [class.error]="isFieldInvalid('platformCommission')"></app-currency-percentage-input>
                 </div>
               </div>
             </div>
@@ -155,7 +156,7 @@ import { NgxMaskDirective } from 'ngx-mask';
             <div class="form-row">
               <div class="form-group flex-1">
                 <label>Validade da Oferta</label>
-                <input type="date" formControlName="validity" class="form-control">
+                <input type="text" formControlName="validity" class="form-control" mask="00/00/0000" placeholder="DD/MM/AAAA" [dropSpecialCharacters]="false">
               </div>
               <div class="form-group flex-1">
                 <label>Limite de Usos (por funcionário)</label>
@@ -313,11 +314,28 @@ export class BenefitsMgmtComponent {
     return company ? company.name : companyId;
   }
 
+  /** Converte de YYYY-MM-DD (ISO/backend) para DD/MM/YYYY (exibição BR) */
+  private isoToBr(isoDate: string | undefined | null): string {
+    if (!isoDate) return '';
+    const [year, month, day] = isoDate.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  /** Converte de DD/MM/YYYY (exibição BR) para YYYY-MM-DD (ISO/backend) */
+  private brToIso(brDate: string | undefined | null): string {
+    if (!brDate || brDate.length < 10) return '';
+    const [day, month, year] = brDate.split('/');
+    return `${year}-${month}-${day}`;
+  }
+
   openForm(benefit?: Benefit) {
     this.isEditing = !!benefit;
     if (benefit) {
       this.currentBenefitId = benefit.id;
-      this.benefitForm.patchValue(benefit);
+      this.benefitForm.patchValue({
+        ...benefit,
+        validity: this.isoToBr(benefit.validity)
+      });
     } else {
       this.currentBenefitId = null;
       this.benefitForm.reset({ 
@@ -350,19 +368,10 @@ export class BenefitsMgmtComponent {
       return;
     }
 
-    const formData = this.benefitForm.value;
+    const formData = { ...this.benefitForm.value };
     
-    // Função auxiliar para converter string com vírgula para número e tratar o sufixo '%'
-    const parsePercent = (val: any) => {
-      if (!val) return 0;
-      if (typeof val === 'number') return val;
-      return Number(val.replace('%', '').replace(',', '.'));
-    };
-
-    formData.discountPercentage = parsePercent(formData.discountPercentage);
-    formData.employeeDiscount = parsePercent(formData.employeeDiscount);
-    formData.platformCommission = parsePercent(formData.platformCommission);
     formData.usageLimit = formData.usageLimit ? Number(formData.usageLimit) : undefined;
+    formData.validity = this.brToIso(formData.validity);
 
     this.isSaving = true;
 
