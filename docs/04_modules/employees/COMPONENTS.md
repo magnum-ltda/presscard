@@ -48,12 +48,12 @@ Cadastro e edição.
 
 Campos principais:
 
-- nome;
-- email;
-- telefone;
-- departamento;
-- cargo;
-- unidade.
+- nome completo (`name`): obrigatório;
+- email (`email`): validação de e-mail;
+- perfil / papel (`role`): EMPLOYEE, ADMIN, COMPANY_ADMIN, PARTNER;
+- status (`status`): ACTIVE, INACTIVE;
+- empresa associada (`companyId`): vínculo obrigatório para roles de Employee e Company Admin;
+- whatsapp / telefone (`whatsapp`): máscara `(00) 00000-0000` e validação de dígitos.
 
 ## EmployeeDetailsComponent
 
@@ -94,11 +94,11 @@ Administra critérios de elegibilidade quando utilizados.
 Reutilizar:
 
 - PageHeaderComponent
-- DataTableComponent
-- ConfirmDialogComponent
+- DataTableComponent / SkeletonTableComponent
+- ConfirmDialogComponent / ConfirmModalComponent
 - StatusBadgeComponent
 - EmptyStateComponent
-- LoadingComponent
+- LoadingComponent / SpinnerComponent
 
 ## UX
 

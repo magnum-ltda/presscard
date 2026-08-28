@@ -27,7 +27,13 @@ Um Commercial Partner deve possuir nome válido.
 Um Commercial Partner deve possuir pelo menos uma categoria válida.
 
 ### PAR-RULE-004
-O cadastro deve possuir dados mínimos de contato quando aplicável.
+O cadastro deve possuir dados válidos de contato (telefone/WhatsApp com 10 ou 11 dígitos no padrão brasileiro).
+
+### PAR-RULE-004.1
+O CEP informado deve ser válido, com 8 dígitos numéricos, com suporte a autopreenchimento e validação via ViaCEP.
+
+### PAR-RULE-004.2
+Links externos e links de mapa fornecidos devem seguir protocolos válidos (`http://` ou `https://`) e padrões compatíveis (Google Maps).
 
 ## Compartilhamento
 

@@ -40,6 +40,7 @@ Funcionalidades:
 - ordenação;
 - paginação;
 - status;
+- exibição formatada do documento com máscara (`CNPJ`);
 - ações.
 
 ## CompanyFormComponent
@@ -48,12 +49,11 @@ Cadastro e edição.
 
 Campos principais:
 
-- razão social;
-- nome fantasia;
-- documento;
-- e-mail;
-- telefone;
-- endereço.
+- nome da empresa (`name`): obrigatório;
+- CNPJ (`cnpj`): máscara `00.000.000/0000-00`, sanitização de dígitos ao carregar e validação de formato e comprimento (14 dígitos);
+- plano (`plan`): seleção do plano associado (ex: Silver, Gold, Platinum);
+- status ativo (`active`): alternância de estado operacional;
+- razão social e contatos adicionais quando aplicável.
 
 ## CompanyDetailsComponent
 
@@ -91,11 +91,11 @@ Gerencia endereço institucional.
 Reutilizar:
 
 - PageHeaderComponent
-- DataTableComponent
-- ConfirmDialogComponent
+- DataTableComponent / SkeletonTableComponent
+- ConfirmDialogComponent / ConfirmModalComponent
 - StatusBadgeComponent
 - EmptyStateComponent
-- LoadingComponent
+- LoadingComponent / SpinnerComponent
 - AddressComponent
 
 ## UX

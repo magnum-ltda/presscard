@@ -48,14 +48,20 @@ Cadastro e edição.
 
 Campos:
 
-- nome;
-- descrição;
-- parceiro;
-- categoria;
-- condição comercial;
-- validade;
-- elegibilidade;
-- limite.
+- título / nome (`title`);
+- descrição (`description`);
+- empresa associada (`companyId`);
+- parceiro comercial (`partnerId`);
+- categoria (`category`);
+- tipo de execução (`executionType`: CUPOM, LINK, PRESENCIAL, etc.);
+- condições financeiras (utilizando `CurrencyPercentageInputComponent` no modo percentual/fixo):
+  - desconto total (`discountPercentage`);
+  - desconto do usuário (`employeeDiscount`);
+  - comissão da plataforma (`platformCommission`);
+- validade da oferta (`validity`): entrada com máscara brasileira `DD/MM/AAAA` (`00/00/0000`) e conversão transparente para `YYYY-MM-DD` (ISO) na camada de dados/backend;
+- limite de usos por funcionário (`usageLimit`);
+- regras e instruções (`rules`, `instructions`);
+- status ativo (`active`).
 
 ## BenefitDetailsComponent
 
@@ -108,11 +114,12 @@ Filtros:
 Reutilizar:
 
 - PageHeaderComponent
-- DataTableComponent
-- ConfirmDialogComponent
+- DataTableComponent / SkeletonTableComponent
+- ConfirmDialogComponent / ConfirmModalComponent
 - StatusBadgeComponent
 - EmptyStateComponent
-- LoadingComponent
+- LoadingComponent / SpinnerComponent
+- CurrencyPercentageInputComponent (para descontos e comissões)
 
 ## UX
 

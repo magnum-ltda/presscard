@@ -40,21 +40,25 @@ Funcionalidades:
 - categoria;
 - status;
 - localização;
+- formatação visual de telefone/contato;
 - paginação.
 
 ## PartnerFormComponent
 
 Cadastro e edição.
 
-Campos:
+Campos e validações:
 
-- razão social;
-- nome fantasia;
-- documento;
-- descrição;
-- email;
-- telefone;
-- website.
+- razão social (`tradeName`);
+- categoria (`category`);
+- descrição (`description`);
+- contato/telefone (`contact`): máscara `(00) 00000-0000`, validação de 10 a 11 dígitos;
+- whatsapp (`whatsapp`): máscara `(00) 00000-0000`, validação de 10 a 11 dígitos;
+- link externo (`externalLink`): validação de URL (`http://` ou `https://`);
+- tipo de comissão (`commissionType`): PERCENTAGE ou FIXED;
+- valor da comissão (`commissionValue`): manipulado via `CurrencyPercentageInputComponent` dinamicamente conforme o tipo selecionado;
+- endereço e CEP (`zipCode`): máscara `00000-000`, validação de 8 dígitos, integração e busca automática com ViaCEP, tratamento e exibição de erro caso não encontrado;
+- link do Google Maps (`googleMapsLink`): validação de formato e regex para links do Google Maps.
 
 ## PartnerDetailsComponent
 
@@ -102,14 +106,15 @@ Cadastro de recursos.
 Reutilizar:
 
 - PageHeaderComponent
-- DataTableComponent
-- ConfirmDialogComponent
+- DataTableComponent / SkeletonTableComponent
+- ConfirmDialogComponent / ConfirmModalComponent
 - StatusBadgeComponent
 - EmptyStateComponent
-- LoadingComponent
+- LoadingComponent / SpinnerComponent
 - AddressComponent
 - LocationPickerComponent
 - ImageUploadComponent
+- CurrencyPercentageInputComponent (para comissão)
 
 ## UX
 
