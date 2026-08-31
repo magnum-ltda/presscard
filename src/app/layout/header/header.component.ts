@@ -48,6 +48,14 @@ export class HeaderComponent {
   goToCoupons() {
     this.router.navigate(['/meus-cupons']);
   }
+
+  goToCompany() {
+    this.router.navigate(['/empresa']);
+  }
+
+  goToPartner() {
+    this.router.navigate(['/parceiro']);
+  }
   
   goToLogin() {
     this.router.navigate(['/auth/login']);

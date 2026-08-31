@@ -41,6 +41,20 @@
         </button>
         <mat-divider></mat-divider>
       </ng-container>
+      <ng-container *ngIf="user()?.role === 'COMPANY_ADMIN'">
+        <button mat-menu-item (click)="goToCompany()">
+          <mat-icon>business</mat-icon>
+          <span>Painel da Empresa</span>
+        </button>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <ng-container *ngIf="user()?.role === 'PARTNER'">
+        <button mat-menu-item (click)="goToPartner()">
+          <mat-icon>store</mat-icon>
+          <span>Painel do Parceiro</span>
+        </button>
+        <mat-divider></mat-divider>
+      </ng-container>
       <ng-container *ngIf="user()?.role === 'EMPLOYEE'">
         <button mat-menu-item (click)="goToCoupons()">
           <mat-icon>local_activity</mat-icon>

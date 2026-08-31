@@ -33,9 +33,13 @@ export class OffersComponent {
     let all = this.benefits().filter(b => b.active);
     const u = this.user();
 
-    if (u && u.role === 'EMPLOYEE') {
+    if (u && (u.role === 'SUPER_ADMIN' || u.role === 'ADMIN')) {
+      // Administradores do sistema visualizam todos os benefícios
+    } else if (u && (u.role === 'EMPLOYEE' || u.role === 'COMPANY_ADMIN')) {
+      // Funcionários e admins de empresa visualizam os públicos + os da sua empresa
       all = all.filter(b => b.associatedCompanyId === 'ALL' || b.associatedCompanyId === u.companyId);
-    } else if (!u) {
+    } else {
+      // Parceiros, não autenticados ou qualquer outra role: apenas benefícios públicos
       all = all.filter(b => b.associatedCompanyId === 'ALL');
     }
 

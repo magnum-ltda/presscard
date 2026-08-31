@@ -161,7 +161,10 @@ export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     const p = this.partner();
     if (!b || !p) return;
 
-    if (b.associatedCompanyId !== 'ALL' && b.associatedCompanyId !== user.companyId && user.role === 'EMPLOYEE') {
+    // Bloqueia acesso a benefícios exclusivos de outras empresas
+    // (aplica-se a EMPLOYEE e COMPANY_ADMIN — SUPER_ADMIN e ADMIN têm acesso total)
+    const isRestrictedRole = user.role === 'EMPLOYEE' || user.role === 'COMPANY_ADMIN';
+    if (isRestrictedRole && b.associatedCompanyId !== 'ALL' && b.associatedCompanyId !== user.companyId) {
       alert('Este benefício é exclusivo para funcionários de outra empresa associada.');
       return;
     }
