@@ -1,0 +1,45 @@
+
+    <div class="company-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="logo-icon">🏢</span>
+          <span class="logo-text">Portal da Empresa</span>
+        </div>
+
+        <nav class="nav-menu">
+          <a routerLink="/empresa/funcionarios" routerLinkActive="active" class="nav-item">
+            <span class="icon">👥</span>
+            <span>Funcionários</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-header">
+          <div class="header-title">
+            <h2>Gestão Corporativa</h2>
+          </div>
+          <div class="user-menu-container" (click)="toggleMenu($event)">
+            <div class="user-profile" *ngIf="user()">
+              <div class="user-info-text">
+                <span class="user-role">Gestor de RH</span>
+                <span class="user-name">{{ user()?.name }}</span>
+              </div>
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            
+            <div class="dropdown-menu" *ngIf="isMenuOpen()">
+              <button (click)="onLogout()" class="dropdown-item logout">
+                <mat-icon>logout</mat-icon> Sair
+              </button>
+            </div>
+          </div>
+        </header>
+        <div class="content-area">
+          <router-outlet></router-outlet>
+        </div>
+      </main>
+    </div>
+  

@@ -6,16 +6,8 @@ import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ConfirmModalComponent],
-  template: `
-    <router-outlet></router-outlet>
-    <app-confirm-modal></app-confirm-modal>
-  `,
-  styles: [`
-    :host {
-      display: block;
-      min-height: 100vh;
-    }
-  `]
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'presscard';

@@ -6,23 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-currency-percentage-input',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="input-wrapper" [class.disabled]="disabled" (click)="focusInput()">
-      <span class="prefix" *ngIf="mode === 'FIXED'">R$</span>
-      <input
-        #inputElement
-        type="text"
-        inputmode="numeric"
-        class="custom-input"
-        [value]="displayValue"
-        (keydown)="onKeyDown($event)"
-        (paste)="$event.preventDefault()"
-        [disabled]="disabled"
-        (blur)="onTouched()"
-      />
-      <span class="suffix" *ngIf="mode === 'PERCENTAGE'">%</span>
-    </div>
-  `,
+  templateUrl: './currency-percentage-input.component.html',
   styleUrls: ['./currency-percentage-input.component.scss'],
   providers: [
     {

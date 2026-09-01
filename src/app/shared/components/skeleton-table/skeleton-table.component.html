@@ -1,0 +1,18 @@
+
+    <table class="data-table skeleton-table">
+      <thead>
+        <tr>
+          <th *ngFor="let c of colsArray">
+            <div class="skeleton-box header-box"></div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rowsArray">
+          <td *ngFor="let c of colsArray">
+            <div class="skeleton-box"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  

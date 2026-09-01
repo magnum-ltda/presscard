@@ -1,0 +1,31 @@
+
+    <div class="validator-container">
+      <div class="validator-card">
+        <h2>Validar Cupom</h2>
+        <p class="subtitle">Digite o código apresentado pelo cliente para validar a oferta.</p>
+        
+        <div class="input-group">
+          <input type="text" [(ngModel)]="couponCode" placeholder="Ex: PRSC-X1Y2Z3" class="code-input" (keyup.enter)="validate()">
+          <button class="validate-btn" (click)="validate()" [disabled]="!couponCode || isChecking()">
+            {{ isChecking() ? 'Verificando...' : 'Validar' }}
+          </button>
+        </div>
+
+        <div class="result-message" *ngIf="resultMessage()" [ngClass]="resultType()">
+          <div class="icon">{{ resultType() === 'success' ? '✅' : '❌' }}</div>
+          <div class="text">
+            <strong>{{ resultType() === 'success' ? 'Sucesso!' : 'Atenção!' }}</strong>
+            <p>{{ resultMessage() }}</p>
+          </div>
+        </div>
+
+        <div class="coupon-details" *ngIf="validatedCoupon()">
+          <h3>Detalhes do Cupom</h3>
+          <p><strong>Cliente:</strong> {{ validatedCoupon()?.employeeName }}</p>
+          <p><strong>Benefício:</strong> {{ validatedCoupon()?.benefitTitle }}</p>
+          <p><strong>Data de Geração:</strong> {{ validatedCoupon()?.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p *ngIf="validatedCoupon()?.validatedAt"><strong>Data de Validação:</strong> {{ validatedCoupon()?.validatedAt | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+      </div>
+    </div>
+  

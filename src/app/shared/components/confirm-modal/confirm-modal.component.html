@@ -1,0 +1,20 @@
+
+    <div class="modal-overlay" *ngIf="config()" (click)="cancel()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-icon" [class.destructive]="config()?.isDestructive">
+          {{ config()?.isDestructive ? '⚠️' : '❓' }}
+        </div>
+        <h2 class="title">{{ config()?.title }}</h2>
+        <p class="message">{{ config()?.message }}</p>
+        
+        <div class="modal-actions">
+          <button class="btn-cancel" (click)="cancel()">
+            {{ config()?.cancelText || 'Cancelar' }}
+          </button>
+          <button class="btn-confirm" [class.destructive]="config()?.isDestructive" (click)="confirm()">
+            {{ config()?.confirmText || 'Confirmar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  

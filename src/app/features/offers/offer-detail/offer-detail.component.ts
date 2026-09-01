@@ -16,7 +16,7 @@ import * as L from 'leaflet';
   standalone: true,
   imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
   templateUrl: './offer-detail.component.html',
-  styleUrls: ['./offer-detail.component.css']
+  styleUrls: ['./offer-detail.component.scss']
 })
 export class OfferDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   private route = inject(ActivatedRoute);

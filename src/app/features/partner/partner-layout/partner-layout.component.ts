@@ -8,78 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-partner-layout',
   standalone: true,
   imports: [CommonModule, RouterModule, MatIconModule],
-  template: `
-    <div class="partner-layout">
-      <header class="topbar">
-        <div class="logo">📦 Portal do Parceiro</div>
-        
-        <div class="user-menu-container" (click)="toggleMenu($event)">
-          <div class="user-profile" *ngIf="user()">
-            <div class="user-info-text">
-              <span class="user-role">Parceiro</span>
-              <span class="user-name">{{ user()?.name }}</span>
-            </div>
-            <mat-icon>account_circle</mat-icon>
-          </div>
-          
-          <div class="dropdown-menu" *ngIf="isMenuOpen()">
-            <button (click)="logout()" class="dropdown-item logout">
-              <mat-icon>logout</mat-icon> Sair
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <div class="main-container">
-        <nav class="sidebar">
-          <a routerLink="/parceiro/validador" routerLinkActive="active">
-            <mat-icon>check_circle</mat-icon> Validador
-          </a>
-          <a routerLink="/parceiro/historico" routerLinkActive="active">
-            <mat-icon>history</mat-icon> Histórico
-          </a>
-        </nav>
-        
-        <main class="content">
-          <router-outlet></router-outlet>
-        </main>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .partner-layout { display: flex; flex-direction: column; min-height: 100vh; background: #f8fafc; }
-    .topbar { background: var(--navy-dark); color: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .logo { font-size: 1.25rem; font-weight: 700; color: var(--gold-accent); }
-    
-    .user-menu-container { position: relative; cursor: pointer; }
-    .user-profile { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; border-radius: 8px; transition: background-color 0.2s; }
-    .user-profile:hover { background-color: rgba(255,255,255,0.1); }
-    .user-info-text { display: flex; flex-direction: column; align-items: flex-end; }
-    .user-name { font-weight: 600; font-size: 0.95rem; }
-    .user-role { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-accent); }
-
-    .dropdown-menu { position: absolute; top: 110%; right: 0; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); min-width: 150px; z-index: 1000; padding: 0.5rem 0; }
-    .dropdown-item { width: 100%; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border: none; background: none; text-align: left; font-size: 0.9rem; cursor: pointer; color: #334155; font-family: inherit; font-weight: 500; transition: background-color 0.2s; }
-    .dropdown-item:hover { background-color: #f8fafc; }
-    .dropdown-item.logout { color: #ef4444; }
-    .dropdown-item.logout:hover { background-color: #fef2f2; }
-    
-    .main-container { display: flex; flex: 1; overflow: hidden; }
-    .sidebar { width: 250px; background: white; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; padding: 1.5rem 0; }
-    .sidebar a { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.5rem; color: #475569; text-decoration: none; font-weight: 500; border-left: 3px solid transparent; transition: 0.2s; }
-    .sidebar a:hover { background: #f1f5f9; color: #1e293b; }
-    .sidebar a.active { background: #f0fdf4; color: #16a34a; border-left-color: #16a34a; }
-    
-    .content { flex: 1; padding: 2rem; overflow-y: auto; }
-
-    @media (max-width: 768px) {
-      .main-container { flex-direction: column; }
-      .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e2e8f0; padding: 0; flex-direction: row; }
-      .sidebar a { flex: 1; justify-content: center; padding: 1rem; border-left: none; border-bottom: 3px solid transparent; }
-      .sidebar a.active { border-left-color: transparent; border-bottom-color: #16a34a; }
-      .content { padding: 1rem; }
-    }
-  `]
+  templateUrl: './partner-layout.component.html',
+  styleUrl: './partner-layout.component.scss'
 })
 export class PartnerLayoutComponent {
   private authService = inject(AuthService);

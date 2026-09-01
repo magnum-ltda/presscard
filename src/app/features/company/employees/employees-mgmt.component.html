@@ -1,0 +1,81 @@
+
+    <div class="header-actions">
+      <div>
+        <h1 class="page-title">Quadro de Funcionários</h1>
+        <p class="page-subtitle">Gerencie os acessos dos seus colaboradores à plataforma de benefícios.</p>
+      </div>
+      <button class="btn-primary" (click)="openModal()">
+        <span>+ Novo Funcionário</span>
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th class="text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="employees().length === 0">
+              <td colspan="4" class="text-center empty-state">Nenhum funcionário cadastrado.</td>
+            </tr>
+            <tr *ngFor="let emp of employees()">
+              <td>
+                <div class="user-cell">
+                  <div class="avatar-sm">{{ emp.name.charAt(0) }}</div>
+                  <span class="fw-500">{{ emp.name }}</span>
+                </div>
+              </td>
+              <td>{{ emp.email }}</td>
+              <td>
+                <span class="badge" [ngClass]="emp.status === 'ACTIVE' ? 'badge-success' : 'badge-danger'">
+                  {{ emp.status === 'ACTIVE' ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+              <td class="text-right">
+                <div class="actions">
+                  <button class="btn-icon" title="Editar" (click)="openModal(emp)">✏️</button>
+                  <button class="btn-icon" [title]="emp.status === 'ACTIVE' ? 'Desativar' : 'Ativar'" 
+                          (click)="toggleStatus(emp)">
+                    {{ emp.status === 'ACTIVE' ? '🚫' : '✅' }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" *ngIf="isModalOpen()">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>{{ editingId() ? 'Editar Funcionário' : 'Novo Funcionário' }}</h3>
+          <button class="close-btn" (click)="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nome Completo</label>
+            <input type="text" class="form-control" [(ngModel)]="formData.name" placeholder="Ex: Maria Santos">
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" class="form-control" [(ngModel)]="formData.email" placeholder="maria@empresa.com">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button class="btn-primary" (click)="saveEmployee()" [disabled]="!isFormValid()">
+            {{ editingId() ? 'Salvar Alterações' : 'Cadastrar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  

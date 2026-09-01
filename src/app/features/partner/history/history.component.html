@@ -1,0 +1,46 @@
+
+    <div class="history-container">
+      <div class="header">
+        <h2>Histórico de Validações</h2>
+        <p>Acompanhe todos os cupons que foram validados no seu estabelecimento.</p>
+      </div>
+
+      <div class="card">
+        <table class="data-table" *ngIf="coupons().length > 0; else emptyState">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Benefício</th>
+              <th>Cliente</th>
+              <th>Status</th>
+              <th>Data de Validação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let coupon of coupons()">
+              <td><span class="code-badge">{{ coupon.code }}</span></td>
+              <td>{{ coupon.benefitTitle }}</td>
+              <td>{{ coupon.employeeName }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="coupon.status.toLowerCase()">
+                  {{ coupon.status === 'VALIDATED' ? 'Utilizado' : 'Gerado' }}
+                </span>
+              </td>
+              <td>
+                <span *ngIf="coupon.validatedAt">{{ coupon.validatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                <span *ngIf="!coupon.validatedAt" class="text-gray">-</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #emptyState>
+          <div class="empty-state">
+            <div class="icon">📋</div>
+            <h3>Nenhum cupom validado ainda</h3>
+            <p>Os cupons validados pelo seu estabelecimento aparecerão aqui.</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  

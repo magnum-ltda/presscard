@@ -1,0 +1,194 @@
+
+    <div class="admin-page">
+      <div class="page-header">
+        <h1>Gestão de Parceiros Comerciais</h1>
+        <button class="btn-primary" (click)="openForm()">+ Novo Parceiro</button>
+      </div>
+
+      <div class="card">
+        @if (isLoading()) {
+          <app-skeleton-table [columns]="6" [rows]="5"></app-skeleton-table>
+        } @else {
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Parceiro</th>
+                <th>Categoria</th>
+                <th>Localização</th>
+                <th>Contato</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let partner of partners()">
+                <td>
+                  <div class="font-medium">{{ partner.tradeName }}</div>
+                  <div class="text-sm text-gray">{{ partner.companyName }}</div>
+                </td>
+                <td><span class="badge">{{ partner.category }}</span></td>
+                <td>{{ partner.location.city }} - {{ partner.location.state }}</td>
+                <td>{{ formatPhone(partner.contact) }}</td>
+                <td>
+                  <span class="status-dot" [class.active]="partner.active"></span>
+                  {{ partner.active ? 'Ativo' : 'Inativo' }}
+                </td>
+                <td>
+                  <button class="btn-icon" title="Editar" (click)="openForm(partner)">✏️</button>
+                  <button class="btn-icon text-red" title="Excluir" (click)="deletePartner(partner.id)">🗑️</button>
+                </td>
+              </tr>
+              <tr *ngIf="partners().length === 0">
+                <td colspan="6" class="empty-state">Nenhum parceiro encontrado.</td>
+              </tr>
+            </tbody>
+          </table>
+        }
+      </div>
+
+      <!-- Form Modal -->
+      <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeForm()">
+        <div class="modal-content large" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h2>{{ isEditing ? 'Editar Parceiro' : 'Novo Parceiro' }}</h2>
+            <button class="close-btn" (click)="closeForm()">✖</button>
+          </div>
+          
+          <form [formGroup]="partnerForm" (ngSubmit)="onSubmit()" class="form-grid">
+            
+            <div class="form-row">
+              <div class="form-group flex-2">
+                <label>Razão Social</label>
+                <input type="text" formControlName="companyName" class="form-control" [class.error]="isFieldInvalid('companyName')">
+              </div>
+              <div class="form-group flex-2">
+                <label>Nome Fantasia</label>
+                <input type="text" formControlName="tradeName" class="form-control" [class.error]="isFieldInvalid('tradeName')">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>Categoria</label>
+                <select formControlName="category" class="form-control">
+                  <option value="HOTEL">Hotel</option>
+                  <option value="RESTAURANT">Restaurante</option>
+                  <option value="CAR_RENTAL">Aluguel de Carros</option>
+                  <option value="GYM">Academia</option>
+                  <option value="PHARMACY">Farmácia</option>
+                  <option value="CINEMA">Cinema</option>
+                  <option value="EDUCATION">Educação</option>
+                  <option value="STORE">Loja</option>
+                  <option value="SERVICES">Serviços</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label>Telefone</label>
+                <input type="text" formControlName="contact" mask="(00) 00000-0000" placeholder="(00) 00000-0000" class="form-control" [class.error]="isFieldInvalid('contact')">
+                <div class="error" *ngIf="isFieldInvalid('contact')">Telefone obrigatório e deve conter 10 ou 11 dígitos.</div>
+              </div>
+              <div class="form-group flex-1">
+                <label>WhatsApp</label>
+                <input type="text" formControlName="whatsapp" mask="(00) 00000-0000" placeholder="(00) 00000-0000" class="form-control" [class.error]="isFieldInvalid('whatsapp')">
+                <div class="error" *ngIf="isFieldInvalid('whatsapp')">WhatsApp deve conter 10 ou 11 dígitos.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Link Externo</label>
+              <input type="text" formControlName="externalLink" placeholder="https://www.exemplo.com.br" class="form-control" [class.error]="isFieldInvalid('externalLink')">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>Tipo de Execução</label>
+                <select formControlName="executionType" class="form-control">
+                  <option value="COUPON">Cupom</option>
+                  <option value="EXTERNAL_REDIRECT">Redirecionamento Externo</option>
+                  <option value="PAYMENT_LINK">Link de Pagamento</option>
+                  <option value="API_INTEGRATION">Integração API</option>
+                  <option value="MANUAL_VALIDATION">Validação Manual</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label>Tipo de Comissão</label>
+                <select formControlName="commissionType" class="form-control">
+                  <option value="PERCENTAGE">Porcentagem (%)</option>
+                  <option value="FIXED">Valor Fixo (R$)</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label>Valor da Comissão</label>
+                <app-currency-percentage-input
+                  formControlName="commissionValue"
+                  [mode]="partnerForm.get('commissionType')?.value"
+                  [class.error]="isFieldInvalid('commissionValue')">
+                </app-currency-percentage-input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Descrição</label>
+              <textarea formControlName="description" rows="2" class="form-control" [class.error]="isFieldInvalid('description')"></textarea>
+            </div>
+
+            <h3 class="section-title">Localização</h3>
+            <div formGroupName="location" class="location-group">
+              <div class="form-row">
+                <div class="form-group flex-1" style="position: relative;">
+                  <label>CEP</label>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" formControlName="zipCode" mask="00000-000" class="form-control" style="flex: 1;" (blur)="searchCep()" [class.error]="isFieldInvalid('location.zipCode')">
+                    <div class="error" *ngIf="isFieldInvalid('location.zipCode')">CEP deve conter 8 dígitos.</div>
+                    <button type="button" class="btn-secondary" (click)="searchCep()" style="padding: 0.5rem;" title="Buscar CEP">🔍</button>
+                  </div>
+                </div>
+                <div class="form-group flex-2">
+                  <label>Endereço</label>
+                  <input type="text" formControlName="address" class="form-control">
+                </div>
+                <div class="form-group flex-1">
+                  <label>Número</label>
+                  <input type="text" formControlName="number" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label>Bairro</label>
+                  <input type="text" formControlName="district" class="form-control">
+                </div>
+                <div class="form-group flex-1">
+                  <label>Cidade</label>
+                  <input type="text" formControlName="city" class="form-control">
+                </div>
+                <div class="form-group flex-1">
+                  <label>Estado (UF)</label>
+                  <input type="text" formControlName="state" class="form-control" maxlength="2">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Link do Google Maps</label>
+                <input type="text" formControlName="googleMapsLink" placeholder="https://maps.google.com/..." class="form-control" [class.error]="isFieldInvalid('location.googleMapsLink')">
+              </div>
+            </div>
+
+            <div class="form-group checkbox-group" style="margin-top: 1rem;">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="active">
+                Parceiro Ativo na Plataforma
+              </label>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn-secondary" (click)="closeForm()">Cancelar</button>
+              <button type="submit" class="btn-primary" [disabled]="partnerForm.invalid || isSaving">
+                {{ isSaving ? 'Salvando...' : 'Salvar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

@@ -58,6 +58,50 @@ depends_on:
 - ☐ FE-TASK-027 Routing tests.
 - ☐ FE-TASK-028 API/client tests.
 
+## FE-EPIC-08 — Separação de arquivos de componentes
+
+Objetivo: eliminar templates e estilos inline, adotando o padrão obrigatório `.ts` + `.html` + `.scss` para todos os componentes.
+
+### Inventário auditado em 31/08/2026
+
+- 29 componentes identificados em `src/app`.
+- 12 já atendem ao padrão de arquivos separados.
+- 17 não atendem ao padrão: 16 possuem template e estilo inline; `currency-percentage-input` possui apenas o template inline.
+
+### FE-TASK-029 — Preparar a migração por componente
+
+Para cada componente abaixo, extrair o conteúdo de `template` para o arquivo `.html`, o conteúdo de `styles` para o arquivo `.scss`, substituir as propriedades inline por `templateUrl` e `styleUrl` (ou `styleUrls`) e preservar a lógica TypeScript.
+
+- ☑ `src/app/app.component.ts`
+- ☑ `src/app/admin/admin-layout.component.ts`
+- ☑ `src/app/admin/benefits/benefits-mgmt.component.ts`
+- ☑ `src/app/admin/companies/companies.component.ts`
+- ☑ `src/app/admin/dashboard/dashboard.component.ts`
+- ☑ `src/app/admin/employees/employees.component.ts`
+- ☑ `src/app/admin/partners/partners.component.ts`
+- ☑ `src/app/core/auth/login.component.ts`
+- ☑ `src/app/features/company/company-layout/company-layout.component.ts`
+- ☑ `src/app/features/company/employees/employees-mgmt.component.ts`
+- ☑ `src/app/features/partner/history/history.component.ts`
+- ☑ `src/app/features/partner/partner-layout/partner-layout.component.ts`
+- ☑ `src/app/features/partner/validator/validator.component.ts`
+- ☑ `src/app/shared/components/confirm-modal/confirm-modal.component.ts`
+- ☑ `src/app/shared/components/currency-percentage-input/currency-percentage-input.component.ts` — criado o template externo; o SCSS já existia.
+- ☑ `src/app/shared/components/skeleton-table/skeleton-table.component.ts`
+- ☑ `src/app/shared/components/spinner/spinner.component.ts`
+
+### FE-TASK-030 — Padronizar extensões de estilo legadas
+
+- ☑ Converter `src/app/features/employee/my-coupons/my-coupons.component.css` para `.scss` e ajustar a referência.
+- ☑ Converter `src/app/features/offers/offer-detail/offer-detail.component.css` para `.scss` e ajustar a referência.
+
+### FE-TASK-031 — Verificação e prevenção de regressão
+
+- ☑ Executar build de produção após a migração, confirmando que templates e estilos foram preservados. Executado em 01/09/2026.
+- ☑ Verificar que nenhum `*.component.ts` contém `template:` ou `styles:` inline.
+- ☐ Revisar visualmente as telas afetadas, com atenção a layouts responsivos, modais e componentes compartilhados.
+- ☐ Avaliar a inclusão de uma checagem automatizada no CI para impedir novos templates ou estilos inline.
+
 ## Critério de conclusão
 
 Código implementado, testes realizados, documentação atualizada, regras validadas e integração com backend validada.

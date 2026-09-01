@@ -1,0 +1,116 @@
+
+    <div class="admin-page">
+      <div class="page-header">
+        <h1>Gestão de Funcionários</h1>
+        <button class="btn-primary" (click)="openForm()">+ Novo Funcionário</button>
+      </div>
+
+      <div class="card">
+        @if (isLoading()) {
+          <app-skeleton-table [columns]="5" [rows]="5"></app-skeleton-table>
+        } @else {
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nome / E-mail</th>
+                <th>Vínculo (Empresa)</th>
+                <th>Perfil (Role)</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employees()">
+                <td>
+                  <div class="font-medium">{{ employee.name }}</div>
+                  <div class="text-sm text-gray">{{ employee.email }}</div>
+                </td>
+                <td>
+                  <span class="badge gray" *ngIf="employee.companyId">{{ getCompanyName(employee.companyId) }}</span>
+                  <span class="text-sm text-gray" *ngIf="!employee.companyId">Sistema Interno</span>
+                </td>
+                <td><span class="badge" [ngClass]="employee.role.toLowerCase()">{{ getRoleLabel(employee.role) }}</span></td>
+                <td>
+                  <span class="status-dot" [class.active]="employee.status === 'ACTIVE'"></span>
+                  {{ employee.status === 'ACTIVE' ? 'Ativo' : 'Inativo' }}
+                </td>
+                <td>
+                  <button class="btn-icon" title="Editar" (click)="openForm(employee)">✏️</button>
+                  <button class="btn-icon text-red" title="Excluir" (click)="deleteEmployee(employee.id)">🗑️</button>
+                </td>
+              </tr>
+              <tr *ngIf="employees().length === 0">
+                <td colspan="5" class="empty-state">Nenhum funcionário encontrado.</td>
+              </tr>
+            </tbody>
+          </table>
+        }
+      </div>
+
+      <!-- Form Modal -->
+      <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeForm()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h2>{{ isEditing ? 'Editar Funcionário' : 'Novo Funcionário' }}</h2>
+            <button class="close-btn" (click)="closeForm()">✖</button>
+          </div>
+          
+          <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-grid">
+            
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <input type="text" formControlName="name" class="form-control" [class.error]="isFieldInvalid('name')">
+              <span class="error-msg" *ngIf="isFieldInvalid('name')">Nome é obrigatório</span>
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" formControlName="email" class="form-control" [class.error]="isFieldInvalid('email')">
+              <span class="error-msg" *ngIf="isFieldInvalid('email')">E-mail válido é obrigatório</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label>Perfil (Role)</label>
+                <select formControlName="role" class="form-control">
+                  <option value="EMPLOYEE">Funcionário</option>
+                  <option value="ADMIN">Administrador</option>
+                  <option value="COMPANY_ADMIN">Admin Empresa</option>
+                  <option value="PARTNER">Parceiro Comercial</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label>Status</label>
+                <select formControlName="status" class="form-control">
+                  <option value="ACTIVE">Ativo</option>
+                  <option value="INACTIVE">Inativo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE' || employeeForm.get('role')?.value === 'COMPANY_ADMIN'">
+              <label>Vínculo (Empresa Associada)</label>
+              <select formControlName="companyId" class="form-control" [class.error]="isFieldInvalid('companyId')">
+                <option value="">Selecione uma empresa...</option>
+                <option *ngFor="let c of companies()" [value]="c.id">{{ c.name }}</option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="employeeForm.get('role')?.value === 'EMPLOYEE'">
+              <label>WhatsApp do Funcionário</label>
+              <input type="text" formControlName="whatsapp" mask="(00) 00000-0000" class="form-control" placeholder="(00) 00000-0000" [class.error]="isFieldInvalid('whatsapp')">
+              <span class="error-msg" *ngIf="isFieldInvalid('whatsapp')">WhatsApp inválido</span>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn-secondary" (click)="closeForm()">Cancelar</button>
+              <button type="submit" class="btn-primary" [disabled]="employeeForm.invalid || isSaving">
+                {{ isSaving ? 'Salvando...' : 'Salvar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

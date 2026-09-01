@@ -1,0 +1,59 @@
+
+    <div class="dashboard-container">
+      <h1 class="page-title">Dashboard Overview</h1>
+      
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="icon-wrapper bg-blue">
+            <i>🏢</i>
+          </div>
+          <div class="metric-info">
+            <span class="label">Total Empresas</span>
+            <span class="value">{{ companiesService.companies().length }}</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="icon-wrapper bg-green">
+            <i>🤝</i>
+          </div>
+          <div class="metric-info">
+            <span class="label">Parceiros Ativos</span>
+            <span class="value">{{ partnersService.partners().length }}</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="icon-wrapper bg-purple">
+            <i>👥</i>
+          </div>
+          <div class="metric-info">
+            <span class="label">Funcionários</span>
+            <span class="value">{{ employeesService.employees().length }}</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="icon-wrapper bg-orange">
+            <i>🎟️</i>
+          </div>
+          <div class="metric-info">
+            <span class="label">Cupons Validados</span>
+            <span class="value">{{ validatedCouponsCount() }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="recent-activity">
+        <h2>Atividades Recentes</h2>
+        <div class="empty-state">
+          Nenhuma atividade registrada no momento.
+        </div>
+        <div style="margin-top: 2rem; text-align: center;">
+          <button class="btn-primary" (click)="seedData()" [disabled]="isSeeding">
+            {{ isSeeding ? 'Gerando dados...' : 'Gerar Dados de Teste' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  

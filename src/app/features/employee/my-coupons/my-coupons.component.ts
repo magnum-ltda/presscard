@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, HeaderComponent, FooterComponent, MatIconModule],
   templateUrl: './my-coupons.component.html',
-  styleUrls: ['./my-coupons.component.css']
+  styleUrls: ['./my-coupons.component.scss']
 })
 export class MyCouponsComponent implements OnInit {
   private couponsService = inject(CouponsService);

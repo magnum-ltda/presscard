@@ -1,0 +1,53 @@
+
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <a routerLink="/admin/dashboard" routerLinkActive="active">
+            <i class="icon">📊</i> <span class="nav-text">Dashboard</span>
+          </a>
+          <a routerLink="/admin/empresas" routerLinkActive="active">
+            <i class="icon">🏢</i> <span class="nav-text">Empresas</span>
+          </a>
+          <a routerLink="/admin/parceiros" routerLinkActive="active">
+            <i class="icon">🤝</i> <span class="nav-text">Parceiros</span>
+          </a>
+          <a routerLink="/admin/funcionarios" routerLinkActive="active">
+            <i class="icon">👥</i> <span class="nav-text">Funcionários</span>
+          </a>
+          <a routerLink="/admin/beneficios" routerLinkActive="active">
+            <i class="icon">🎁</i> <span class="nav-text">Benefícios</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="topbar">
+          <div class="topbar-title">Gestão Corporativa</div>
+          <div class="user-menu-container" (click)="toggleMenu($event)">
+            <div class="user-profile" *ngIf="user()">
+              <div class="user-info-text">
+                <span class="user-role">{{ user()?.role }}</span>
+                <span class="user-name">{{ user()?.name }}</span>
+              </div>
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            
+            <div class="dropdown-menu" *ngIf="isMenuOpen()">
+              <button (click)="logout()" class="dropdown-item logout">
+                <mat-icon>logout</mat-icon> Sair
+              </button>
+            </div>
+          </div>
+        </header>
+        
+        <div class="content-area">
+          <router-outlet></router-outlet>
+        </div>
+      </main>
+    </div>
+  

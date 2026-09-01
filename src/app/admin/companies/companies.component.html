@@ -1,0 +1,93 @@
+
+    <div class="admin-page">
+      <div class="page-header">
+        <h1>Gestão de Empresas Associadas</h1>
+        <button class="btn-primary" (click)="openForm()">+ Nova Empresa</button>
+      </div>
+
+      <div class="card">
+        @if (isLoading()) {
+          <app-skeleton-table [columns]="5" [rows]="5"></app-skeleton-table>
+        } @else {
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CNPJ</th>
+                <th>Plano</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let company of companies()">
+                <td>{{ company.name }}</td>
+                <td>{{ company.cnpj | mask: '00.000.000/0000-00' }}</td>
+                <td><span class="badge">{{ company.plan }}</span></td>
+                <td>
+                  <span class="status-dot" [class.active]="company.active"></span>
+                  {{ company.active ? 'Ativo' : 'Inativo' }}
+                </td>
+                <td>
+                  <button class="btn-icon" title="Editar" (click)="openForm(company)">✏️</button>
+                  <button class="btn-icon text-red" title="Excluir" (click)="deleteCompany(company.id)">🗑️</button>
+                </td>
+              </tr>
+              <tr *ngIf="companies().length === 0">
+                <td colspan="5" class="empty-state">Nenhuma empresa encontrada.</td>
+              </tr>
+            </tbody>
+          </table>
+        }
+      </div>
+
+      <!-- Form Modal -->
+      <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeForm()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h2>{{ isEditing ? 'Editar Empresa' : 'Nova Empresa' }}</h2>
+            <button class="close-btn" (click)="closeForm()">✖</button>
+          </div>
+          
+          <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="form-grid">
+            <div class="form-group">
+              <label>Nome da Empresa</label>
+              <input type="text" formControlName="name" placeholder="Ex: ACME Corp" class="form-control" [class.error]="isFieldInvalid('name')">
+              <span class="error-msg" *ngIf="companyForm.get('name')?.hasError('required') && isFieldInvalid('name')">Nome é obrigatório</span>
+            </div>
+            
+            <div class="form-group">
+              <label>CNPJ</label>
+              <input type="text" formControlName="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00" class="form-control" [class.error]="isFieldInvalid('cnpj')">
+              <span class="error-msg" *ngIf="companyForm.get('cnpj')?.hasError('required') && isFieldInvalid('cnpj')">CNPJ é obrigatório</span>
+              <span class="error-msg" *ngIf="(companyForm.get('cnpj')?.hasError('minlength') || companyForm.get('cnpj')?.hasError('maxlength')) && isFieldInvalid('cnpj')">CNPJ inválido</span>
+            </div>
+
+            <div class="form-group">
+              <label>Plano</label>
+              <select formControlName="plan" class="form-control">
+                <option value="Bronze">Bronze</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+              </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="active">
+                Empresa Ativa na Plataforma
+              </label>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn-secondary" (click)="closeForm()">Cancelar</button>
+              <button type="submit" class="btn-primary" [disabled]="companyForm.invalid || isSaving">
+                {{ isSaving ? 'Salvando...' : 'Salvar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  

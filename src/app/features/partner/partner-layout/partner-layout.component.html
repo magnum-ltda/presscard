@@ -1,0 +1,38 @@
+
+    <div class="partner-layout">
+      <header class="topbar">
+        <div class="logo">📦 Portal do Parceiro</div>
+        
+        <div class="user-menu-container" (click)="toggleMenu($event)">
+          <div class="user-profile" *ngIf="user()">
+            <div class="user-info-text">
+              <span class="user-role">Parceiro</span>
+              <span class="user-name">{{ user()?.name }}</span>
+            </div>
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          
+          <div class="dropdown-menu" *ngIf="isMenuOpen()">
+            <button (click)="logout()" class="dropdown-item logout">
+              <mat-icon>logout</mat-icon> Sair
+            </button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="main-container">
+        <nav class="sidebar">
+          <a routerLink="/parceiro/validador" routerLinkActive="active">
+            <mat-icon>check_circle</mat-icon> Validador
+          </a>
+          <a routerLink="/parceiro/historico" routerLinkActive="active">
+            <mat-icon>history</mat-icon> Histórico
+          </a>
+        </nav>
+        
+        <main class="content">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+    </div>
+  
